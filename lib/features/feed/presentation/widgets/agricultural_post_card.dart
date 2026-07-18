@@ -6,16 +6,8 @@ import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dar
 class AgriculturePostCard extends StatelessWidget {
   final AgriculturePost post;
   final VoidCallback? onCall;
-  final VoidCallback? onSave;
-  final VoidCallback? onComment;
 
-  const AgriculturePostCard({
-    super.key,
-    required this.post,
-    this.onCall,
-    this.onSave,
-    this.onComment,
-  });
+  const AgriculturePostCard({super.key, required this.post, this.onCall});
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +39,14 @@ class AgriculturePostCard extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: TextButton.icon(
-                    onPressed: onCall,
-                    icon: const Icon(Icons.call_outlined),
-                    label: const Text('Call'),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: FilledButton.icon(
+                      onPressed: onCall,
+                      icon: const Icon(Icons.call_outlined),
+                      label: const Text('Contact'),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: TextButton.icon(
-                    onPressed: onComment,
-                    icon: const Icon(Icons.comment_outlined),
-                    label: const Text('Comment'),
-                  ),
-                ),
-                IconButton(
-                  onPressed: onSave,
-                  tooltip: 'Save',
-                  icon: const Icon(Icons.bookmark_border),
                 ),
               ],
             ),
