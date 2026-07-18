@@ -93,7 +93,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noMatchingPosts => 'কোনো পোস্ট পাওয়া যায়নি';
 
   @override
-  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
+  String get tryAnotherProductOrCategory =>
+      'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
 
   @override
   String get quantity => 'পরিমাণ';

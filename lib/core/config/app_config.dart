@@ -21,7 +21,7 @@ class AppConfig {
   static String get baseUrl {
     switch (_environment) {
       case Environment.demo:
-        return 'http://localhost:3000';
+        return 'http://192.168.1.105:3001';
 
       case Environment.development:
         return 'https://dev-api.company.com';

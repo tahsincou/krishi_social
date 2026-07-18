@@ -331,7 +331,7 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     return selectedRange;
   }
 
-  void _submit() {
+  Future<void> _submit() async {
     FocusScope.of(context).unfocus();
 
     if (!_formKey.currentState!.validate()) {
@@ -356,7 +356,23 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
       description: _nullableText(_descriptionController.text),
     );
 
-    ref.read(feedNotifierProvider.notifier).createPost(params);
+    final created = await ref
+        .read(feedNotifierProvider.notifier)
+        .createPost(params);
+
+    if (!mounted) return;
+
+    if (!created) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            ref.read(feedNotifierProvider).error ??
+                context.l10n.enterProductName,
+          ),
+        ),
+      );
+      return;
+    }
 
     ScaffoldMessenger.of(
       context,

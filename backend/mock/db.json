@@ -1,112 +1,48 @@
 {
-  "shipments": [
+  "posts": [
     {
-      "trackingId": "TRK002",
-      "customer": "Alice",
-      "phone": "01700000002",
-      "address": "Chattogram",
-      "status": "Delivered",
-      "id": "f072",
- 
-
-  "timeline":[
-      {
-        "title":"Created",
-        "time":"2026-07-04T09:00:00",
-        "completed":true
-      },
-      {
-        "title":"Picked Up",
-        "time":"2026-07-04T10:20:00",
-        "completed":true
-      },
-      {
-        "title":"Hub",
-        "time":null,
-        "completed":false
-      },
-      {
-        "title":"Out for Delivery",
-        "time":null,
-        "completed":false
-      },
-      {
-        "title":"Delivered",
-        "time":null,
-        "completed":false
-      }
-  ]
-    },
-    {
-      "trackingId": "TRK001",
-      "customer": "Updated John",
+      "id": "1",
+      "userId": "buyer-1",
+      "userName": "Rahman Traders",
+      "userImageUrl": null,
+      "isUserReviewed": true,
+      "type": "buy",
+      "category": "vegetables",
+      "productName": "Tomato",
+      "quantity": 2,
+      "unit": "ton",
+      "availableFrom": "2026-08-01T00:00:00.000Z",
+      "availableTo": "2026-08-10T00:00:00.000Z",
+      "district": "Dhaka",
+      "upazila": "",
+      "pricePerUnit": null,
+      "qualityRequirement": "Fresh medium-size tomatoes",
+      "description": "Buyer will arrange pickup.",
       "phone": "01700000001",
-      "address": "Dhaka",
-      "status": "Delivered",
-      "id": "e096",
-
-      "timeline":[
-      {
-        "title":"Created",
-        "time":"2026-07-04T09:00:00",
-        "completed":true
-      },
-      {
-        "title":"Picked Up",
-        "time":"2026-07-04T10:20:00",
-        "completed":true
-      },
-      {
-        "title":"Hub",
-        "time":"2026-07-04T12:30:00",
-        "completed":true
-      },
-      {
-        "title":"Out for Delivery",
-        "time":"2026-07-04T14:00:00",
-        "completed":true
-      },
-      {
-        "title":"Delivered",
-        "time":"2026-07-04T15:30:00",
-        "completed":true
-      }
-      ]
+      "status": "active",
+      "createdAt": "2026-07-18T10:00:00.000Z"
     },
     {
-      "trackingId": "TRK003",
-      "customer": "Tahsin Hasan",
-      "phone": "2384747487545",
-      "address": "Dhaka",
-      "status": "In Transit",
-      "id": "c0f5",
-      "timeline":[
-      {
-        "title":"Created",
-        "time":"2026-07-04T09:00:00",
-        "completed":true
-      },
-      {
-        "title":"Picked Up",
-        "time":"2026-07-04T10:20:00",
-        "completed":true
-      },
-      {
-        "title":"Hub",
-        "time":null,
-        "completed":false
-      },
-      {
-        "title":"Out for Delivery",
-        "time":null,
-        "completed":false
-      },
-      {
-        "title":"Delivered",
-        "time":null,
-        "completed":false
-      }
-      ]
+      "id": "2",
+      "userId": "seller-1",
+      "userName": "Abdul Karim",
+      "userImageUrl": null,
+      "isUserReviewed": false,
+      "type": "sell",
+      "category": "poultry",
+      "productName": "Broiler Chicken",
+      "quantity": 1200,
+      "unit": "bird",
+      "availableFrom": "2026-07-28T00:00:00.000Z",
+      "availableTo": "2026-08-02T00:00:00.000Z",
+      "district": "Gazipur",
+      "upazila": "",
+      "pricePerUnit": null,
+      "qualityRequirement": "Average weight 1.8–2.0 kg",
+      "description": "Full batch available during this period.",
+      "phone": "01700000002",
+      "status": "active",
+      "createdAt": "2026-07-18T08:00:00.000Z"
     }
   ]
-    }
+}
