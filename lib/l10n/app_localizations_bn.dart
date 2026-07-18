@@ -118,4 +118,114 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get newBuyer => 'নতুন ক্রেতা';
+
+  @override
+  String get createPost => 'পোস্ট করুন';
+
+  @override
+  String get createBuyPost => 'কেনার পোস্ট করুন';
+
+  @override
+  String get createSellPost => 'বিক্রির পোস্ট করুন';
+
+  @override
+  String get category => 'ক্যাটাগরি';
+
+  @override
+  String get productName => 'পণ্যের নাম';
+
+  @override
+  String get selectOrTypeProduct => 'পণ্য বাছাই করুন বা নাম লিখুন';
+
+  @override
+  String get unit => 'একক';
+
+  @override
+  String get requiredBetween => 'কোন তারিখের মধ্যে দরকার';
+
+  @override
+  String get availableBetween => 'কোন তারিখের মধ্যে পাওয়া যাবে';
+
+  @override
+  String get selectDateRange => 'তারিখ বাছাই করুন';
+
+  @override
+  String get district => 'জেলা';
+
+  @override
+  String get upazila => 'উপজেলা';
+
+  @override
+  String get targetPriceOptional => 'কত দামে কিনতে চান (না দিলেও হবে)';
+
+  @override
+  String get expectedPriceOptional => 'কত দাম আশা করেন (না দিলেও হবে)';
+
+  @override
+  String get descriptionOptional => 'আরও কিছু লিখুন (না দিলেও হবে)';
+
+  @override
+  String get publishPost => 'পোস্ট করুন';
+
+  @override
+  String get selectCategory => 'একটি ক্যাটাগরি বাছাই করুন';
+
+  @override
+  String get enterProductName => 'পণ্যের নাম লিখুন';
+
+  @override
+  String get enterValidQuantity => 'সঠিক পরিমাণ লিখুন';
+
+  @override
+  String get fieldRequired => 'এই তথ্যটি দিতে হবে';
+
+  @override
+  String get postCreated => 'পোস্ট তৈরি হয়েছে';
+
+  @override
+  String get moreInformationOptional => 'আরও তথ্য দিতে চাইলে';
+
+  @override
+  String get qualityOptional => 'পণ্যের মান বা সাইজ (না দিলেও হবে)';
+
+  @override
+  String get selectCategoryFirst => 'আগে ক্যাটাগরি বাছাই করুন';
+
+  @override
+  String get productSearchHint => 'পণ্য সার্চ করুন বা নাম লিখুন';
+
+  @override
+  String get location => 'পণ্যের এলাকা';
+
+  @override
+  String get districtAndUpazila => 'জেলা ও উপজেলা';
+
+  @override
+  String get useCurrentLocation => 'বর্তমান লোকেশন ব্যবহার করুন';
+
+  @override
+  String get findingLocation => 'লোকেশন খোঁজা হচ্ছে...';
+
+  @override
+  String get addressOrArea => 'এলাকা বা ঠিকানা';
+
+  @override
+  String get addressHint => 'গ্রাম, বাজার বা কাছের পরিচিত জায়গা';
+
+  @override
+  String detectedDistrict(String district) {
+    return 'জেলা: $district';
+  }
+
+  @override
+  String get locationUnavailable => 'লোকেশন পাওয়া যায়নি';
+
+  @override
+  String get locationExample => 'গ্রাম, বাজার, উপজেলা বা জেলার নাম';
+
+  @override
+  String get locationRequired => 'পণ্য কোথায় আছে বা লাগবে তা লিখুন';
+
+  @override
+  String get dateRangeRequired => 'তারিখ বাছাই করুন';
 }

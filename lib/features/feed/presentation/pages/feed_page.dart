@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/data/mock/mock_agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
@@ -127,6 +128,21 @@ class _FeedPageState extends State<FeedPage> {
               ),
             ),
           ],
+        ),
+        floatingActionButton: Builder(
+          builder: (context) {
+            return FloatingActionButton.extended(
+              onPressed: () {
+                final tabIndex = DefaultTabController.of(context).index;
+
+                final type = tabIndex == 0 ? PostType.buy : PostType.sell;
+
+                context.push('/create-post', extra: type);
+              },
+              icon: const Icon(Icons.add),
+              label: Text(context.l10n.createPost),
+            );
+          },
         ),
       ),
     );

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../theme/app_radius.dart';
+import 'package:krishi_social/shared/theme/app_radius.dart';
 
 class AppDropdown<T> extends StatelessWidget {
   final T? value;
   final List<DropdownMenuItem<T>> items;
   final String label;
   final ValueChanged<T?>? onChanged;
+  final String? Function(T?)? validator;
+  final Widget? prefixIcon;
 
   const AppDropdown({
     super.key,
@@ -14,7 +15,8 @@ class AppDropdown<T> extends StatelessWidget {
     required this.items,
     required this.label,
     required this.onChanged,
-    required String? Function(dynamic value) validator,
+    this.validator,
+    this.prefixIcon,
   });
 
   @override
@@ -23,8 +25,10 @@ class AppDropdown<T> extends StatelessWidget {
       value: value,
       items: items,
       onChanged: onChanged,
+      validator: validator,
       decoration: InputDecoration(
         labelText: label,
+        prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.md),
         ),

@@ -46,5 +46,51 @@
 "contact": "ফোন করুন",
 
 "reviewedBuyer": "যাচাই করা ক্রেতা",
-"newBuyer": "নতুন ক্রেতা"
+"newBuyer": "নতুন ক্রেতা",
+
+"createPost": "পোস্ট করুন",
+"createBuyPost": "কেনার পোস্ট করুন",
+"createSellPost": "বিক্রির পোস্ট করুন",
+"category": "ক্যাটাগরি",
+"productName": "পণ্যের নাম",
+"selectOrTypeProduct": "পণ্য বাছাই করুন বা নাম লিখুন",
+"unit": "একক",
+"requiredBetween": "কোন তারিখের মধ্যে দরকার",
+"availableBetween": "কোন তারিখের মধ্যে পাওয়া যাবে",
+"selectDateRange": "তারিখ বাছাই করুন",
+"district": "জেলা",
+"upazila": "উপজেলা",
+"targetPriceOptional": "কত দামে কিনতে চান (না দিলেও হবে)",
+"expectedPriceOptional": "কত দাম আশা করেন (না দিলেও হবে)",
+"descriptionOptional": "আরও কিছু লিখুন (না দিলেও হবে)",
+"publishPost": "পোস্ট করুন",
+"selectCategory": "একটি ক্যাটাগরি বাছাই করুন",
+"enterProductName": "পণ্যের নাম লিখুন",
+"enterValidQuantity": "সঠিক পরিমাণ লিখুন",
+"fieldRequired": "এই তথ্যটি দিতে হবে",
+"postCreated": "পোস্ট তৈরি হয়েছে",
+"moreInformationOptional": "আরও তথ্য দিতে চাইলে",
+"qualityOptional": "পণ্যের মান বা সাইজ (না দিলেও হবে)",
+"selectCategoryFirst": "আগে ক্যাটাগরি বাছাই করুন",
+"productSearchHint": "পণ্য সার্চ করুন বা নাম লিখুন",
+"districtAndUpazila": "জেলা ও উপজেলা",
+"useCurrentLocation": "বর্তমান লোকেশন ব্যবহার করুন",
+"findingLocation": "লোকেশন খোঁজা হচ্ছে...",
+"addressOrArea": "এলাকা বা ঠিকানা",
+"addressHint": "গ্রাম, বাজার বা কাছের পরিচিত জায়গা",
+"detectedDistrict": "জেলা: {district}",
+"@detectedDistrict": {
+  "placeholders": {
+    "district": {
+      "type": "String"
+    }
+  }
+},
+
+"locationUnavailable": "লোকেশন পাওয়া যায়নি",
+"dateRangeRequired": "তারিখ বাছাই করুন",
+"location": "পণ্যের এলাকা",
+"locationExample": "গ্রাম, বাজার, উপজেলা বা জেলার নাম",
+"locationRequired": "পণ্য কোথায় আছে বা লাগবে তা লিখুন"
+
 }

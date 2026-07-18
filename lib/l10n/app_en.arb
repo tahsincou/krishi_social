@@ -46,5 +46,53 @@
 "contact": "Contact",
 
 "reviewedBuyer": "Reviewed Buyer",
-"newBuyer": "New Buyer"
+"newBuyer": "New Buyer",
+
+
+"createPost": "Create Post",
+"createBuyPost": "Create Buy Post",
+"createSellPost": "Create Sell Post",
+"category": "Category",
+"productName": "Product name",
+"selectOrTypeProduct": "Select or type a product",
+"unit": "Unit",
+"requiredBetween": "Required between",
+"availableBetween": "Available between",
+"selectDateRange": "Select date range",
+"district": "District",
+"upazila": "Upazila",
+"targetPriceOptional": "Target price per unit (optional)",
+"expectedPriceOptional": "Expected price per unit (optional)",
+"descriptionOptional": "Description (optional)",
+"publishPost": "Publish Post",
+"selectCategory": "Select a category",
+"enterProductName": "Enter a product name",
+"enterValidQuantity": "Enter a valid quantity",
+"fieldRequired": "Required",
+"postCreated": "Post created",
+"moreInformationOptional": "More information (optional)",
+"qualityOptional": "Quality or size (optional)",
+"selectCategoryFirst": "Select a category first",
+"productSearchHint": "Search or type a product",
+"location": "Location",
+"districtAndUpazila": "District and upazila",
+"useCurrentLocation": "Use current location",
+"findingLocation": "Finding location...",
+"addressOrArea": "Address or area",
+"addressHint": "Village, market or nearby place",
+"detectedDistrict": "Detected district: {district}",
+"@detectedDistrict": {
+  "placeholders": {
+    "district": {
+      "type": "String"
+    }
+  }
+},
+
+"locationUnavailable": "Could not find your location",
+"locationExample": "Village, market, area or district",
+"locationRequired": "Enter the product location",
+"dateRangeRequired": "Select a date range"
+
+
 }

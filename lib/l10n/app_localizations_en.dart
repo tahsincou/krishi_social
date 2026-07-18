@@ -118,4 +118,114 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newBuyer => 'New Buyer';
+
+  @override
+  String get createPost => 'Create Post';
+
+  @override
+  String get createBuyPost => 'Create Buy Post';
+
+  @override
+  String get createSellPost => 'Create Sell Post';
+
+  @override
+  String get category => 'Category';
+
+  @override
+  String get productName => 'Product name';
+
+  @override
+  String get selectOrTypeProduct => 'Select or type a product';
+
+  @override
+  String get unit => 'Unit';
+
+  @override
+  String get requiredBetween => 'Required between';
+
+  @override
+  String get availableBetween => 'Available between';
+
+  @override
+  String get selectDateRange => 'Select date range';
+
+  @override
+  String get district => 'District';
+
+  @override
+  String get upazila => 'Upazila';
+
+  @override
+  String get targetPriceOptional => 'Target price per unit (optional)';
+
+  @override
+  String get expectedPriceOptional => 'Expected price per unit (optional)';
+
+  @override
+  String get descriptionOptional => 'Description (optional)';
+
+  @override
+  String get publishPost => 'Publish Post';
+
+  @override
+  String get selectCategory => 'Select a category';
+
+  @override
+  String get enterProductName => 'Enter a product name';
+
+  @override
+  String get enterValidQuantity => 'Enter a valid quantity';
+
+  @override
+  String get fieldRequired => 'Required';
+
+  @override
+  String get postCreated => 'Post created';
+
+  @override
+  String get moreInformationOptional => 'More information (optional)';
+
+  @override
+  String get qualityOptional => 'Quality or size (optional)';
+
+  @override
+  String get selectCategoryFirst => 'Select a category first';
+
+  @override
+  String get productSearchHint => 'Search or type a product';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get districtAndUpazila => 'District and upazila';
+
+  @override
+  String get useCurrentLocation => 'Use current location';
+
+  @override
+  String get findingLocation => 'Finding location...';
+
+  @override
+  String get addressOrArea => 'Address or area';
+
+  @override
+  String get addressHint => 'Village, market or nearby place';
+
+  @override
+  String detectedDistrict(String district) {
+    return 'Detected district: $district';
+  }
+
+  @override
+  String get locationUnavailable => 'Could not find your location';
+
+  @override
+  String get locationExample => 'Village, market, area or district';
+
+  @override
+  String get locationRequired => 'Enter the product location';
+
+  @override
+  String get dateRangeRequired => 'Select a date range';
 }

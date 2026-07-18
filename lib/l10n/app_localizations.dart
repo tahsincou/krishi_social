@@ -316,6 +316,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New Buyer'**
   String get newBuyer;
+
+  /// No description provided for @createPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Post'**
+  String get createPost;
+
+  /// No description provided for @createBuyPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Buy Post'**
+  String get createBuyPost;
+
+  /// No description provided for @createSellPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Sell Post'**
+  String get createSellPost;
+
+  /// No description provided for @category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get category;
+
+  /// No description provided for @productName.
+  ///
+  /// In en, this message translates to:
+  /// **'Product name'**
+  String get productName;
+
+  /// No description provided for @selectOrTypeProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Select or type a product'**
+  String get selectOrTypeProduct;
+
+  /// No description provided for @unit.
+  ///
+  /// In en, this message translates to:
+  /// **'Unit'**
+  String get unit;
+
+  /// No description provided for @requiredBetween.
+  ///
+  /// In en, this message translates to:
+  /// **'Required between'**
+  String get requiredBetween;
+
+  /// No description provided for @availableBetween.
+  ///
+  /// In en, this message translates to:
+  /// **'Available between'**
+  String get availableBetween;
+
+  /// No description provided for @selectDateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Select date range'**
+  String get selectDateRange;
+
+  /// No description provided for @district.
+  ///
+  /// In en, this message translates to:
+  /// **'District'**
+  String get district;
+
+  /// No description provided for @upazila.
+  ///
+  /// In en, this message translates to:
+  /// **'Upazila'**
+  String get upazila;
+
+  /// No description provided for @targetPriceOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Target price per unit (optional)'**
+  String get targetPriceOptional;
+
+  /// No description provided for @expectedPriceOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Expected price per unit (optional)'**
+  String get expectedPriceOptional;
+
+  /// No description provided for @descriptionOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Description (optional)'**
+  String get descriptionOptional;
+
+  /// No description provided for @publishPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Publish Post'**
+  String get publishPost;
+
+  /// No description provided for @selectCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a category'**
+  String get selectCategory;
+
+  /// No description provided for @enterProductName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a product name'**
+  String get enterProductName;
+
+  /// No description provided for @enterValidQuantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid quantity'**
+  String get enterValidQuantity;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get fieldRequired;
+
+  /// No description provided for @postCreated.
+  ///
+  /// In en, this message translates to:
+  /// **'Post created'**
+  String get postCreated;
+
+  /// No description provided for @moreInformationOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'More information (optional)'**
+  String get moreInformationOptional;
+
+  /// No description provided for @qualityOptional.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality or size (optional)'**
+  String get qualityOptional;
+
+  /// No description provided for @selectCategoryFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a category first'**
+  String get selectCategoryFirst;
+
+  /// No description provided for @productSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search or type a product'**
+  String get productSearchHint;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
+  /// No description provided for @districtAndUpazila.
+  ///
+  /// In en, this message translates to:
+  /// **'District and upazila'**
+  String get districtAndUpazila;
+
+  /// No description provided for @useCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current location'**
+  String get useCurrentLocation;
+
+  /// No description provided for @findingLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Finding location...'**
+  String get findingLocation;
+
+  /// No description provided for @addressOrArea.
+  ///
+  /// In en, this message translates to:
+  /// **'Address or area'**
+  String get addressOrArea;
+
+  /// No description provided for @addressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Village, market or nearby place'**
+  String get addressHint;
+
+  /// No description provided for @detectedDistrict.
+  ///
+  /// In en, this message translates to:
+  /// **'Detected district: {district}'**
+  String detectedDistrict(String district);
+
+  /// No description provided for @locationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not find your location'**
+  String get locationUnavailable;
+
+  /// No description provided for @locationExample.
+  ///
+  /// In en, this message translates to:
+  /// **'Village, market, area or district'**
+  String get locationExample;
+
+  /// No description provided for @locationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the product location'**
+  String get locationRequired;
+
+  /// No description provided for @dateRangeRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a date range'**
+  String get dateRangeRequired;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
