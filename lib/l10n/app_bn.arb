@@ -1,0 +1,25 @@
+{
+  "@@locale": "bn",
+
+  "appName": "লজিস্টিক অপারেশন",
+
+  "login": "লগইন",
+
+  "dashboard": "ড্যাশবোর্ড",
+
+  "shipments": "পার্সেল",
+
+  "settings": "সেটিংস",
+
+  "logout": "লগআউট",
+
+  "save": "সংরক্ষণ",
+
+  "cancel": "বাতিল",
+
+  "theme": "থিম",
+  "system": "সিস্টেম",
+  "light": "লাইট",
+  "dark": "ডার্ক",
+  "language":"ভাষা"
+}

@@ -1,0 +1,26 @@
+{
+  "@@locale": "en",
+
+  "appName": "Logistic Operation",
+
+  "login": "Login",
+
+  "dashboard": "Dashboard",
+
+  "shipments": "Shipments",
+
+  "settings": "Settings",
+
+  "logout": "Logout",
+
+  "save": "Save",
+
+  "cancel": "Cancel",
+
+  "theme": "Theme",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "language":"Language"
+  
+}

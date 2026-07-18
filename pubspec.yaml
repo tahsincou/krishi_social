@@ -1,0 +1,43 @@
+name: flutter_mvp_starter
+description: "MVP Starter App"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^3.3.2
+  go_router: ^17.0.0
+  dio: ^5.10.0
+  flutter_secure_storage: ^10.3.1
+  connectivity_plus: ^7.2.0
+  logger: ^2.7.0
+  intl: ^0.20.2
+  equatable: ^2.0.8
+  shared_preferences: ^2.5.3
+  sqflite: ^2.4.2
+  path: ^1.9.1
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+  build_runner:
+
+
+flutter:
+  generate: true
+  uses-material-design: true
+  
+

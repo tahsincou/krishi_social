@@ -1,0 +1,1 @@
+enum AppEnvironment { demo, live }
