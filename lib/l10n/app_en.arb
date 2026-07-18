@@ -1,26 +1,50 @@
 {
-  "@@locale": "en",
+"@@locale": "en",
 
-  "appName": "Krishi Media",
+"appName": "Krishi Media",
 
-  "login": "Login",
+"login": "Login",
+"dashboard": "Dashboard",
+"settings": "Settings",
+"logout": "Logout",
 
-  "dashboard": "Dashboard",
+"save": "Save",
+"cancel": "Cancel",
 
-  "shipments": "Shipments",
+"theme": "Theme",
+"system": "System",
+"light": "Light",
+"dark": "Dark",
+"language": "Language",
 
-  "settings": "Settings",
+"buy": "Buy",
+"sell": "Sell",
+"all": "All",
 
-  "logout": "Logout",
+"searchProductOrLocation": "Search product or location",
 
-  "save": "Save",
+"vegetables": "Vegetables",
+"fruits": "Fruits",
+"crops": "Crops",
+"poultry": "Poultry",
+"eggs": "Eggs",
+"dairy": "Dairy",
+"fish": "Fish",
+"livestock": "Livestock",
+"honey": "Honey",
+"nursery": "Nursery",
+"other": "Other",
 
-  "cancel": "Cancel",
+"noMatchingPosts": "No matching posts found",
+"tryAnotherProductOrCategory": "Try another product or category.",
 
-  "theme": "Theme",
-  "system": "System",
-  "light": "Light",
-  "dark": "Dark",
-  "language":"Language"
-  
+"quantity": "Quantity",
+"required": "Required",
+"available": "Available",
+"price": "Price",
+"quality": "Quality",
+"contact": "Contact",
+
+"reviewedBuyer": "Reviewed Buyer",
+"newBuyer": "New Buyer"
 }

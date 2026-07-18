@@ -1,5 +1,6 @@
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
+import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 import 'package:krishi_social/features/feed/domain/entities/quantity_unit.dart';
 
 class AgriculturePost {
@@ -11,8 +12,8 @@ class AgriculturePost {
 
   final PostType type;
 
-  final String category;
-  final String product;
+  final ProductCategory category;
+  final String productName;
 
   final double quantity;
   final QuantityUnit unit;
@@ -40,7 +41,7 @@ class AgriculturePost {
     required this.isUserReviewed,
     required this.type,
     required this.category,
-    required this.product,
+    required this.productName,
     required this.quantity,
     required this.unit,
     required this.availableFrom,

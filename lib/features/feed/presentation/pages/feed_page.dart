@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/data/mock/mock_agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
+import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
+import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_list.dart';
+import 'package:krishi_social/shared/widgets/app_drawer.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -15,6 +19,7 @@ class _FeedPageState extends State<FeedPage> {
   final TextEditingController _searchController = TextEditingController();
 
   String _searchQuery = '';
+  ProductCategory? _selectedCategory;
 
   @override
   void dispose() {
@@ -30,12 +35,19 @@ class _FeedPageState extends State<FeedPage> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        drawer: AppDrawer(),
         appBar: AppBar(
-          title: const Text('Krishi Social'),
-          bottom: const TabBar(
+          title: Text(context.l10n.appName),
+          bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.shopping_cart_outlined), text: 'Buy'),
-              Tab(icon: Icon(Icons.agriculture_outlined), text: 'Sell'),
+              Tab(
+                icon: const Icon(Icons.shopping_cart_outlined),
+                text: context.l10n.buy,
+              ),
+              Tab(
+                icon: const Icon(Icons.agriculture_outlined),
+                text: context.l10n.sell,
+              ),
             ],
           ),
         ),
@@ -51,7 +63,7 @@ class _FeedPageState extends State<FeedPage> {
                   });
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search product or location',
+                  hintText: context.l10n.searchProductOrLocation,
                   prefixIcon: const Icon(Icons.search),
                   suffixIcon: _searchQuery.isNotEmpty
                       ? IconButton(
@@ -69,6 +81,43 @@ class _FeedPageState extends State<FeedPage> {
                 ),
               ),
             ),
+
+            SizedBox(
+              height: 48,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  ChoiceChip(
+                    label: Text(context.l10n.all),
+                    selected: _selectedCategory == null,
+                    onSelected: (_) {
+                      setState(() {
+                        _selectedCategory = null;
+                      });
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  ...ProductCategory.values.map(
+                    (category) => Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: ChoiceChip(
+                        label: Text(category.displayName(context)),
+                        selected: _selectedCategory == category,
+                        onSelected: (_) {
+                          setState(() {
+                            _selectedCategory = category;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
             Expanded(
               child: TabBarView(
                 children: [
@@ -84,24 +133,32 @@ class _FeedPageState extends State<FeedPage> {
   }
 
   List<AgriculturePost> _filterPosts(PostType type) {
-    final posts = mockAgriculturePosts
+    var posts = mockAgriculturePosts
         .where((post) => post.type == type)
         .toList();
 
-    if (_searchQuery.isEmpty) {
-      return posts;
+    if (_selectedCategory != null) {
+      posts = posts
+          .where((post) => post.category == _selectedCategory)
+          .toList();
     }
 
-    return posts.where((post) {
-      final searchableText = [
-        post.product,
-        post.category,
-        post.district,
-        post.upazila,
-        post.userName,
-      ].join(' ').toLowerCase();
+    if (_searchQuery.isNotEmpty) {
+      posts = posts.where((post) {
+        final searchableText = [
+          post.productName,
+          post.category.displayName(context),
+          post.district,
+          post.upazila,
+          post.userName,
+        ].join(' ').toLowerCase();
 
-      return searchableText.contains(_searchQuery);
-    }).toList();
+        return searchableText.contains(_searchQuery);
+      }).toList();
+    }
+
+    posts.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return posts;
   }
 }

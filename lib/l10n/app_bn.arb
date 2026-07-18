@@ -1,25 +1,50 @@
 {
-  "@@locale": "bn",
+"@@locale": "bn",
 
-  "appName": "লজিস্টিক অপারেশন",
+"appName": "কৃষি মিডিয়া",
 
-  "login": "লগইন",
+"login": "লগইন",
+"dashboard": "হোম",
+"settings": "সেটিংস",
+"logout": "লগআউট",
 
-  "dashboard": "ড্যাশবোর্ড",
+"save": "সেভ করুন",
+"cancel": "ক্যানসেল",
 
-  "shipments": "পার্সেল",
+"theme": "থিম",
+"system": "ফোনের সেটিং অনুযায়ী",
+"light": "লাইট",
+"dark": "ডার্ক",
+"language": "ভাষা",
 
-  "settings": "সেটিংস",
+"buy": "কিনতে চাই",
+"sell": "বিক্রি করব",
+"all": "সব",
 
-  "logout": "লগআউট",
+"searchProductOrLocation": "পণ্য বা এলাকার নাম লিখে সার্চ করুন",
 
-  "save": "সংরক্ষণ",
+"vegetables": "শাকসবজি",
+"fruits": "ফলমূল",
+"crops": "ধান ও ফসল",
+"poultry": "মুরগি ও হাঁস",
+"eggs": "ডিম",
+"dairy": "দুধ",
+"fish": "মাছ",
+"livestock": "গরু-ছাগল",
+"honey": "মধু",
+"nursery": "চারা ও নার্সারি",
+"other": "অন্যান্য",
 
-  "cancel": "বাতিল",
+"noMatchingPosts": "কোনো পোস্ট পাওয়া যায়নি",
+"tryAnotherProductOrCategory": "অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন",
 
-  "theme": "থিম",
-  "system": "সিস্টেম",
-  "light": "লাইট",
-  "dark": "ডার্ক",
-  "language":"ভাষা"
+"quantity": "পরিমাণ",
+"required": "কবে দরকার",
+"available": "কবে পাওয়া যাবে",
+"price": "দাম",
+"quality": "পণ্যের মান",
+"contact": "ফোন করুন",
+
+"reviewedBuyer": "যাচাই করা ক্রেতা",
+"newBuyer": "নতুন ক্রেতা"
 }

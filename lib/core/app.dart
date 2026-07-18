@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/core/providers/locale_provider.dart';
 import 'package:krishi_social/core/router/router.dart';
 import 'package:krishi_social/core/providers/theme_provider.dart';
@@ -13,7 +14,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Krishi Media',
+      title: 'Krishi Social',
       routerConfig: AppRouter.router,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

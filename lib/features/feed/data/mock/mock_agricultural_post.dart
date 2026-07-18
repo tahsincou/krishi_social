@@ -1,6 +1,7 @@
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
+import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 import 'package:krishi_social/features/feed/domain/entities/quantity_unit.dart';
 
 final mockAgriculturePosts = <AgriculturePost>[
@@ -10,8 +11,8 @@ final mockAgriculturePosts = <AgriculturePost>[
     userName: 'Rahman Traders',
     isUserReviewed: true,
     type: PostType.buy,
-    category: 'Vegetables',
-    product: 'Tomato',
+    category: ProductCategory.vegetables,
+    productName: 'Tomato',
     quantity: 2,
     unit: QuantityUnit.ton,
     availableFrom: DateTime.now().add(const Duration(days: 10)),
@@ -31,8 +32,8 @@ final mockAgriculturePosts = <AgriculturePost>[
     userName: 'Abdul Karim',
     isUserReviewed: false,
     type: PostType.sell,
-    category: 'Poultry',
-    product: 'Broiler Chicken',
+    category: ProductCategory.poultry,
+    productName: 'Broiler Chicken',
     quantity: 1200,
     unit: QuantityUnit.bird,
     availableFrom: DateTime.now().add(const Duration(days: 7)),
@@ -52,8 +53,8 @@ final mockAgriculturePosts = <AgriculturePost>[
     userName: 'Maa Dairy Farm',
     isUserReviewed: true,
     type: PostType.sell,
-    category: 'Dairy',
-    product: 'Raw Milk',
+    category: ProductCategory.dairy,
+    productName: 'Raw Milk',
     quantity: 150,
     unit: QuantityUnit.liter,
     availableFrom: DateTime.now(),
@@ -73,8 +74,8 @@ final mockAgriculturePosts = <AgriculturePost>[
     userName: 'City Egg Traders',
     isUserReviewed: true,
     type: PostType.buy,
-    category: 'Eggs',
-    product: 'Chicken Eggs',
+    category: ProductCategory.eggs,
+    productName: 'Chicken Eggs',
     quantity: 5000,
     unit: QuantityUnit.piece,
     availableFrom: DateTime.now().add(const Duration(days: 5)),

@@ -23,7 +23,7 @@ class AgriculturePostCard extends StatelessWidget {
             _PostHeader(post: post),
             const SizedBox(height: 16),
             Text(
-              post.product,
+              post.productName,
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),

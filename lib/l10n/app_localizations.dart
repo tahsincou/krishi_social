@@ -98,7 +98,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Logistic Operation'**
+  /// **'Krishi Media'**
   String get appName;
 
   /// No description provided for @login.
@@ -112,12 +112,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get dashboard;
-
-  /// No description provided for @shipments.
-  ///
-  /// In en, this message translates to:
-  /// **'Shipments'**
-  String get shipments;
 
   /// No description provided for @settings.
   ///
@@ -172,6 +166,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
+
+  /// No description provided for @buy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy'**
+  String get buy;
+
+  /// No description provided for @sell.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell'**
+  String get sell;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @searchProductOrLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Search product or location'**
+  String get searchProductOrLocation;
+
+  /// No description provided for @vegetables.
+  ///
+  /// In en, this message translates to:
+  /// **'Vegetables'**
+  String get vegetables;
+
+  /// No description provided for @fruits.
+  ///
+  /// In en, this message translates to:
+  /// **'Fruits'**
+  String get fruits;
+
+  /// No description provided for @crops.
+  ///
+  /// In en, this message translates to:
+  /// **'Crops'**
+  String get crops;
+
+  /// No description provided for @poultry.
+  ///
+  /// In en, this message translates to:
+  /// **'Poultry'**
+  String get poultry;
+
+  /// No description provided for @eggs.
+  ///
+  /// In en, this message translates to:
+  /// **'Eggs'**
+  String get eggs;
+
+  /// No description provided for @dairy.
+  ///
+  /// In en, this message translates to:
+  /// **'Dairy'**
+  String get dairy;
+
+  /// No description provided for @fish.
+  ///
+  /// In en, this message translates to:
+  /// **'Fish'**
+  String get fish;
+
+  /// No description provided for @livestock.
+  ///
+  /// In en, this message translates to:
+  /// **'Livestock'**
+  String get livestock;
+
+  /// No description provided for @honey.
+  ///
+  /// In en, this message translates to:
+  /// **'Honey'**
+  String get honey;
+
+  /// No description provided for @nursery.
+  ///
+  /// In en, this message translates to:
+  /// **'Nursery'**
+  String get nursery;
+
+  /// No description provided for @other.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get other;
+
+  /// No description provided for @noMatchingPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching posts found'**
+  String get noMatchingPosts;
+
+  /// No description provided for @tryAnotherProductOrCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another product or category.'**
+  String get tryAnotherProductOrCategory;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @available.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get available;
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
+
+  /// No description provided for @quality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality'**
+  String get quality;
+
+  /// No description provided for @contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get contact;
+
+  /// No description provided for @reviewedBuyer.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviewed Buyer'**
+  String get reviewedBuyer;
+
+  /// No description provided for @newBuyer.
+  ///
+  /// In en, this message translates to:
+  /// **'New Buyer'**
+  String get newBuyer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
