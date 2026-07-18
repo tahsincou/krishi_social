@@ -33,7 +33,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get theme => 'থিম';
 
   @override
-  String get system => 'ফোনের সেটিং অনুযায়ী';
+  String get system => 'সিস্টেম';
 
   @override
   String get light => 'লাইট';
@@ -93,8 +93,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noMatchingPosts => 'কোনো পোস্ট পাওয়া যায়নি';
 
   @override
-  String get tryAnotherProductOrCategory =>
-      'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
+  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
 
   @override
   String get quantity => 'পরিমাণ';
@@ -234,12 +233,41 @@ class AppLocalizationsBn extends AppLocalizations {
   String get couldNotLoadPosts => 'পোস্ট লোড করা যায়নি';
 
   @override
-  String get checkConnectionAndTryAgain =>
-      'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
+  String get checkConnectionAndTryAgain => 'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
 
   @override
   String get tryAgain => 'আবার চেষ্টা করুন';
 
   @override
   String get postCreationFailed => 'পোস্ট তৈরি করা যায়নি';
+
+  @override
+  String get myPosts => 'আমার পোস্ট';
+
+  @override
+  String get noPostsYet => 'এখনো কোনো পোস্ট নেই';
+
+  @override
+  String get createFirstPost => 'কেনা বা বিক্রির পোস্ট করলে এখানে দেখা যাবে';
+
+  @override
+  String get closePost => 'পোস্ট বন্ধ করুন';
+
+  @override
+  String get postClosed => 'পোস্ট বন্ধ হয়েছে';
+
+  @override
+  String get delete => 'ডিলিট';
+
+  @override
+  String get deletePost => 'পোস্ট ডিলিট';
+
+  @override
+  String get deletePostConfirmation => 'পোস্টটি ডিলিট করতে চান?';
+
+  @override
+  String get postDeleted => 'পোস্ট ডিলিট হয়েছে';
+
+  @override
+  String get actionFailed => 'কাজটি করা যায়নি';
 }

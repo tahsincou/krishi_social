@@ -6,6 +6,7 @@ class FeedState {
   const FeedState({
     this.isLoading = false,
     this.isCreating = false,
+    this.isUpdating = false,
     this.posts = const [],
     this.searchQuery = '',
     this.selectedCategory,
@@ -14,6 +15,7 @@ class FeedState {
 
   final bool isLoading;
   final bool isCreating;
+  final bool isUpdating;
   final List<AgriculturePost> posts;
   final String searchQuery;
   final ProductCategory? selectedCategory;
@@ -22,6 +24,7 @@ class FeedState {
   FeedState copyWith({
     bool? isLoading,
     bool? isCreating,
+    bool? isUpdating,
     List<AgriculturePost>? posts,
     String? searchQuery,
     ProductCategory? selectedCategory,
@@ -32,6 +35,7 @@ class FeedState {
     return FeedState(
       isLoading: isLoading ?? this.isLoading,
       isCreating: isCreating ?? this.isCreating,
+      isUpdating: isUpdating ?? this.isUpdating,
       posts: posts ?? this.posts,
       searchQuery: searchQuery ?? this.searchQuery,
       selectedCategory: clearSelectedCategory
@@ -60,6 +64,16 @@ class FeedState {
             post.upazila.toLowerCase().contains(query);
       }).toList();
     }
+
+    result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return result;
+  }
+
+  List<AgriculturePost> get myPosts {
+    final result = posts
+        .where((post) => post.userId == 'current-user')
+        .toList();
 
     result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 

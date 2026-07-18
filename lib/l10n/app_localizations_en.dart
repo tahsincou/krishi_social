@@ -233,12 +233,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotLoadPosts => 'Could not load posts';
 
   @override
-  String get checkConnectionAndTryAgain =>
-      'Check the server connection and try again.';
+  String get checkConnectionAndTryAgain => 'Check the server connection and try again.';
 
   @override
   String get tryAgain => 'Try again';
 
   @override
   String get postCreationFailed => 'Could not create the post';
+
+  @override
+  String get myPosts => 'My Posts';
+
+  @override
+  String get noPostsYet => 'No posts yet';
+
+  @override
+  String get createFirstPost => 'Create a buy or sell post to see it here.';
+
+  @override
+  String get closePost => 'Close Post';
+
+  @override
+  String get postClosed => 'Post closed';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get deletePost => 'Delete Post';
+
+  @override
+  String get deletePostConfirmation => 'Are you sure you want to delete this post?';
+
+  @override
+  String get postDeleted => 'Post deleted';
+
+  @override
+  String get actionFailed => 'Could not complete the action';
 }

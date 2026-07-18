@@ -12,7 +12,7 @@
 "cancel": "ক্যানসেল",
 
 "theme": "থিম",
-"system": "ফোনের সেটিং অনুযায়ী",
+"system": "সিস্টেম",
 "light": "লাইট",
 "dark": "ডার্ক",
 "language": "ভাষা",
@@ -96,6 +96,17 @@
 "couldNotLoadPosts": "পোস্ট লোড করা যায়নি",
 "checkConnectionAndTryAgain": "সার্ভার কানেকশন দেখে আবার চেষ্টা করুন",
 "tryAgain": "আবার চেষ্টা করুন",
-"postCreationFailed": "পোস্ট তৈরি করা যায়নি"
+"postCreationFailed": "পোস্ট তৈরি করা যায়নি",
+
+"myPosts": "আমার পোস্ট",
+"noPostsYet": "এখনো কোনো পোস্ট নেই",
+"createFirstPost": "কেনা বা বিক্রির পোস্ট করলে এখানে দেখা যাবে",
+"closePost": "পোস্ট বন্ধ করুন",
+"postClosed": "পোস্ট বন্ধ হয়েছে",
+"delete": "ডিলিট",
+"deletePost": "পোস্ট ডিলিট",
+"deletePostConfirmation": "পোস্টটি ডিলিট করতে চান?",
+"postDeleted": "পোস্ট ডিলিট হয়েছে",
+"actionFailed": "কাজটি করা যায়নি"
 
 }

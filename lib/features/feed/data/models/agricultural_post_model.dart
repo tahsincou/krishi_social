@@ -108,4 +108,56 @@ class AgriculturalPostModel extends AgriculturePost {
       'createdAt': createdAt.toIso8601String(),
     };
   }
+
+  Map<String, dynamic> toDatabase() {
+    return {
+      'id': id,
+      'user_id': userId,
+      'user_name': userName,
+      'user_image_url': userImageUrl,
+      'is_user_reviewed': isUserReviewed ? 1 : 0,
+      'type': type.name,
+      'category': category.name,
+      'product_name': productName,
+      'quantity': quantity,
+      'unit': unit.name,
+      'available_from': availableFrom.toIso8601String(),
+      'available_to': availableTo.toIso8601String(),
+      'district': district,
+      'upazila': upazila,
+      'price_per_unit': pricePerUnit,
+      'quality_requirement': qualityRequirement,
+      'description': description,
+      'image_url': imageUrl,
+      'phone': phone,
+      'status': status.name,
+      'created_at': createdAt.toIso8601String(),
+    };
+  }
+
+  factory AgriculturalPostModel.fromDatabase(Map<String, dynamic> map) {
+    return AgriculturalPostModel(
+      id: map['id'] as String,
+      userId: map['user_id'] as String,
+      userName: map['user_name'] as String,
+      userImageUrl: map['user_image_url'] as String?,
+      isUserReviewed: map['is_user_reviewed'] == 1,
+      type: PostType.values.byName(map['type'] as String),
+      category: ProductCategory.values.byName(map['category'] as String),
+      productName: map['product_name'] as String,
+      quantity: (map['quantity'] as num).toDouble(),
+      unit: QuantityUnit.values.byName(map['unit'] as String),
+      availableFrom: DateTime.parse(map['available_from'] as String),
+      availableTo: DateTime.parse(map['available_to'] as String),
+      district: map['district'] as String,
+      upazila: map['upazila'] as String,
+      pricePerUnit: (map['price_per_unit'] as num?)?.toDouble(),
+      qualityRequirement: map['quality_requirement'] as String?,
+      description: map['description'] as String?,
+      imageUrl: map['image_url'] as String?,
+      phone: map['phone'] as String,
+      status: PostStatus.values.byName(map['status'] as String),
+      createdAt: DateTime.parse(map['created_at'] as String),
+    );
+  }
 }

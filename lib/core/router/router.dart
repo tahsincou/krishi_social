@@ -4,6 +4,7 @@ import 'package:krishi_social/features/dashboard/presentation/pages/dashboard_pa
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/presentation/pages/create_post_page.dart';
 import 'package:krishi_social/features/feed/presentation/pages/feed_page.dart';
+import 'package:krishi_social/features/feed/presentation/pages/my_posts_page.dart';
 import 'package:krishi_social/features/settings/settings_page.dart';
 import 'package:krishi_social/features/splash/presentation/pages/splash_page.dart';
 
@@ -23,6 +24,7 @@ class AppRouter {
           return CreatePostPage(initialType: type);
         },
       ),
+      GoRoute(path: '/my-posts', builder: (_, __) => const MyPostsPage()),
     ],
   );
 }

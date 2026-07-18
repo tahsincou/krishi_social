@@ -29,6 +29,16 @@ class AppDrawer extends ConsumerWidget {
             //   },
             // ),
             ListTile(
+              leading: const Icon(Icons.article_outlined),
+              title: Text(context.l10n.myPosts),
+              onTap: () {
+                Navigator.pop(context);
+                context.push('/my-posts');
+              },
+            ),
+
+            const Divider(),
+            ListTile(
               leading: const Icon(Icons.settings),
               title: Text(context.l10n.settings),
               onTap: () {

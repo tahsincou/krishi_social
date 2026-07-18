@@ -165,7 +165,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         ),
         floatingActionButton: Builder(
           builder: (context) {
-            return FloatingActionButton.extended(
+            return FloatingActionButton(
               onPressed: () {
                 final tabIndex = DefaultTabController.of(context).index;
 
@@ -173,8 +173,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
                 context.push('/create-post', extra: type);
               },
-              icon: const Icon(Icons.add),
-              label: Text(context.l10n.createPost),
+              child: Icon(Icons.add),
             );
           },
         ),

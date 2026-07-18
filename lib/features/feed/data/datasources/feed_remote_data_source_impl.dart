@@ -31,4 +31,21 @@ class FeedRemoteDataSourceImpl implements FeedRemoteDataSource {
       response.data as Map<String, dynamic>,
     );
   }
+
+  @override
+  Future<AgriculturalPostModel> updatePost(AgriculturalPostModel post) async {
+    final response = await apiClient.put(
+      '/posts/${post.id}',
+      data: post.toJson(),
+    );
+
+    return AgriculturalPostModel.fromJson(
+      response.data as Map<String, dynamic>,
+    );
+  }
+
+  @override
+  Future<void> deletePost(String postId) async {
+    await apiClient.delete('/posts/$postId');
+  }
 }

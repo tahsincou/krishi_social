@@ -4,4 +4,8 @@ abstract class FeedRemoteDataSource {
   Future<List<AgriculturalPostModel>> getPosts();
 
   Future<AgriculturalPostModel> createPost(AgriculturalPostModel post);
+
+  Future<AgriculturalPostModel> updatePost(AgriculturalPostModel post);
+
+  Future<void> deletePost(String postId);
 }

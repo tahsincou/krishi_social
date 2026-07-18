@@ -96,7 +96,17 @@
 "couldNotLoadPosts": "Could not load posts",
 "checkConnectionAndTryAgain": "Check the server connection and try again.",
 "tryAgain": "Try again",
-"postCreationFailed": "Could not create the post"
+"postCreationFailed": "Could not create the post",
+"myPosts": "My Posts",
+"noPostsYet": "No posts yet",
+"createFirstPost": "Create a buy or sell post to see it here.",
+"closePost": "Close Post",
+"postClosed": "Post closed",
+"delete": "Delete",
+"deletePost": "Delete Post",
+"deletePostConfirmation": "Are you sure you want to delete this post?",
+"postDeleted": "Post deleted",
+"actionFailed": "Could not complete the action"
 
 
 }
