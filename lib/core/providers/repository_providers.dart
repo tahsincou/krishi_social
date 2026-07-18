@@ -13,5 +13,5 @@ final authRepositoryProvider = Provider<AuthRepository>((ref) {
 });
 
 final feedRepositoryProvider = Provider<FeedRepository>((ref) {
-  return FeedRepositoryImpl(ref.watch(feedRemoteDataSourceProvider));
+  return FeedRepositoryImpl(ref.read(feedRemoteDataSourceProvider));
 });

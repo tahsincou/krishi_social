@@ -91,6 +91,11 @@
 "dateRangeRequired": "তারিখ বাছাই করুন",
 "location": "পণ্যের এলাকা",
 "locationExample": "গ্রাম, বাজার, উপজেলা বা জেলার নাম",
-"locationRequired": "পণ্য কোথায় আছে বা লাগবে তা লিখুন"
+"locationRequired": "পণ্য কোথায় আছে বা লাগবে তা লিখুন",
+
+"couldNotLoadPosts": "পোস্ট লোড করা যায়নি",
+"checkConnectionAndTryAgain": "সার্ভার কানেকশন দেখে আবার চেষ্টা করুন",
+"tryAgain": "আবার চেষ্টা করুন",
+"postCreationFailed": "পোস্ট তৈরি করা যায়নি"
 
 }

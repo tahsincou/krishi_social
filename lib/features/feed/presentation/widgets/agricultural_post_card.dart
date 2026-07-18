@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
+import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dart';
 
 class AgriculturePostCard extends StatelessWidget {
@@ -22,12 +23,7 @@ class AgriculturePostCard extends StatelessWidget {
           children: [
             _PostHeader(post: post),
             const SizedBox(height: 16),
-            Text(
-              post.productName,
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text(post.productName, style: theme.textTheme.titleLarge),
             const SizedBox(height: 8),
             _PostInformation(post: post),
             if (post.description?.isNotEmpty == true) ...[
@@ -35,16 +31,24 @@ class AgriculturePostCard extends StatelessWidget {
               Text(post.description!),
             ],
             const SizedBox(height: 12),
-            const Divider(),
+
             Row(
               children: [
                 Expanded(
                   child: SizedBox(
-                    width: double.infinity,
                     child: FilledButton.icon(
                       onPressed: onCall,
                       icon: const Icon(Icons.call_outlined),
                       label: const Text('Contact'),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    child: FilledButton.icon(
+                      onPressed: onCall,
+                      icon: const Icon(Icons.comment),
+                      label: const Text('Comment'),
                     ),
                   ),
                 ),
@@ -66,19 +70,18 @@ class _PostHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundImage: post.userImageUrl != null
-              ? NetworkImage(post.userImageUrl!)
-              : null,
-          child: post.userImageUrl == null
-              ? Text(
-                  post.userName.isNotEmpty
-                      ? post.userName.characters.first.toUpperCase()
-                      : '?',
-                )
-              : null,
-        ),
-        const SizedBox(width: 12),
+        // CircleAvatar(
+        //   backgroundImage: post.userImageUrl != null
+        //       ? NetworkImage(post.userImageUrl!)
+        //       : null,
+        //   child: post.userImageUrl == null
+        //       ? Text(
+        //           post.userName.isNotEmpty
+        //               ? post.userName.characters.first.toUpperCase()
+        //               : '?',
+        //         )
+        //       : null,
+        // ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,10 +102,7 @@ class _PostHeader extends StatelessWidget {
                   ],
                 ],
               ),
-              Text(
-                '${post.upazila}, ${post.district}',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+              Text(post.district, style: Theme.of(context).textTheme.bodySmall),
             ],
           ),
         ),
@@ -122,7 +122,7 @@ class _PostInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('dd MMM');
+    final dateFormat = DateFormat('dd MMM yyyy');
 
     return Column(
       children: [
@@ -133,7 +133,7 @@ class _PostInformation extends StatelessWidget {
         ),
         _InformationRow(
           icon: Icons.date_range_outlined,
-          label: post.type.displayName == 'Buy' ? 'Required' : 'Available',
+          label: post.type == PostType.buy ? 'Required' : 'Available',
           value:
               '${dateFormat.format(post.availableFrom)} - ${dateFormat.format(post.availableTo)}',
         ),

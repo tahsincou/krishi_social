@@ -229,4 +229,17 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get dateRangeRequired => 'তারিখ বাছাই করুন';
+
+  @override
+  String get couldNotLoadPosts => 'পোস্ট লোড করা যায়নি';
+
+  @override
+  String get checkConnectionAndTryAgain =>
+      'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
+
+  @override
+  String get tryAgain => 'আবার চেষ্টা করুন';
+
+  @override
+  String get postCreationFailed => 'পোস্ট তৈরি করা যায়নি';
 }

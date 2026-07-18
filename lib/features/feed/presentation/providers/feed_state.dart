@@ -3,22 +3,25 @@ import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 
 class FeedState {
-  final bool isLoading;
-  final List<AgriculturePost> posts;
-  final String searchQuery;
-  final ProductCategory? selectedCategory;
-  final String? error;
-
   const FeedState({
     this.isLoading = false,
+    this.isCreating = false,
     this.posts = const [],
     this.searchQuery = '',
     this.selectedCategory,
     this.error,
   });
 
+  final bool isLoading;
+  final bool isCreating;
+  final List<AgriculturePost> posts;
+  final String searchQuery;
+  final ProductCategory? selectedCategory;
+  final String? error;
+
   FeedState copyWith({
     bool? isLoading,
+    bool? isCreating,
     List<AgriculturePost>? posts,
     String? searchQuery,
     ProductCategory? selectedCategory,
@@ -28,6 +31,7 @@ class FeedState {
   }) {
     return FeedState(
       isLoading: isLoading ?? this.isLoading,
+      isCreating: isCreating ?? this.isCreating,
       posts: posts ?? this.posts,
       searchQuery: searchQuery ?? this.searchQuery,
       selectedCategory: clearSelectedCategory
@@ -46,9 +50,9 @@ class FeedState {
           .toList();
     }
 
-    if (searchQuery.isNotEmpty) {
-      final query = searchQuery.toLowerCase();
+    final query = searchQuery.trim().toLowerCase();
 
+    if (query.isNotEmpty) {
       result = result.where((post) {
         return post.productName.toLowerCase().contains(query) ||
             post.userName.toLowerCase().contains(query) ||

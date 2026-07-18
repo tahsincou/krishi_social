@@ -8,6 +8,8 @@ import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dar
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_list.dart';
 import 'package:krishi_social/shared/widgets/app_drawer.dart';
+import 'package:krishi_social/shared/widgets/app_empty.dart';
+import 'package:krishi_social/shared/widgets/app_loading.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -121,13 +123,42 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             ),
 
             const SizedBox(height: 8),
-
             Expanded(
-              child: TabBarView(
-                children: [
-                  AgriculturePostList(posts: buyPosts),
-                  AgriculturePostList(posts: sellPosts),
-                ],
+              child: Builder(
+                builder: (context) {
+                  if (feedState.isLoading && feedState.posts.isEmpty) {
+                    return const AppLoading();
+                  }
+
+                  if (feedState.error != null && feedState.posts.isEmpty) {
+                    return AppEmpty(
+                      title: context.l10n.couldNotLoadPosts,
+                      message: context.l10n.checkConnectionAndTryAgain,
+                      icon: Icons.cloud_off_outlined,
+                    );
+                  }
+
+                  return TabBarView(
+                    children: [
+                      RefreshIndicator(
+                        onRefresh: () {
+                          return ref
+                              .read(feedNotifierProvider.notifier)
+                              .loadPosts();
+                        },
+                        child: AgriculturePostList(posts: buyPosts),
+                      ),
+                      RefreshIndicator(
+                        onRefresh: () {
+                          return ref
+                              .read(feedNotifierProvider.notifier)
+                              .loadPosts();
+                        },
+                        child: AgriculturePostList(posts: sellPosts),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ],

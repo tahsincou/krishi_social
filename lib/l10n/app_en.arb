@@ -92,7 +92,11 @@
 "locationUnavailable": "Could not find your location",
 "locationExample": "Village, market, area or district",
 "locationRequired": "Enter the product location",
-"dateRangeRequired": "Select a date range"
+"dateRangeRequired": "Select a date range",
+"couldNotLoadPosts": "Could not load posts",
+"checkConnectionAndTryAgain": "Check the server connection and try again.",
+"tryAgain": "Try again",
+"postCreationFailed": "Could not create the post"
 
 
 }

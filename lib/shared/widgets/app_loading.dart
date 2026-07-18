@@ -9,18 +9,20 @@ class AppLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: EdgeInsets.all(AppSpacing.sm),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const CircularProgressIndicator(),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(AppSpacing.sm),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircularProgressIndicator(),
 
-            if (message != null) ...[
-              SizedBox(height: AppSpacing.md),
-              Text(message!, textAlign: TextAlign.center),
+              if (message != null) ...[
+                SizedBox(height: AppSpacing.md),
+                Text(message!, textAlign: TextAlign.center),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

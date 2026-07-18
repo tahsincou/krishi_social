@@ -4,6 +4,7 @@ import 'package:krishi_social/core/providers/contact_providers.dart';
 import 'package:krishi_social/core/services/contact_service.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_card.dart';
+import 'package:krishi_social/shared/widgets/app_empty.dart';
 
 class AgriculturePostList extends ConsumerWidget {
   final List<AgriculturePost> posts;
@@ -13,10 +14,19 @@ class AgriculturePostList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (posts.isEmpty) {
-      return const Center(child: Text('No posts found'));
+      return ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: [
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.55,
+            child: const AppEmpty(),
+          ),
+        ],
+      );
     }
 
     return ListView.builder(
+      physics: const AlwaysScrollableScrollPhysics(),
       padding: const EdgeInsets.symmetric(vertical: 6),
       itemCount: posts.length,
       itemBuilder: (context, index) {

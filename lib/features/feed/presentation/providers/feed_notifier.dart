@@ -1,28 +1,26 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:krishi_social/core/providers/repository_providers.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 import 'package:krishi_social/features/feed/domain/params/create_agricultural_post_params.dart';
-import 'package:krishi_social/features/feed/domain/repositories/feed_repository.dart';
+import 'package:krishi_social/features/feed/presentation/providers/feed_provider.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_state.dart';
 
-final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>((
-  ref,
-) {
-  return FeedNotifier(ref.watch(feedRepositoryProvider));
-});
+final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>(
+  (ref) => FeedNotifier(ref),
+);
 
 class FeedNotifier extends StateNotifier<FeedState> {
-  final FeedRepository repository;
+  FeedNotifier(this.ref) : super(const FeedState());
 
-  FeedNotifier(this.repository) : super(const FeedState());
+  final Ref ref;
 
   Future<void> loadPosts() async {
     state = state.copyWith(isLoading: true, clearError: true);
 
     try {
-      final posts = await repository.getPosts();
+      final posts = await ref.read(getPostsUseCaseProvider)();
 
       state = state.copyWith(isLoading: false, posts: posts);
     } catch (error) {
@@ -30,31 +28,14 @@ class FeedNotifier extends StateNotifier<FeedState> {
     }
   }
 
-  void updateSearch(String value) {
-    state = state.copyWith(searchQuery: value.trim());
-  }
-
-  void clearSearch() {
-    state = state.copyWith(searchQuery: '');
-  }
-
-  void selectCategory(ProductCategory? category) {
-    if (category == null) {
-      state = state.copyWith(clearSelectedCategory: true);
-      return;
-    }
-
-    state = state.copyWith(selectedCategory: category);
-  }
-
   Future<bool> createPost(CreateAgriculturalPostParams params) async {
-    state = state.copyWith(isLoading: true, clearError: true);
+    state = state.copyWith(isCreating: true, clearError: true);
 
     try {
       final now = DateTime.now();
 
       final post = AgriculturePost(
-        id: now.microsecondsSinceEpoch.toString(),
+        id: '',
         userId: 'current-user',
         userName: 'My Account',
         isUserReviewed: false,
@@ -75,18 +56,35 @@ class FeedNotifier extends StateNotifier<FeedState> {
         createdAt: now,
       );
 
-      final createdPost = await repository.createPost(post);
+      final createdPost = await ref.read(createPostUseCaseProvider)(post);
 
       state = state.copyWith(
-        isLoading: false,
+        isCreating: false,
         posts: [createdPost, ...state.posts],
       );
 
       return true;
     } catch (error) {
-      state = state.copyWith(isLoading: false, error: error.toString());
+      state = state.copyWith(isCreating: false, error: error.toString());
 
       return false;
     }
+  }
+
+  void updateSearch(String value) {
+    state = state.copyWith(searchQuery: value.trim());
+  }
+
+  void clearSearch() {
+    state = state.copyWith(searchQuery: '');
+  }
+
+  void selectCategory(ProductCategory? category) {
+    if (category == null) {
+      state = state.copyWith(clearSelectedCategory: true);
+      return;
+    }
+
+    state = state.copyWith(selectedCategory: category);
   }
 }

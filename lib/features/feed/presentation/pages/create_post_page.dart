@@ -65,6 +65,7 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   @override
   Widget build(BuildContext context) {
     final isBuyPost = _postType == PostType.buy;
+    final feedState = ref.watch(feedNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -261,7 +262,11 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
 
               const SizedBox(height: AppSpacing.lg),
 
-              AppButton(text: context.l10n.publishPost, onPressed: _submit),
+              AppButton(
+                text: context.l10n.publishPost,
+                isLoading: feedState.isCreating,
+                onPressed: feedState.isCreating ? null : _submit,
+              ),
             ],
           ),
         ),
@@ -351,9 +356,9 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
       availableFrom: _dateRange!.start,
       availableTo: _dateRange!.end,
       location: _locationController.text.trim(),
-      pricePerUnit: _nullableDouble(_priceController.text),
-      qualityRequirement: _nullableText(_qualityController.text),
-      description: _nullableText(_descriptionController.text),
+      pricePerUnit: _parseOptionalDouble(_priceController.text),
+      qualityRequirement: _optionalText(_qualityController.text),
+      description: _optionalText(_descriptionController.text),
     );
 
     final created = await ref
@@ -363,14 +368,9 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     if (!mounted) return;
 
     if (!created) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            ref.read(feedNotifierProvider).error ??
-                context.l10n.enterProductName,
-          ),
-        ),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.postCreationFailed)));
       return;
     }
 
@@ -381,19 +381,19 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     Navigator.of(context).pop();
   }
 
-  double? _nullableDouble(String value) {
-    final trimmed = value.trim();
+  double? _parseOptionalDouble(String value) {
+    final text = value.trim();
 
-    if (trimmed.isEmpty) {
+    if (text.isEmpty) {
       return null;
     }
 
-    return double.tryParse(trimmed);
+    return double.tryParse(text);
   }
 
-  String? _nullableText(String value) {
-    final trimmed = value.trim();
+  String? _optionalText(String value) {
+    final text = value.trim();
 
-    return trimmed.isEmpty ? null : trimmed;
+    return text.isEmpty ? null : text;
   }
 }

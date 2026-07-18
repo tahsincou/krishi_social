@@ -535,6 +535,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a date range'**
   String get dateRangeRequired;
+
+  /// No description provided for @couldNotLoadPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load posts'**
+  String get couldNotLoadPosts;
+
+  /// No description provided for @checkConnectionAndTryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the server connection and try again.'**
+  String get checkConnectionAndTryAgain;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get tryAgain;
+
+  /// No description provided for @postCreationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not create the post'**
+  String get postCreationFailed;
 }
 
 class _AppLocalizationsDelegate

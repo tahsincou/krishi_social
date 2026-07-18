@@ -32,9 +32,9 @@ class AgriculturalPostModel extends AgriculturePost {
   factory AgriculturalPostModel.fromJson(Map<String, dynamic> json) {
     return AgriculturalPostModel(
       id: json['id'].toString(),
-      userId: json['userId'] as String,
-      userName: json['userName'] as String,
-      userImageUrl: json['userImageUrl'] as String?,
+      userId: json['userId']?.toString() ?? '',
+      userName: json['userName']?.toString() ?? '',
+      userImageUrl: json['userImageUrl']?.toString(),
       isUserReviewed: json['isUserReviewed'] as bool? ?? false,
       type: PostType.values.byName(json['type'] as String),
       category: ProductCategory.values.byName(json['category'] as String),
@@ -43,21 +43,49 @@ class AgriculturalPostModel extends AgriculturePost {
       unit: QuantityUnit.values.byName(json['unit'] as String),
       availableFrom: DateTime.parse(json['availableFrom'] as String),
       availableTo: DateTime.parse(json['availableTo'] as String),
-      district: json['district'] as String,
-      upazila: json['upazila'] as String? ?? '',
+      district: json['district']?.toString() ?? '',
+      upazila: json['upazila']?.toString() ?? '',
       pricePerUnit: (json['pricePerUnit'] as num?)?.toDouble(),
-      qualityRequirement: json['qualityRequirement'] as String?,
-      description: json['description'] as String?,
-      imageUrl: json['imageUrl'] as String?,
-      phone: json['phone'] as String,
-      status: PostStatus.values.byName(json['status'] as String),
+      qualityRequirement: json['qualityRequirement']?.toString(),
+      description: json['description']?.toString(),
+      imageUrl: json['imageUrl']?.toString(),
+      phone: json['phone']?.toString() ?? '',
+      status: PostStatus.values.byName(
+        json['status'] as String? ?? PostStatus.active.name,
+      ),
       createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }
 
-  Map<String, dynamic> toJson() {
+  factory AgriculturalPostModel.fromEntity(AgriculturePost post) {
+    return AgriculturalPostModel(
+      id: post.id,
+      userId: post.userId,
+      userName: post.userName,
+      userImageUrl: post.userImageUrl,
+      isUserReviewed: post.isUserReviewed,
+      type: post.type,
+      category: post.category,
+      productName: post.productName,
+      quantity: post.quantity,
+      unit: post.unit,
+      availableFrom: post.availableFrom,
+      availableTo: post.availableTo,
+      district: post.district,
+      upazila: post.upazila,
+      pricePerUnit: post.pricePerUnit,
+      qualityRequirement: post.qualityRequirement,
+      description: post.description,
+      imageUrl: post.imageUrl,
+      phone: post.phone,
+      status: post.status,
+      createdAt: post.createdAt,
+    );
+  }
+
+  Map<String, dynamic> toJson({bool includeId = true}) {
     return {
-      'id': id,
+      if (includeId) 'id': id,
       'userId': userId,
       'userName': userName,
       'userImageUrl': userImageUrl,

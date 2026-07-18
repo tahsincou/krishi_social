@@ -10,5 +10,5 @@ final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
 });
 
 final feedRemoteDataSourceProvider = Provider<FeedRemoteDataSource>((ref) {
-  return FeedRemoteDataSourceImpl(ref.watch(apiClientProvider));
+  return FeedRemoteDataSourceImpl(ref.read(apiClientProvider));
 });

@@ -228,4 +228,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dateRangeRequired => 'Select a date range';
+
+  @override
+  String get couldNotLoadPosts => 'Could not load posts';
+
+  @override
+  String get checkConnectionAndTryAgain =>
+      'Check the server connection and try again.';
+
+  @override
+  String get tryAgain => 'Try again';
+
+  @override
+  String get postCreationFailed => 'Could not create the post';
 }

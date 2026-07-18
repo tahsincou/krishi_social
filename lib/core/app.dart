@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/core/providers/locale_provider.dart';
 import 'package:krishi_social/core/router/router.dart';
 import 'package:krishi_social/core/providers/theme_provider.dart';
