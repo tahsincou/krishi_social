@@ -39,7 +39,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         );
 
     if (mounted) {
-      context.go('/dashboard');
+      context.go('/feed');
     }
   }
 
