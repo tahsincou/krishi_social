@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvp_starter/features/auth/presentaion/providers/auth_notifier.dart';
-import 'package:flutter_mvp_starter/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});

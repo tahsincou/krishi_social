@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvp_starter/core/providers/providers.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/usecases/create_shipment_usecase.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/usecases/delete_shipment_usecase.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/usecases/get_recent_shipment_usecase.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/usecases/update_shipment_usecase.dart';
+import 'package:krishi_social/core/providers/providers.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/usecases/create_shipment_usecase.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/usecases/delete_shipment_usecase.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/usecases/get_recent_shipment_usecase.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/usecases/update_shipment_usecase.dart';
 
 final getRecentShipmentsUseCaseProvider = Provider<GetRecentShipmentsUseCase>((
   ref,

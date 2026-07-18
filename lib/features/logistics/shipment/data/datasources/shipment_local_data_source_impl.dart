@@ -1,6 +1,6 @@
-import 'package:flutter_mvp_starter/core/database/database_helper.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/data/datasources/shipment_local_data_source.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/data/models/shipement_model.dart';
+import 'package:krishi_social/core/database/database_helper.dart';
+import 'package:krishi_social/features/logistics/shipment/data/datasources/shipment_local_data_source.dart';
+import 'package:krishi_social/features/logistics/shipment/data/models/shipement_model.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ShipmentLocalDataSourceImpl implements ShipmentLocalDataSource {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/core/config/app_config.dart';
-import 'package:flutter_mvp_starter/core/config/environment.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_text_styles.dart';
+import 'package:krishi_social/core/config/app_config.dart';
+import 'package:krishi_social/core/config/environment.dart';
+import 'package:krishi_social/shared/theme/app_text_styles.dart';
 
 import '../theme/app_spacing.dart';
 

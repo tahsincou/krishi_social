@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment_status.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/params/create_shipment.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/entities/shipment.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/entities/shipment_status.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/params/create_shipment.dart';
 
 import 'shipment_provider.dart';
 import 'shipment_state.dart';

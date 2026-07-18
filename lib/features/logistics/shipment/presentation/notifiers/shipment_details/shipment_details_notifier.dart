@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/repository/shipment_repository.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/presentation/notifiers/shipment_details/shipment_details_state.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/repository/shipment_repository.dart';
+import 'package:krishi_social/features/logistics/shipment/presentation/notifiers/shipment_details/shipment_details_state.dart';
 
 class ShipmentDetailsNotifier extends StateNotifier<ShipmentDetailsState> {
   ShipmentDetailsNotifier(this.repository)

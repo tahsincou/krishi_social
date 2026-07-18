@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/core/providers/locale_provider.dart';
-import 'package:flutter_mvp_starter/core/router/router.dart';
-import 'package:flutter_mvp_starter/core/providers/theme_provider.dart';
+import 'package:krishi_social/core/providers/locale_provider.dart';
+import 'package:krishi_social/core/router/router.dart';
+import 'package:krishi_social/core/providers/theme_provider.dart';
 import '../l10n/app_localizations.dart';
 import '../core/theme/app_theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'Logistic Operation',
+      title: 'Krishi Media',
       routerConfig: AppRouter.router,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,

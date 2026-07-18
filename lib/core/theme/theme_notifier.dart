@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/core/services/theme_service.dart';
+import 'package:krishi_social/core/services/theme_service.dart';
 
 class ThemeNotifier extends StateNotifier<ThemeMode> {
   ThemeNotifier(this._service) : super(ThemeMode.system) {

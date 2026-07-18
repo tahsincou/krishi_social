@@ -1,4 +1,4 @@
-import 'package:flutter_mvp_starter/features/auth/data/repository/auth_repository.dart';
+import 'package:krishi_social/features/auth/data/repository/auth_repository.dart';
 
 import '../../../../core/storage/secure_storage_service.dart';
 import '../../domain/entities/user.dart';

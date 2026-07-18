@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_colors.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_text_styles.dart';
+import 'package:krishi_social/shared/theme/app_colors.dart';
+import 'package:krishi_social/shared/theme/app_text_styles.dart';
 
 class DashboardCard extends StatelessWidget {
   final String title;

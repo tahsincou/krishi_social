@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/core/services/locale_service.dart';
+import 'package:krishi_social/core/services/locale_service.dart';
 
 class LocaleNotifier extends StateNotifier<Locale> {
   LocaleNotifier(this._service) : super(const Locale('en')) {

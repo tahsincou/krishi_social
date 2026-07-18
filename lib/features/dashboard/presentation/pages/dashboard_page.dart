@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvp_starter/features/dashboard/presentation/providers/dashboard_notifier.dart';
-import 'package:flutter_mvp_starter/features/dashboard/presentation/providers/dashboard_provider.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/presentation/providers/shipment_notifier.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_colors.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_drawer.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_empty.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_loading.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_search_field.dart';
-import 'package:flutter_mvp_starter/shared/widgets/dashboard_card.dart';
-import 'package:flutter_mvp_starter/shared/widgets/shipment_tile.dart';
-import 'package:flutter_mvp_starter/shared/widgets/status_filter_chips.dart';
+import 'package:krishi_social/features/dashboard/presentation/providers/dashboard_notifier.dart';
+import 'package:krishi_social/features/dashboard/presentation/providers/dashboard_provider.dart';
+import 'package:krishi_social/features/logistics/shipment/presentation/providers/shipment_notifier.dart';
+import 'package:krishi_social/shared/theme/app_colors.dart';
+import 'package:krishi_social/shared/widgets/app_drawer.dart';
+import 'package:krishi_social/shared/widgets/app_empty.dart';
+import 'package:krishi_social/shared/widgets/app_loading.dart';
+import 'package:krishi_social/shared/widgets/app_search_field.dart';
+import 'package:krishi_social/shared/widgets/dashboard_card.dart';
+import 'package:krishi_social/shared/widgets/shipment_tile.dart';
+import 'package:krishi_social/shared/widgets/status_filter_chips.dart';
 
 import '../../../../shared/theme/app_spacing.dart';
 

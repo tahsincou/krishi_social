@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_mvp_starter/core/network/network_exception.dart';
+import 'package:krishi_social/core/network/network_exception.dart';
 
 class ApiClient {
   ApiClient(this._dio);

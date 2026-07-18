@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/core/providers/repository_providers.dart';
-import 'package:flutter_mvp_starter/features/dashboard/domain/utils/dashboard_summary_calculator.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/repository/shipment_repository.dart';
+import 'package:krishi_social/core/providers/repository_providers.dart';
+import 'package:krishi_social/features/dashboard/domain/utils/dashboard_summary_calculator.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/repository/shipment_repository.dart';
 
 import 'dashboard_state.dart';
 

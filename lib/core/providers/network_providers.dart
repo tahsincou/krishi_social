@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvp_starter/core/network/api_client.dart';
-import 'package:flutter_mvp_starter/core/providers/providers.dart';
+import 'package:krishi_social/core/network/api_client.dart';
+import 'package:krishi_social/core/providers/providers.dart';
 import '../network/dio_client.dart';
 
 final dioProvider = Provider<Dio>((ref) {

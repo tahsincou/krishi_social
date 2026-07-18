@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvp_starter/core/providers/providers.dart';
-import 'package:flutter_mvp_starter/features/auth/domain/usecases/check_login_usecase.dart';
-import 'package:flutter_mvp_starter/features/auth/domain/usecases/login_usecase.dart';
-import 'package:flutter_mvp_starter/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:krishi_social/core/providers/providers.dart';
+import 'package:krishi_social/features/auth/domain/usecases/check_login_usecase.dart';
+import 'package:krishi_social/features/auth/domain/usecases/login_usecase.dart';
+import 'package:krishi_social/features/auth/domain/usecases/logout_usecase.dart';
 
 final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
   return LoginUseCase(ref.read(authRepositoryProvider));

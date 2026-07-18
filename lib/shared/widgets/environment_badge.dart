@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_text_styles.dart';
+import 'package:krishi_social/shared/theme/app_text_styles.dart';
 import '../../core/config/app_config.dart';
 
 class EnvironmentBadge extends StatelessWidget {

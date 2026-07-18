@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvp_starter/core/locale/locale_extension.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_loading.dart';
-import 'package:flutter_mvp_starter/shared/widgets/environment_badge.dart';
-import 'package:flutter_mvp_starter/shared/widgets/environment_bottom_sheet.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/shared/widgets/app_loading.dart';
+import 'package:krishi_social/shared/widgets/environment_badge.dart';
+import 'package:krishi_social/shared/widgets/environment_bottom_sheet.dart';
 import '../../../../shared/theme/app_spacing.dart';
 import '../providers/auth_notifier.dart';
 

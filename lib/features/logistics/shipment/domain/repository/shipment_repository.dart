@@ -1,6 +1,6 @@
-import 'package:flutter_mvp_starter/core/common/repository_result.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/entities/shipment_details.dart';
-import 'package:flutter_mvp_starter/features/logistics/shipment/domain/params/create_shipment.dart';
+import 'package:krishi_social/core/common/repository_result.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/entities/shipment_details.dart';
+import 'package:krishi_social/features/logistics/shipment/domain/params/create_shipment.dart';
 
 import '../entities/shipment.dart';
 

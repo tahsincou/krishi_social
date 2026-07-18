@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:flutter_mvp_starter/features/auth/data/dto/login_request.dart';
+import 'package:krishi_social/features/auth/data/dto/login_request.dart';
 
 import 'auth_provider.dart';
 import 'auth_state.dart';

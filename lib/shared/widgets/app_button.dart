@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/shared/widgets/app_loading.dart';
+import 'package:krishi_social/shared/widgets/app_loading.dart';
 
 class AppButton extends StatelessWidget {
   final String text;

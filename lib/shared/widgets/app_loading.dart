@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_spacing.dart';
+import 'package:krishi_social/shared/theme/app_spacing.dart';
 
 class AppLoading extends StatelessWidget {
   const AppLoading({super.key, this.message});

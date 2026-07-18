@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_mvp_starter/core/locale/locale_extension.dart';
-import 'package:flutter_mvp_starter/core/providers/theme_provider.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_radius.dart';
-import 'package:flutter_mvp_starter/shared/theme/app_spacing.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/core/providers/theme_provider.dart';
+import 'package:krishi_social/shared/theme/app_radius.dart';
+import 'package:krishi_social/shared/theme/app_spacing.dart';
 
 import '../../core/providers/locale_provider.dart';
 

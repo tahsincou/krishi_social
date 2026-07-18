@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_mvp_starter/core/config/app_config.dart';
-import 'package:flutter_mvp_starter/features/auth/presentaion/providers/auth_notifier.dart';
+import 'package:krishi_social/core/config/app_config.dart';
+import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});

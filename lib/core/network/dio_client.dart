@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_mvp_starter/core/network/interceptors/auth_interceptor.dart';
-import 'package:flutter_mvp_starter/core/network/interceptors/error_interceptor.dart';
-import 'package:flutter_mvp_starter/core/network/interceptors/logging_interceptor.dart';
-import 'package:flutter_mvp_starter/core/storage/secure_storage_service.dart';
+import 'package:krishi_social/core/network/interceptors/auth_interceptor.dart';
+import 'package:krishi_social/core/network/interceptors/error_interceptor.dart';
+import 'package:krishi_social/core/network/interceptors/logging_interceptor.dart';
+import 'package:krishi_social/core/storage/secure_storage_service.dart';
 import '../config/app_config.dart';
 
 class DioClient {
