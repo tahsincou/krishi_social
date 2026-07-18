@@ -18,8 +18,8 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController(text: 'buyer@demo.com');
+  final _passwordController = TextEditingController(text: '123456');
 
   @override
   void dispose() {
@@ -31,16 +31,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
-    await ref
+    final success = await ref
         .read(authNotifierProvider.notifier)
         .login(
           email: _emailController.text.trim(),
           password: _passwordController.text,
         );
 
-    if (mounted) {
-      context.go('/feed');
-    }
+    if (!mounted || !success) return;
+
+    context.go('/feed');
   }
 
   @override
@@ -102,6 +102,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
 
               const SizedBox(height: 20),
+              TextButton(
+                onPressed: () => context.push('/register'),
+                child: Text("Create account"),
+              ),
               EnvironmentBadge(
                 onLongPress: () async {
                   final changed = await showEnvironmentBottomSheet(context);

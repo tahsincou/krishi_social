@@ -106,7 +106,35 @@
 "deletePost": "Delete Post",
 "deletePostConfirmation": "Are you sure you want to delete this post?",
 "postDeleted": "Post deleted",
-"actionFailed": "Could not complete the action"
+"actionFailed": "Could not complete the action",
+
+
+"createAccount": "Create Account",
+"registerAccountTitle": "Create your account",
+"registerAccountMessage": "Enter your basic information to start buying or selling agricultural products.",
+"fullName": "Full name",
+"enterYourName": "Enter your name",
+"phoneNumber": "Phone number",
+"phoneNumberHint": "01XXXXXXXXX",
+"enterPhoneNumber": "Enter your phone number",
+"enterValidPhoneNumber": "Enter a valid Bangladeshi phone number",
+"email": "Email",
+"enterEmail": "Enter your email",
+"enterValidEmail": "Enter a valid email address",
+"password": "Password",
+"confirmPassword": "Confirm password",
+"enterPassword": "Enter your password",
+"confirmYourPassword": "Confirm your password",
+"passwordMinimumLength": "Password must be at least 6 characters",
+"passwordsDoNotMatch": "Passwords do not match",
+"mainActivity": "I mainly want to",
+"wantToBuy": "Buy products",
+"wantToSell": "Sell products",
+"wantToBuyAndSell": "Buy and sell",
+"enterYourLocation": "Enter your location",
+"accountReviewMessage": "Your account will initially remain under review. Full verification will be added later.",
+"registrationSuccessful": "Account created successfully",
+"alreadyHaveAccount": "Already have an account? Login"
 
 
 }

@@ -93,7 +93,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noMatchingPosts => 'কোনো পোস্ট পাওয়া যায়নি';
 
   @override
-  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
+  String get tryAnotherProductOrCategory =>
+      'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
 
   @override
   String get quantity => 'পরিমাণ';
@@ -233,7 +234,8 @@ class AppLocalizationsBn extends AppLocalizations {
   String get couldNotLoadPosts => 'পোস্ট লোড করা যায়নি';
 
   @override
-  String get checkConnectionAndTryAgain => 'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
+  String get checkConnectionAndTryAgain =>
+      'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
 
   @override
   String get tryAgain => 'আবার চেষ্টা করুন';
@@ -270,4 +272,84 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get actionFailed => 'কাজটি করা যায়নি';
+
+  @override
+  String get createAccount => 'অ্যাকাউন্ট খুলুন';
+
+  @override
+  String get registerAccountTitle => 'নতুন অ্যাকাউন্ট খুলুন';
+
+  @override
+  String get registerAccountMessage =>
+      'কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন';
+
+  @override
+  String get fullName => 'আপনার নাম';
+
+  @override
+  String get enterYourName => 'নাম লিখুন';
+
+  @override
+  String get phoneNumber => 'মোবাইল নম্বর';
+
+  @override
+  String get phoneNumberHint => '01XXXXXXXXX';
+
+  @override
+  String get enterPhoneNumber => 'মোবাইল নম্বর লিখুন';
+
+  @override
+  String get enterValidPhoneNumber => 'সঠিক মোবাইল নম্বর লিখুন';
+
+  @override
+  String get email => 'ইমেইল';
+
+  @override
+  String get enterEmail => 'ইমেইল লিখুন';
+
+  @override
+  String get enterValidEmail => 'সঠিক ইমেইল লিখুন';
+
+  @override
+  String get password => 'পাসওয়ার্ড';
+
+  @override
+  String get confirmPassword => 'পাসওয়ার্ড আবার লিখুন';
+
+  @override
+  String get enterPassword => 'পাসওয়ার্ড লিখুন';
+
+  @override
+  String get confirmYourPassword => 'পাসওয়ার্ড আবার লিখুন';
+
+  @override
+  String get passwordMinimumLength => 'পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে';
+
+  @override
+  String get passwordsDoNotMatch => 'দুইটি পাসওয়ার্ড মিলছে না';
+
+  @override
+  String get mainActivity => 'আপনি মূলত কী করতে চান';
+
+  @override
+  String get wantToBuy => 'পণ্য কিনতে চাই';
+
+  @override
+  String get wantToSell => 'পণ্য বিক্রি করব';
+
+  @override
+  String get wantToBuyAndSell => 'কেনা ও বিক্রি দুটোই';
+
+  @override
+  String get enterYourLocation => 'আপনার এলাকা লিখুন';
+
+  @override
+  String get accountReviewMessage =>
+      'অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।';
+
+  @override
+  String get registrationSuccessful => 'অ্যাকাউন্ট তৈরি হয়েছে';
+
+  @override
+  String get alreadyHaveAccount => 'আগেই অ্যাকাউন্ট আছে? লগইন করুন';
 }

@@ -233,7 +233,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotLoadPosts => 'Could not load posts';
 
   @override
-  String get checkConnectionAndTryAgain => 'Check the server connection and try again.';
+  String get checkConnectionAndTryAgain =>
+      'Check the server connection and try again.';
 
   @override
   String get tryAgain => 'Try again';
@@ -263,11 +264,92 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deletePost => 'Delete Post';
 
   @override
-  String get deletePostConfirmation => 'Are you sure you want to delete this post?';
+  String get deletePostConfirmation =>
+      'Are you sure you want to delete this post?';
 
   @override
   String get postDeleted => 'Post deleted';
 
   @override
   String get actionFailed => 'Could not complete the action';
+
+  @override
+  String get createAccount => 'Create Account';
+
+  @override
+  String get registerAccountTitle => 'Create your account';
+
+  @override
+  String get registerAccountMessage =>
+      'Enter your basic information to start buying or selling agricultural products.';
+
+  @override
+  String get fullName => 'Full name';
+
+  @override
+  String get enterYourName => 'Enter your name';
+
+  @override
+  String get phoneNumber => 'Phone number';
+
+  @override
+  String get phoneNumberHint => '01XXXXXXXXX';
+
+  @override
+  String get enterPhoneNumber => 'Enter your phone number';
+
+  @override
+  String get enterValidPhoneNumber => 'Enter a valid Bangladeshi phone number';
+
+  @override
+  String get email => 'Email';
+
+  @override
+  String get enterEmail => 'Enter your email';
+
+  @override
+  String get enterValidEmail => 'Enter a valid email address';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get confirmPassword => 'Confirm password';
+
+  @override
+  String get enterPassword => 'Enter your password';
+
+  @override
+  String get confirmYourPassword => 'Confirm your password';
+
+  @override
+  String get passwordMinimumLength => 'Password must be at least 6 characters';
+
+  @override
+  String get passwordsDoNotMatch => 'Passwords do not match';
+
+  @override
+  String get mainActivity => 'I mainly want to';
+
+  @override
+  String get wantToBuy => 'Buy products';
+
+  @override
+  String get wantToSell => 'Sell products';
+
+  @override
+  String get wantToBuyAndSell => 'Buy and sell';
+
+  @override
+  String get enterYourLocation => 'Enter your location';
+
+  @override
+  String get accountReviewMessage =>
+      'Your account will initially remain under review. Full verification will be added later.';
+
+  @override
+  String get registrationSuccessful => 'Account created successfully';
+
+  @override
+  String get alreadyHaveAccount => 'Already have an account? Login';
 }

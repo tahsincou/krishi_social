@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:krishi_social/features/auth/domain/entities/verification_status.dart';
+import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
@@ -32,13 +34,26 @@ class FeedNotifier extends StateNotifier<FeedState> {
     state = state.copyWith(isCreating: true, clearError: true);
 
     try {
+      final authState = ref.read(authNotifierProvider);
+      final user = authState.user;
+
+      if (user == null) {
+        state = state.copyWith(
+          isCreating: false,
+          error: 'Authenticated user not found',
+        );
+
+        return false;
+      }
+
       final now = DateTime.now();
 
       final post = AgriculturePost(
         id: '',
-        userId: 'current-user',
-        userName: 'My Account',
-        isUserReviewed: false,
+        userId: user.id,
+        userName: user.name,
+        userImageUrl: null,
+        isUserReviewed: user.verificationStatus == VerificationStatus.reviewed,
         type: params.type,
         category: params.category,
         productName: params.productName,
@@ -51,7 +66,8 @@ class FeedNotifier extends StateNotifier<FeedState> {
         pricePerUnit: params.pricePerUnit,
         qualityRequirement: params.qualityRequirement,
         description: params.description,
-        phone: '01700000000',
+        imageUrl: null,
+        phone: user.phone,
         status: PostStatus.active,
         createdAt: now,
       );

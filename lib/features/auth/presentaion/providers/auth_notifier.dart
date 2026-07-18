@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:krishi_social/features/auth/data/dto/login_request.dart';
+import 'package:krishi_social/features/auth/data/dto/register_request.dart';
 
 import 'auth_provider.dart';
 import 'auth_state.dart';
@@ -14,16 +16,61 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   final Ref ref;
 
-  Future<void> login({required String email, required String password}) async {
-    state = state.copyWith(isLoading: true);
+  Future<bool> register(RegisterRequest request) async {
+    state = state.copyWith(isLoading: true, error: null);
 
     try {
-      await ref.read(loginUseCaseProvider)(
+      final user = await ref.read(registerUseCaseProvider)(request);
+
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: true,
+        user: user,
+        error: null,
+      );
+
+      return true;
+    } catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: false,
+        error: error.toString(),
+      );
+
+      return false;
+    }
+  }
+
+  Future<bool> login({required String email, required String password}) async {
+    state = state.copyWith(isLoading: true, error: null);
+
+    try {
+      final user = await ref.read(loginUseCaseProvider)(
         LoginRequest(email: email, password: password),
       );
-      state = state.copyWith(isLoading: false);
-    } catch (e) {
-      state = state.copyWith(isLoading: false, error: e.toString());
+
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: true,
+        user: user,
+        error: null,
+      );
+
+      debugPrint(
+        'Authenticated user: '
+        '${state.user?.id}, '
+        '${state.user?.name}, '
+        '${state.user?.phone}',
+      );
+      return true;
+    } catch (error) {
+      state = state.copyWith(
+        isLoading: false,
+        isAuthenticated: false,
+        error: error.toString(),
+      );
+
+      return false;
     }
   }
 
@@ -49,6 +96,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> logout() async {
     await ref.read(logoutUseCaseProvider)();
 
-    state = const AuthState();
+    state = state.copyWith(
+      isAuthenticated: false,
+      clearUser: true,
+      clearError: true,
+    );
   }
 }

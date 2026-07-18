@@ -3,6 +3,7 @@ import 'package:krishi_social/core/providers/providers.dart';
 import 'package:krishi_social/features/auth/domain/usecases/check_login_usecase.dart';
 import 'package:krishi_social/features/auth/domain/usecases/login_usecase.dart';
 import 'package:krishi_social/features/auth/domain/usecases/logout_usecase.dart';
+import 'package:krishi_social/features/auth/domain/usecases/register_usecase.dart';
 
 final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
   return LoginUseCase(ref.read(authRepositoryProvider));
@@ -14,4 +15,8 @@ final checkLoginUseCaseProvider = Provider<CheckLoginUseCase>((ref) {
 
 final logoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
   return LogoutUseCase(ref.read(authRepositoryProvider));
+});
+
+final registerUseCaseProvider = Provider<RegisterUseCase>((ref) {
+  return RegisterUseCase(ref.read(authRepositoryProvider));
 });

@@ -107,6 +107,34 @@
 "deletePost": "পোস্ট ডিলিট",
 "deletePostConfirmation": "পোস্টটি ডিলিট করতে চান?",
 "postDeleted": "পোস্ট ডিলিট হয়েছে",
-"actionFailed": "কাজটি করা যায়নি"
+"actionFailed": "কাজটি করা যায়নি",
+
+
+"createAccount": "অ্যাকাউন্ট খুলুন",
+"registerAccountTitle": "নতুন অ্যাকাউন্ট খুলুন",
+"registerAccountMessage": "কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন",
+"fullName": "আপনার নাম",
+"enterYourName": "নাম লিখুন",
+"phoneNumber": "মোবাইল নম্বর",
+"phoneNumberHint": "01XXXXXXXXX",
+"enterPhoneNumber": "মোবাইল নম্বর লিখুন",
+"enterValidPhoneNumber": "সঠিক মোবাইল নম্বর লিখুন",
+"email": "ইমেইল",
+"enterEmail": "ইমেইল লিখুন",
+"enterValidEmail": "সঠিক ইমেইল লিখুন",
+"password": "পাসওয়ার্ড",
+"confirmPassword": "পাসওয়ার্ড আবার লিখুন",
+"enterPassword": "পাসওয়ার্ড লিখুন",
+"confirmYourPassword": "পাসওয়ার্ড আবার লিখুন",
+"passwordMinimumLength": "পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে",
+"passwordsDoNotMatch": "দুইটি পাসওয়ার্ড মিলছে না",
+"mainActivity": "আপনি মূলত কী করতে চান",
+"wantToBuy": "পণ্য কিনতে চাই",
+"wantToSell": "পণ্য বিক্রি করব",
+"wantToBuyAndSell": "কেনা ও বিক্রি দুটোই",
+"enterYourLocation": "আপনার এলাকা লিখুন",
+"accountReviewMessage": "অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।",
+"registrationSuccessful": "অ্যাকাউন্ট তৈরি হয়েছে",
+"alreadyHaveAccount": "আগেই অ্যাকাউন্ট আছে? লগইন করুন"
 
 }

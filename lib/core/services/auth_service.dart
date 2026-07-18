@@ -11,6 +11,6 @@ class AuthService {
   }
 
   Future<void> logout() async {
-    await storage.clear();
+    await storage.deleteUser();
   }
 }

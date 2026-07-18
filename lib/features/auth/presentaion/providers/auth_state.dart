@@ -17,13 +17,15 @@ class AuthState {
     bool? isLoading,
     bool? isAuthenticated,
     User? user,
+    bool clearUser = false,
     String? error,
+    bool clearError = false,
   }) {
     return AuthState(
       isLoading: isLoading ?? this.isLoading,
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
-      user: user ?? this.user,
-      error: error,
+      user: clearUser ? null : user ?? this.user,
+      error: clearError ? null : error ?? this.error,
     );
   }
 }

@@ -62,7 +62,8 @@ import 'app_localizations_en.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,7 +71,8 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate =
+      _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -82,17 +84,18 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('bn'),
-    Locale('en')
+    Locale('en'),
   ];
 
   /// No description provided for @appName.
@@ -616,9 +619,166 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not complete the action'**
   String get actionFailed;
+
+  /// No description provided for @createAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccount;
+
+  /// No description provided for @registerAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get registerAccountTitle;
+
+  /// No description provided for @registerAccountMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your basic information to start buying or selling agricultural products.'**
+  String get registerAccountMessage;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get fullName;
+
+  /// No description provided for @enterYourName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get enterYourName;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number'**
+  String get phoneNumber;
+
+  /// No description provided for @phoneNumberHint.
+  ///
+  /// In en, this message translates to:
+  /// **'01XXXXXXXXX'**
+  String get phoneNumberHint;
+
+  /// No description provided for @enterPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your phone number'**
+  String get enterPhoneNumber;
+
+  /// No description provided for @enterValidPhoneNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid Bangladeshi phone number'**
+  String get enterValidPhoneNumber;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enterEmail;
+
+  /// No description provided for @enterValidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid email address'**
+  String get enterValidEmail;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get confirmPassword;
+
+  /// No description provided for @enterPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get enterPassword;
+
+  /// No description provided for @confirmYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your password'**
+  String get confirmYourPassword;
+
+  /// No description provided for @passwordMinimumLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordMinimumLength;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @mainActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'I mainly want to'**
+  String get mainActivity;
+
+  /// No description provided for @wantToBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy products'**
+  String get wantToBuy;
+
+  /// No description provided for @wantToSell.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell products'**
+  String get wantToSell;
+
+  /// No description provided for @wantToBuyAndSell.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy and sell'**
+  String get wantToBuyAndSell;
+
+  /// No description provided for @enterYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your location'**
+  String get enterYourLocation;
+
+  /// No description provided for @accountReviewMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account will initially remain under review. Full verification will be added later.'**
+  String get accountReviewMessage;
+
+  /// No description provided for @registrationSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created successfully'**
+  String get registrationSuccessful;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Login'**
+  String get alreadyHaveAccount;
 }
 
-class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate
+    extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -627,25 +787,26 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['bn', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['bn', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'bn': return AppLocalizationsBn();
-    case 'en': return AppLocalizationsEn();
+    case 'bn':
+      return AppLocalizationsBn();
+    case 'en':
+      return AppLocalizationsEn();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

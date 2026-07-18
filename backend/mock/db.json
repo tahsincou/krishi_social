@@ -1,4 +1,16 @@
 {
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Rahman Traders",
+      "phone": "01700000002",
+      "email": "buyer@demo.com",
+      "password": "123456",
+      "location": "Jatrabari, Dhaka",
+      "activity": "buy",
+      "verificationStatus": "reviewed"
+    }
+  ],
   "posts": [
     {
       "id": "1",
@@ -43,52 +55,6 @@
       "phone": "01700000002",
       "status": "active",
       "createdAt": "2026-07-18T08:00:00.000Z"
-    },
-    {
-      "userId": "current-user",
-      "userName": "My Account",
-      "userImageUrl": null,
-      "isUserReviewed": false,
-      "type": "buy",
-      "category": "livestock",
-      "productName": "Goat",
-      "quantity": 2,
-      "unit": "piece",
-      "availableFrom": "2026-07-18T00:00:00.000",
-      "availableTo": "2026-07-21T00:00:00.000",
-      "district": "Narayanganj",
-      "upazila": "",
-      "pricePerUnit": null,
-      "qualityRequirement": null,
-      "description": null,
-      "imageUrl": null,
-      "phone": "01700000000",
-      "status": "active",
-      "createdAt": "2026-07-18T23:43:04.851",
-      "id": "9jUNft_"
-    },
-    {
-      "userId": "current-user",
-      "userName": "My Account",
-      "userImageUrl": null,
-      "isUserReviewed": false,
-      "type": "buy",
-      "category": "fruits",
-      "productName": "Mango",
-      "quantity": 10,
-      "unit": "kg",
-      "availableFrom": "2026-07-21T00:00:00.000",
-      "availableTo": "2026-08-11T00:00:00.000",
-      "district": "Narayanganj",
-      "upazila": "",
-      "pricePerUnit": null,
-      "qualityRequirement": null,
-      "description": null,
-      "imageUrl": null,
-      "phone": "01700000000",
-      "status": "active",
-      "createdAt": "2026-07-19T01:03:47.105",
-      "id": "8T06XTU"
     }
   ]
 }

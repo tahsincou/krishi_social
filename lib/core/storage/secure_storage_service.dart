@@ -1,21 +1,30 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageService {
-  final FlutterSecureStorage _storage;
+  static const _tokenKey = 'auth_token';
+  static const _userKey = 'auth_user';
 
-  SecureStorageService(this._storage);
+  final FlutterSecureStorage storage;
 
-  static const tokenKey = 'access_token';
+  const SecureStorageService(this.storage);
 
-  Future<void> saveToken(String token) async {
-    await _storage.write(key: tokenKey, value: token);
+  Future<void> saveToken(String token) {
+    return storage.write(key: _tokenKey, value: token);
   }
 
-  Future<String?> getToken() async {
-    return _storage.read(key: tokenKey);
+  Future<String?> getToken() {
+    return storage.read(key: _tokenKey);
   }
 
-  Future<void> clear() async {
-    await _storage.deleteAll();
+  Future<void> saveUser(String userJson) {
+    return storage.write(key: _userKey, value: userJson);
+  }
+
+  Future<String?> getUser() {
+    return storage.read(key: _userKey);
+  }
+
+  Future<void> deleteUser() {
+    return storage.delete(key: _userKey);
   }
 }

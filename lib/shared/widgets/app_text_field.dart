@@ -16,6 +16,7 @@ class AppTextField extends StatelessWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final TextInputAction? textInputAction;
+  final ValueChanged<String>? onFieldSubmitted;
 
   const AppTextField({
     super.key,
@@ -33,6 +34,7 @@ class AppTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -48,6 +50,7 @@ class AppTextField extends StatelessWidget {
       readOnly: readOnly,
       onTap: onTap,
       textInputAction: textInputAction,
+      onFieldSubmitted: onFieldSubmitted,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
