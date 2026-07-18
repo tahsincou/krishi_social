@@ -14,9 +14,11 @@ class AppDrawer extends ConsumerWidget {
         child: Column(
           children: [
             const UserAccountsDrawerHeader(
-              accountName: Text("Parcel Pathai"),
-              accountEmail: Text("user@logistics.com"),
-              currentAccountPicture: CircleAvatar(child: Icon(Icons.person)),
+              accountName: Text('Krishi Social'),
+              accountEmail: Text('Agricultural Network'),
+              currentAccountPicture: CircleAvatar(
+                child: Icon(Icons.agriculture),
+              ),
             ),
 
             // ListTile(

@@ -14,20 +14,12 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    final path = join(await getDatabasesPath(), 'logistics.db');
+    final path = join(await getDatabasesPath(), 'krishi_social.db');
 
     return openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('''
-        CREATE TABLE shipments(
-          trackingId TEXT PRIMARY KEY,
-          customer TEXT,
-          phone TEXT,
-          address TEXT,
-          status TEXT
-      )
-    ''');
+    // Krishi-specific offline tables will be added later.
   }
 }
