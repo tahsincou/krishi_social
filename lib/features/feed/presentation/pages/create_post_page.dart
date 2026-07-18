@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 import 'package:krishi_social/features/feed/domain/entities/quantity_unit.dart';
 import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dart';
+import 'package:krishi_social/features/feed/domain/params/create_agricultural_post_params.dart';
+import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/product_search_field.dart';
 import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_button.dart';
@@ -12,16 +15,16 @@ import 'package:krishi_social/shared/widgets/app_date_range_field.dart';
 import 'package:krishi_social/shared/widgets/app_dropdown.dart';
 import 'package:krishi_social/shared/widgets/app_text_field.dart';
 
-class CreatePostPage extends StatefulWidget {
+class CreatePostPage extends ConsumerStatefulWidget {
   final PostType initialType;
 
   const CreatePostPage({super.key, required this.initialType});
 
   @override
-  State<CreatePostPage> createState() => _CreatePostPageState();
+  ConsumerState<CreatePostPage> createState() => _CreatePostPageState();
 }
 
-class _CreatePostPageState extends State<CreatePostPage> {
+class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   final _formKey = GlobalKey<FormState>();
 
   final _productController = TextEditingController();
@@ -335,10 +338,46 @@ class _CreatePostPageState extends State<CreatePostPage> {
       return;
     }
 
+    if (_category == null || _dateRange == null) {
+      return;
+    }
+
+    final params = CreateAgriculturalPostParams(
+      type: _postType,
+      category: _category!,
+      productName: _productController.text.trim(),
+      quantity: double.parse(_quantityController.text.trim()),
+      unit: _unit,
+      availableFrom: _dateRange!.start,
+      availableTo: _dateRange!.end,
+      location: _locationController.text.trim(),
+      pricePerUnit: _nullableDouble(_priceController.text),
+      qualityRequirement: _nullableText(_qualityController.text),
+      description: _nullableText(_descriptionController.text),
+    );
+
+    ref.read(feedNotifierProvider.notifier).createPost(params);
+
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(context.l10n.postCreated)));
 
     Navigator.of(context).pop();
+  }
+
+  double? _nullableDouble(String value) {
+    final trimmed = value.trim();
+
+    if (trimmed.isEmpty) {
+      return null;
+    }
+
+    return double.tryParse(trimmed);
+  }
+
+  String? _nullableText(String value) {
+    final trimmed = value.trim();
+
+    return trimmed.isEmpty ? null : trimmed;
   }
 }
