@@ -1,4 +1,3 @@
-const express = require('express');
 const jsonServer = require('json-server');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -6,20 +5,27 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 
-const app = express();
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
+const server = jsonServer.create();
+const router = jsonServer.router(
+  path.join(__dirname, 'db.json'),
+);
 const middlewares = jsonServer.defaults();
 
 const PORT = 3001;
 const JWT_SECRET = 'krishi-media-demo-secret';
 
-app.use(cors());
-app.use(express.json());
-app.use(middlewares);
+server.use(cors());
+server.use(middlewares);
+
+// Use only one JSON body parser.
+server.use(jsonServer.bodyParser);
 
 function readDatabase() {
   return JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'db.json'), 'utf8'),
+    fs.readFileSync(
+      path.join(__dirname, 'db.json'),
+      'utf8',
+    ),
   );
 }
 
@@ -30,29 +36,33 @@ function writeDatabase(data) {
   );
 }
 
-app.post('/auth/login', async (req, res) => {
-  console.log('Login request received:', req.body);
+server.get('/health', (_, response) => {
+  response.json({
+    status: 'ok',
+    server: 'krishi-custom-server',
+  });
+});
 
-  const email = String(req.body?.email ?? '').trim().toLowerCase();
-  const password = String(req.body?.password ?? '');
+server.post('/auth/login', async (request, response) => {
+  const email = String(request.body?.email ?? '')
+    .trim()
+    .toLowerCase();
 
-  if (!email || !password) {
-    return res.status(400).json({
-      message: 'Email and password are required',
-    });
-  }
+  const password = String(
+    request.body?.password ?? '',
+  );
 
   const database = readDatabase();
 
-  console.log('Users found:', database.users);
-
   const user = (database.users ?? []).find(
     (item) =>
-      String(item.email ?? '').trim().toLowerCase() === email,
+      String(item.email ?? '')
+        .trim()
+        .toLowerCase() === email,
   );
 
   if (!user) {
-    return res.status(401).json({
+    return response.status(401).json({
       message: 'Invalid email or password',
     });
   }
@@ -62,7 +72,7 @@ app.post('/auth/login', async (req, res) => {
     : user.password === password;
 
   if (!passwordMatches) {
-    return res.status(401).json({
+    return response.status(401).json({
       message: 'Invalid email or password',
     });
   }
@@ -84,13 +94,13 @@ app.post('/auth/login', async (req, res) => {
     ...safeUser
   } = user;
 
-  return res.json({
+  return response.json({
     ...safeUser,
     token,
   });
 });
 
-app.post('/auth/register', async (req, res) => {
+server.post('/auth/register', async (request, response) => {
   const {
     name,
     phone,
@@ -98,17 +108,19 @@ app.post('/auth/register', async (req, res) => {
     password,
     location,
     activity,
-  } = req.body;
+  } = request.body;
 
   const database = readDatabase();
   database.users ??= [];
 
   const existingUser = database.users.find(
-    (item) => item.email?.toLowerCase() === email?.toLowerCase(),
+    (item) =>
+      String(item.email ?? '').toLowerCase() ===
+      String(email ?? '').toLowerCase(),
   );
 
   if (existingUser) {
-    return res.status(409).json({
+    return response.status(409).json({
       message: 'An account already exists with this email',
     });
   }
@@ -138,23 +150,22 @@ app.post('/auth/register', async (req, res) => {
     },
   );
 
-  const { passwordHash, ...safeUser } = user;
+  const {
+    passwordHash,
+    ...safeUser
+  } = user;
 
-  return res.status(201).json({
+  return response.status(201).json({
     ...safeUser,
     token,
   });
 });
-app.get("/health", (req, res) => {
-  res.json({
-    status: "ok",
-    server: "custom-auth-server",
-  });
-});
 
-app.use(router);
+// Keep this after custom routes.
+server.use(router);
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Krishi mock server running on port ${PORT}`);
-  console.log(`LAN access: http://192.168.1.105:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(
+    `Krishi mock server running on port ${PORT}`,
+  );
 });

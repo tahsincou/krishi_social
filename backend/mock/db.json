@@ -55,6 +55,29 @@
       "phone": "01700000002",
       "status": "active",
       "createdAt": "2026-07-18T08:00:00.000Z"
+    },
+    {
+      "userId": "user-1",
+      "userName": "Rahman Traders",
+      "userImageUrl": null,
+      "isUserReviewed": true,
+      "type": "buy",
+      "category": "fruits",
+      "productName": "Mango",
+      "quantity": 100,
+      "unit": "kg",
+      "availableFrom": "2026-08-04T00:00:00.000",
+      "availableTo": "2026-08-11T00:00:00.000",
+      "district": "Cumilla",
+      "upazila": "",
+      "pricePerUnit": null,
+      "qualityRequirement": null,
+      "description": null,
+      "imageUrl": null,
+      "phone": "01700000002",
+      "status": "active",
+      "createdAt": "2026-07-20T00:06:51.840",
+      "id": "Wi87uVk"
     }
   ]
 }
