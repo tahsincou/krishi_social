@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_card.dart';
+import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_empty.dart';
 import 'package:krishi_social/shared/widgets/app_loading.dart';
 
@@ -13,12 +15,18 @@ class MyPostsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authNotifierProvider);
     final feedState = ref.watch(feedNotifierProvider);
-    final posts = feedState.myPosts;
+
+    final userId = authState.user?.id;
+
+    final posts = userId == null
+        ? const <AgriculturePost>[]
+        : feedState.postsByUser(userId);
 
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.myPosts)),
-      body: feedState.isUpdating && posts.isEmpty
+      body: feedState.isLoading && posts.isEmpty
           ? const AppLoading()
           : posts.isEmpty
           ? AppEmpty(
@@ -26,45 +34,19 @@ class MyPostsPage extends ConsumerWidget {
               message: context.l10n.createFirstPost,
               icon: Icons.post_add_outlined,
             )
-          : ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+          : ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
               itemCount: posts.length,
+              separatorBuilder: (_, __) =>
+                  const SizedBox(height: AppSpacing.sm),
               itemBuilder: (context, index) {
                 final post = posts[index];
 
-                return Column(
-                  children: [
-                    AgriculturePostCard(post: post, onCall: null),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: [
-                          if (post.status == PostStatus.active)
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: feedState.isUpdating
-                                    ? null
-                                    : () => _closePost(context, ref, post),
-                                icon: const Icon(Icons.check_circle_outline),
-                                label: Text(context.l10n.closePost),
-                              ),
-                            ),
-                          if (post.status == PostStatus.active)
-                            const SizedBox(width: 12),
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: feedState.isUpdating
-                                  ? null
-                                  : () => _confirmDelete(context, ref, post),
-                              icon: const Icon(Icons.delete_outline),
-                              label: Text(context.l10n.delete),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                  ],
+                return _MyPostItem(
+                  post: post,
+                  isUpdating: feedState.isUpdating,
+                  onClose: () => _closePost(context, ref, post),
+                  onDelete: () => _confirmDelete(context, ref, post),
                 );
               },
             ),
@@ -134,6 +116,55 @@ class MyPostsPage extends ConsumerWidget {
           success ? context.l10n.postDeleted : context.l10n.actionFailed,
         ),
       ),
+    );
+  }
+}
+
+class _MyPostItem extends StatelessWidget {
+  const _MyPostItem({
+    required this.post,
+    required this.isUpdating,
+    required this.onClose,
+    required this.onDelete,
+  });
+
+  final AgriculturePost post;
+  final bool isUpdating;
+  final VoidCallback onClose;
+  final VoidCallback onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    final isClosed = post.status == PostStatus.closed;
+
+    return Column(
+      children: [
+        AgriculturePostCard(post: post, onCall: null),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+          child: Row(
+            children: [
+              Chip(
+                label: Text(
+                  isClosed ? context.l10n.closed : context.l10n.active,
+                ),
+              ),
+              const Spacer(),
+              if (!isClosed)
+                TextButton.icon(
+                  onPressed: isUpdating ? null : onClose,
+                  icon: const Icon(Icons.check_circle_outline),
+                  label: Text(context.l10n.closePost),
+                ),
+              IconButton(
+                onPressed: isUpdating ? null : onDelete,
+                tooltip: context.l10n.delete,
+                icon: const Icon(Icons.delete_outline),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

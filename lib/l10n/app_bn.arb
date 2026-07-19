@@ -108,6 +108,8 @@
 "deletePostConfirmation": "পোস্টটি ডিলিট করতে চান?",
 "postDeleted": "পোস্ট ডিলিট হয়েছে",
 "actionFailed": "কাজটি করা যায়নি",
+"active": "চলমান",
+"closed": "বন্ধ",
 
 
 "createAccount": "অ্যাকাউন্ট খুলুন",

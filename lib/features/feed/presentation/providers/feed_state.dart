@@ -1,4 +1,5 @@
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
+import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 
@@ -46,8 +47,9 @@ class FeedState {
   }
 
   List<AgriculturePost> postsByType(PostType type) {
-    var result = posts.where((post) => post.type == type).toList();
-
+    var result = posts.where((post) {
+      return post.type == type && post.status == PostStatus.active;
+    }).toList();
     if (selectedCategory != null) {
       result = result
           .where((post) => post.category == selectedCategory)
@@ -74,6 +76,14 @@ class FeedState {
     final result = posts
         .where((post) => post.userId == 'current-user')
         .toList();
+
+    result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return result;
+  }
+
+  List<AgriculturePost> postsByUser(String userId) {
+    final result = posts.where((post) => post.userId == userId).toList();
 
     result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
 

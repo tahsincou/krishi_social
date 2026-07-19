@@ -93,8 +93,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noMatchingPosts => 'কোনো পোস্ট পাওয়া যায়নি';
 
   @override
-  String get tryAnotherProductOrCategory =>
-      'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
+  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
 
   @override
   String get quantity => 'পরিমাণ';
@@ -234,8 +233,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get couldNotLoadPosts => 'পোস্ট লোড করা যায়নি';
 
   @override
-  String get checkConnectionAndTryAgain =>
-      'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
+  String get checkConnectionAndTryAgain => 'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
 
   @override
   String get tryAgain => 'আবার চেষ্টা করুন';
@@ -274,14 +272,19 @@ class AppLocalizationsBn extends AppLocalizations {
   String get actionFailed => 'কাজটি করা যায়নি';
 
   @override
+  String get active => 'চলমান';
+
+  @override
+  String get closed => 'বন্ধ';
+
+  @override
   String get createAccount => 'অ্যাকাউন্ট খুলুন';
 
   @override
   String get registerAccountTitle => 'নতুন অ্যাকাউন্ট খুলুন';
 
   @override
-  String get registerAccountMessage =>
-      'কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন';
+  String get registerAccountMessage => 'কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন';
 
   @override
   String get fullName => 'আপনার নাম';
@@ -344,8 +347,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get enterYourLocation => 'আপনার এলাকা লিখুন';
 
   @override
-  String get accountReviewMessage =>
-      'অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।';
+  String get accountReviewMessage => 'অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।';
 
   @override
   String get registrationSuccessful => 'অ্যাকাউন্ট তৈরি হয়েছে';

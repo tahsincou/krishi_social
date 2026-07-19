@@ -233,8 +233,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get couldNotLoadPosts => 'Could not load posts';
 
   @override
-  String get checkConnectionAndTryAgain =>
-      'Check the server connection and try again.';
+  String get checkConnectionAndTryAgain => 'Check the server connection and try again.';
 
   @override
   String get tryAgain => 'Try again';
@@ -264,8 +263,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deletePost => 'Delete Post';
 
   @override
-  String get deletePostConfirmation =>
-      'Are you sure you want to delete this post?';
+  String get deletePostConfirmation => 'Are you sure you want to delete this post?';
 
   @override
   String get postDeleted => 'Post deleted';
@@ -274,14 +272,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionFailed => 'Could not complete the action';
 
   @override
+  String get active => 'Active';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
   String get createAccount => 'Create Account';
 
   @override
   String get registerAccountTitle => 'Create your account';
 
   @override
-  String get registerAccountMessage =>
-      'Enter your basic information to start buying or selling agricultural products.';
+  String get registerAccountMessage => 'Enter your basic information to start buying or selling agricultural products.';
 
   @override
   String get fullName => 'Full name';
@@ -344,8 +347,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterYourLocation => 'Enter your location';
 
   @override
-  String get accountReviewMessage =>
-      'Your account will initially remain under review. Full verification will be added later.';
+  String get accountReviewMessage => 'Your account will initially remain under review. Full verification will be added later.';
 
   @override
   String get registrationSuccessful => 'Account created successfully';
