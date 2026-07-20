@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:krishi_social/features/auth/domain/entities/verification_status.dart';
@@ -8,10 +9,17 @@ import 'package:krishi_social/features/feed/domain/entities/product_category.dar
 import 'package:krishi_social/features/feed/domain/params/create_agricultural_post_params.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_provider.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_state.dart';
+import 'package:flutter/foundation.dart';
 
-final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>(
-  (ref) => FeedNotifier(ref),
-);
+final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>((
+  ref,
+) {
+  final notifier = FeedNotifier(ref);
+
+  Future.microtask(notifier.loadPosts);
+
+  return notifier;
+});
 
 class FeedNotifier extends StateNotifier<FeedState> {
   FeedNotifier(this.ref) : super(const FeedState());
@@ -19,13 +27,20 @@ class FeedNotifier extends StateNotifier<FeedState> {
   final Ref ref;
 
   Future<void> loadPosts() async {
+    if (state.isLoading) {
+      return;
+    }
+
     state = state.copyWith(isLoading: true, clearError: true);
 
     try {
       final posts = await ref.read(getPostsUseCaseProvider)();
 
       state = state.copyWith(isLoading: false, posts: posts);
-    } catch (error) {
+    } catch (error, stackTrace) {
+      debugPrint('Load posts failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+
       state = state.copyWith(isLoading: false, error: error.toString());
     }
   }
@@ -34,8 +49,7 @@ class FeedNotifier extends StateNotifier<FeedState> {
     state = state.copyWith(isCreating: true, clearError: true);
 
     try {
-      final authState = ref.read(authNotifierProvider);
-      final user = authState.user;
+      final user = ref.read(authNotifierProvider).user;
 
       if (user == null) {
         state = state.copyWith(
@@ -45,8 +59,6 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
         return false;
       }
-
-      final now = DateTime.now();
 
       final post = AgriculturePost(
         id: '',
@@ -69,18 +81,20 @@ class FeedNotifier extends StateNotifier<FeedState> {
         imageUrl: null,
         phone: user.phone,
         status: PostStatus.active,
-        createdAt: now,
+        createdAt: DateTime.now(),
       );
 
-      final createdPost = await ref.read(createPostUseCaseProvider)(post);
+      await ref.read(createPostUseCaseProvider)(post);
 
-      state = state.copyWith(
-        isCreating: false,
-        posts: [createdPost, ...state.posts],
-      );
+      state = state.copyWith(isCreating: false);
+
+      await loadPosts();
 
       return true;
-    } catch (error) {
+    } catch (error, stackTrace) {
+      debugPrint('Create post failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+
       state = state.copyWith(isCreating: false, error: error.toString());
 
       return false;
@@ -109,13 +123,11 @@ class FeedNotifier extends StateNotifier<FeedState> {
         description: params.description,
       );
 
-      final savedPost = await ref.read(updatePostUseCaseProvider)(updatedPost);
+      await ref.read(updatePostUseCaseProvider)(updatedPost);
 
-      final updatedPosts = state.posts.map((post) {
-        return post.id == savedPost.id ? savedPost : post;
-      }).toList();
+      state = state.copyWith(isUpdating: false);
 
-      state = state.copyWith(isUpdating: false, posts: updatedPosts);
+      await loadPosts();
 
       return true;
     } catch (error) {
@@ -129,15 +141,13 @@ class FeedNotifier extends StateNotifier<FeedState> {
     state = state.copyWith(isUpdating: true, clearError: true);
 
     try {
-      final updatedPost = await ref.read(updatePostUseCaseProvider)(
+      await ref.read(updatePostUseCaseProvider)(
         post.copyWith(status: PostStatus.closed),
       );
 
-      final updatedPosts = state.posts.map((item) {
-        return item.id == updatedPost.id ? updatedPost : item;
-      }).toList();
+      state = state.copyWith(isUpdating: false);
 
-      state = state.copyWith(isUpdating: false, posts: updatedPosts);
+      await loadPosts();
 
       return true;
     } catch (error) {
@@ -153,10 +163,9 @@ class FeedNotifier extends StateNotifier<FeedState> {
     try {
       await ref.read(deletePostUseCaseProvider)(postId);
 
-      state = state.copyWith(
-        isUpdating: false,
-        posts: state.posts.where((post) => post.id != postId).toList(),
-      );
+      state = state.copyWith(isUpdating: false);
+
+      await loadPosts();
 
       return true;
     } catch (error) {

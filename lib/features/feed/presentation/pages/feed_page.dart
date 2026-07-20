@@ -22,13 +22,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   final TextEditingController _searchController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-
-    Future.microtask(() => ref.read(feedNotifierProvider.notifier).loadPosts());
-  }
-
-  @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
@@ -77,7 +70,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                           onPressed: () {
                             _searchController.clear();
                             ref
-                                .watch(feedNotifierProvider.notifier)
+                                .read(feedNotifierProvider.notifier)
                                 .clearSearch();
                           },
                           icon: const Icon(Icons.clear),

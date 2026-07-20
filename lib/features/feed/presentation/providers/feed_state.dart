@@ -72,16 +72,6 @@ class FeedState {
     return result;
   }
 
-  List<AgriculturePost> get myPosts {
-    final result = posts
-        .where((post) => post.userId == 'current-user')
-        .toList();
-
-    result.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-
-    return result;
-  }
-
   List<AgriculturePost> postsByUser(String userId) {
     final result = posts.where((post) => post.userId == userId).toList();
 
