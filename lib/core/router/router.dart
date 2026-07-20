@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:krishi_social/features/auth/presentaion/pages/login_page.dart';
 import 'package:krishi_social/features/auth/presentaion/pages/register_page.dart';
 import 'package:krishi_social/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/presentation/pages/create_post_page.dart';
 import 'package:krishi_social/features/feed/presentation/pages/feed_page.dart';
@@ -23,6 +24,14 @@ class AppRouter {
         builder: (context, state) {
           final type = state.extra as PostType? ?? PostType.sell;
           return CreatePostPage(initialType: type);
+        },
+      ),
+      GoRoute(
+        path: '/edit-post',
+        builder: (context, state) {
+          final post = state.extra as AgriculturePost;
+
+          return CreatePostPage(initialType: post.type, existingPost: post);
         },
       ),
       GoRoute(path: '/my-posts', builder: (_, __) => const MyPostsPage()),

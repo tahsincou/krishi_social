@@ -11,7 +11,7 @@ import 'package:krishi_social/features/feed/data/datasources/feed_remote_data_so
 import 'package:krishi_social/features/feed/data/datasources/feed_remote_data_source_impl.dart';
 
 final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
-  return AuthRemoteDataSourceImpl(ref.read(apiClientProvider));
+  return AuthRemoteDataSourceImpl(apiClient: ref.watch(apiClientProvider));
 });
 
 final feedRemoteDataSourceProvider = Provider<FeedRemoteDataSource>((ref) {

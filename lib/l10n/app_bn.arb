@@ -137,6 +137,10 @@
 "enterYourLocation": "আপনার এলাকা লিখুন",
 "accountReviewMessage": "অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।",
 "registrationSuccessful": "অ্যাকাউন্ট তৈরি হয়েছে",
-"alreadyHaveAccount": "আগেই অ্যাকাউন্ট আছে? লগইন করুন"
+"alreadyHaveAccount": "আগেই অ্যাকাউন্ট আছে? লগইন করুন",
+
+"editPost": "পোস্ট এডিট",
+"saveChanges": "পরিবর্তন সংরক্ষণ",
+"postUpdated": "পোস্ট আপডেট হয়েছে"
 
 }

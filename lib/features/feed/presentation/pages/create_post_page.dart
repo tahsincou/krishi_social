@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
 import 'package:krishi_social/features/feed/domain/entities/quantity_unit.dart';
@@ -17,8 +18,15 @@ import 'package:krishi_social/shared/widgets/app_text_field.dart';
 
 class CreatePostPage extends ConsumerStatefulWidget {
   final PostType initialType;
+  final AgriculturePost? existingPost;
 
-  const CreatePostPage({super.key, required this.initialType});
+  const CreatePostPage({
+    super.key,
+    required this.initialType,
+    this.existingPost,
+  });
+
+  bool get isEditing => existingPost != null;
 
   @override
   ConsumerState<CreatePostPage> createState() => _CreatePostPageState();
@@ -47,7 +55,42 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   @override
   void initState() {
     super.initState();
-    _postType = widget.initialType;
+
+    final post = widget.existingPost;
+
+    _postType = post?.type ?? widget.initialType;
+
+    if (post != null) {
+      _category = post.category;
+      _unit = post.unit;
+
+      _productController.text = post.productName;
+      _quantityController.text = _formatNumber(post.quantity);
+      _locationController.text = post.district;
+      _priceController.text = post.pricePerUnit == null
+          ? ''
+          : _formatNumber(post.pricePerUnit!);
+      _qualityController.text = post.qualityRequirement ?? '';
+      _descriptionController.text = post.description ?? '';
+
+      _dateRange = DateTimeRange(
+        start: post.availableFrom,
+        end: post.availableTo,
+      );
+
+      _showOptionalFields =
+          post.pricePerUnit != null ||
+          (post.qualityRequirement?.isNotEmpty ?? false) ||
+          (post.description?.isNotEmpty ?? false);
+    }
+  }
+
+  String _formatNumber(double value) {
+    if (value == value.roundToDouble()) {
+      return value.toInt().toString();
+    }
+
+    return value.toString();
   }
 
   @override
@@ -66,11 +109,16 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   Widget build(BuildContext context) {
     final isBuyPost = _postType == PostType.buy;
     final feedState = ref.watch(feedNotifierProvider);
+    final isEditing = widget.isEditing;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          isBuyPost ? context.l10n.createBuyPost : context.l10n.createSellPost,
+          isEditing
+              ? context.l10n.editPost
+              : isBuyPost
+              ? context.l10n.createBuyPost
+              : context.l10n.createSellPost,
         ),
       ),
       body: SafeArea(
@@ -263,9 +311,15 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
               const SizedBox(height: AppSpacing.lg),
 
               AppButton(
-                text: context.l10n.publishPost,
-                isLoading: feedState.isCreating,
-                onPressed: feedState.isCreating ? null : _submit,
+                text: isEditing
+                    ? context.l10n.saveChanges
+                    : context.l10n.publishPost,
+                isLoading: isEditing
+                    ? feedState.isUpdating
+                    : feedState.isCreating,
+                onPressed: feedState.isCreating || feedState.isUpdating
+                    ? null
+                    : _submit,
               ),
             ],
           ),
@@ -361,22 +415,33 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
       description: _optionalText(_descriptionController.text),
     );
 
-    final created = await ref
-        .read(feedNotifierProvider.notifier)
-        .createPost(params);
+    final success = widget.isEditing
+        ? await ref
+              .read(feedNotifierProvider.notifier)
+              .updatePost(widget.existingPost!, params)
+        : await ref.read(feedNotifierProvider.notifier).createPost(params);
 
     if (!mounted) return;
 
-    if (!created) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(context.l10n.postCreationFailed)));
+    if (!success) {
+      final error = ref.read(feedNotifierProvider).error;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error ?? context.l10n.actionFailed)),
+      );
+
       return;
     }
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(context.l10n.postCreated)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          widget.isEditing
+              ? context.l10n.postUpdated
+              : context.l10n.postCreated,
+        ),
+      ),
+    );
 
     Navigator.of(context).pop();
   }

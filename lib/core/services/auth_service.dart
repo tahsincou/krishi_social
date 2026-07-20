@@ -10,7 +10,9 @@ class AuthService {
     return token != null && token.isNotEmpty;
   }
 
+  @override
   Future<void> logout() async {
+    await storage.deleteToken();
     await storage.deleteUser();
   }
 }

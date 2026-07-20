@@ -354,4 +354,13 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get alreadyHaveAccount => 'আগেই অ্যাকাউন্ট আছে? লগইন করুন';
+
+  @override
+  String get editPost => 'পোস্ট এডিট';
+
+  @override
+  String get saveChanges => 'পরিবর্তন সংরক্ষণ';
+
+  @override
+  String get postUpdated => 'পোস্ট আপডেট হয়েছে';
 }

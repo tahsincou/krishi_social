@@ -27,4 +27,8 @@ class SecureStorageService {
   Future<void> deleteUser() {
     return storage.delete(key: _userKey);
   }
+
+  Future<void> deleteToken() {
+    return storage.delete(key: _tokenKey);
+  }
 }

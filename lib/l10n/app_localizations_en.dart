@@ -354,4 +354,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get alreadyHaveAccount => 'Already have an account? Login';
+
+  @override
+  String get editPost => 'Edit Post';
+
+  @override
+  String get saveChanges => 'Save Changes';
+
+  @override
+  String get postUpdated => 'Post updated';
 }

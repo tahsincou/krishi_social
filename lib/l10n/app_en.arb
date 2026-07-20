@@ -136,7 +136,11 @@
 "enterYourLocation": "Enter your location",
 "accountReviewMessage": "Your account will initially remain under review. Full verification will be added later.",
 "registrationSuccessful": "Account created successfully",
-"alreadyHaveAccount": "Already have an account? Login"
+"alreadyHaveAccount": "Already have an account? Login",
+
+"editPost": "Edit Post",
+"saveChanges": "Save Changes",
+"postUpdated": "Post updated"
 
 
 }

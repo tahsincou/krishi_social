@@ -1,4 +1,6 @@
 import 'package:krishi_social/core/config/environment.dart';
+import 'package:krishi_social/core/config/supabse_config.dart';
+import 'package:path/path.dart';
 
 import '../services/environment_service.dart';
 
@@ -27,7 +29,7 @@ class AppConfig {
         return 'https://dev-api.company.com';
 
       case Environment.staging:
-        return 'https://staging-api.company.com';
+        return '${SupabaseConfig.url}/rest/v1';
 
       case Environment.production:
         return 'https://api.company.com';

@@ -784,6 +784,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Already have an account? Login'**
   String get alreadyHaveAccount;
+
+  /// No description provided for @editPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Post'**
+  String get editPost;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save Changes'**
+  String get saveChanges;
+
+  /// No description provided for @postUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Post updated'**
+  String get postUpdated;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

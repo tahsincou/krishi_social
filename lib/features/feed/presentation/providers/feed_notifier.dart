@@ -87,6 +87,44 @@ class FeedNotifier extends StateNotifier<FeedState> {
     }
   }
 
+  Future<bool> updatePost(
+    AgriculturePost existingPost,
+    CreateAgriculturalPostParams params,
+  ) async {
+    state = state.copyWith(isUpdating: true, clearError: true);
+
+    try {
+      final updatedPost = existingPost.copyWith(
+        type: params.type,
+        category: params.category,
+        productName: params.productName,
+        quantity: params.quantity,
+        unit: params.unit,
+        availableFrom: params.availableFrom,
+        availableTo: params.availableTo,
+        district: params.location,
+        upazila: '',
+        pricePerUnit: params.pricePerUnit,
+        qualityRequirement: params.qualityRequirement,
+        description: params.description,
+      );
+
+      final savedPost = await ref.read(updatePostUseCaseProvider)(updatedPost);
+
+      final updatedPosts = state.posts.map((post) {
+        return post.id == savedPost.id ? savedPost : post;
+      }).toList();
+
+      state = state.copyWith(isUpdating: false, posts: updatedPosts);
+
+      return true;
+    } catch (error) {
+      state = state.copyWith(isUpdating: false, error: error.toString());
+
+      return false;
+    }
+  }
+
   Future<bool> closePost(AgriculturePost post) async {
     state = state.copyWith(isUpdating: true, clearError: true);
 

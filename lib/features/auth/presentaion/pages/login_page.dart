@@ -107,7 +107,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 child: Text("Create account"),
               ),
               EnvironmentBadge(
-                onLongPress: () async {
+                onTap: () async {
                   final changed = await showEnvironmentBottomSheet(context);
 
                   if (!context.mounted) return;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
@@ -47,6 +48,9 @@ class MyPostsPage extends ConsumerWidget {
                   isUpdating: feedState.isUpdating,
                   onClose: () => _closePost(context, ref, post),
                   onDelete: () => _confirmDelete(context, ref, post),
+                  onEdit: () {
+                    context.push('/edit-post', extra: post);
+                  },
                 );
               },
             ),
@@ -124,9 +128,12 @@ class _MyPostItem extends StatelessWidget {
   const _MyPostItem({
     required this.post,
     required this.isUpdating,
+    required this.onEdit,
     required this.onClose,
     required this.onDelete,
   });
+
+  final VoidCallback onEdit;
 
   final AgriculturePost post;
   final bool isUpdating;
@@ -150,6 +157,11 @@ class _MyPostItem extends StatelessWidget {
                 ),
               ),
               const Spacer(),
+              IconButton(
+                onPressed: isUpdating ? null : onEdit,
+                tooltip: context.l10n.editPost,
+                icon: const Icon(Icons.edit_outlined),
+              ),
               if (!isClosed)
                 TextButton.icon(
                   onPressed: isUpdating ? null : onClose,
