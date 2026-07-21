@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/auth/domain/entities/auth_status.dart';
+import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/entities/product_category.dart';
@@ -110,6 +113,28 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     final isBuyPost = _postType == PostType.buy;
     final feedState = ref.watch(feedNotifierProvider);
     final isEditing = widget.isEditing;
+    final authState = ref.watch(authNotifierProvider);
+
+    debugPrint(
+      'Create post auth status: ${authState.status}, '
+      'user=${authState.user?.id}',
+    );
+
+    if (authState.status == AuthStatus.initial ||
+        authState.status == AuthStatus.restoring) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
+
+    if (!authState.isAuthenticated) {
+      return Scaffold(
+        body: Center(
+          child: FilledButton(
+            onPressed: () => context.go('/login'),
+            child: Text(context.l10n.login),
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(

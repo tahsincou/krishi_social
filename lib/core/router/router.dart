@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:krishi_social/features/auth/presentaion/pages/auth_gate.dart';
 import 'package:krishi_social/features/auth/presentaion/pages/login_page.dart';
 import 'package:krishi_social/features/auth/presentaion/pages/register_page.dart';
 import 'package:krishi_social/features/dashboard/presentation/pages/dashboard_page.dart';
@@ -36,6 +37,7 @@ class AppRouter {
       ),
       GoRoute(path: '/my-posts', builder: (_, __) => const MyPostsPage()),
       GoRoute(path: '/register', builder: (_, __) => const RegisterPage()),
+      GoRoute(path: '/', builder: (context, state) => const AuthGate()),
     ],
   );
 }
