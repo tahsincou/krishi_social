@@ -14,15 +14,15 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initialize();
+    });
   }
 
   Future<void> _initialize() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    final authState = ref.read(authNotifierProvider);
 
     if (!mounted) return;
-
-    final authState = ref.read(authNotifierProvider);
 
     if (authState.isAuthenticated) {
       context.go('/feed');
