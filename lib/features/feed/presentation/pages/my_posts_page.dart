@@ -27,7 +27,7 @@ class MyPostsPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.myPosts)),
-      body: feedState.isLoading && posts.isEmpty
+      body: feedState.isInitialLoading && posts.isEmpty
           ? const AppLoading()
           : posts.isEmpty
           ? AppEmpty(

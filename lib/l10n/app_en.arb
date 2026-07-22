@@ -140,7 +140,9 @@
 
 "editPost": "Edit Post",
 "saveChanges": "Save Changes",
-"postUpdated": "Post updated"
+"postUpdated": "Post updated",
+
+"offline": "Offline"
 
 
 }

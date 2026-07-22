@@ -52,6 +52,16 @@ class _FeedPageState extends ConsumerState<FeedPage> {
               ),
             ],
           ),
+          actions: [
+            if (feedState.isOffline)
+              Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: Chip(
+                  avatar: const Icon(Icons.cloud_off_outlined, size: 18),
+                  label: Text(context.l10n.offline),
+                ),
+              ),
+          ],
         ),
         body: Column(
           children: [
@@ -119,7 +129,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             Expanded(
               child: Builder(
                 builder: (context) {
-                  if (feedState.isLoading && feedState.posts.isEmpty) {
+                  if (feedState.isInitialLoading && feedState.posts.isEmpty) {
                     return const AppLoading();
                   }
 
@@ -137,7 +147,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                         onRefresh: () {
                           return ref
                               .read(feedNotifierProvider.notifier)
-                              .loadPosts();
+                              .refreshPosts();
                         },
                         child: AgriculturePostList(posts: buyPosts),
                       ),
@@ -145,7 +155,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                         onRefresh: () {
                           return ref
                               .read(feedNotifierProvider.notifier)
-                              .loadPosts();
+                              .refreshPosts();
                         },
                         child: AgriculturePostList(posts: sellPosts),
                       ),

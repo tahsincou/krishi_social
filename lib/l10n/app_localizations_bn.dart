@@ -363,4 +363,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get postUpdated => 'পোস্ট আপডেট হয়েছে';
+
+  @override
+  String get offline => 'অফলাইন';
 }

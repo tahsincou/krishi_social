@@ -5,28 +5,36 @@ import 'package:krishi_social/features/feed/domain/entities/product_category.dar
 
 class FeedState {
   const FeedState({
-    this.isLoading = false,
+    this.posts = const [],
+    this.isInitialLoading = false,
+    this.isRefreshing = false,
     this.isCreating = false,
     this.isUpdating = false,
-    this.posts = const [],
+    this.isOffline = false,
     this.searchQuery = '',
     this.selectedCategory,
     this.error,
   });
 
-  final bool isLoading;
+  final List<AgriculturePost> posts;
+
+  final bool isInitialLoading;
+  final bool isRefreshing;
   final bool isCreating;
   final bool isUpdating;
-  final List<AgriculturePost> posts;
+  final bool isOffline;
+
   final String searchQuery;
   final ProductCategory? selectedCategory;
   final String? error;
 
   FeedState copyWith({
-    bool? isLoading,
+    List<AgriculturePost>? posts,
+    bool? isInitialLoading,
+    bool? isRefreshing,
     bool? isCreating,
     bool? isUpdating,
-    List<AgriculturePost>? posts,
+    bool? isOffline,
     String? searchQuery,
     ProductCategory? selectedCategory,
     bool clearSelectedCategory = false,
@@ -34,10 +42,12 @@ class FeedState {
     bool clearError = false,
   }) {
     return FeedState(
-      isLoading: isLoading ?? this.isLoading,
+      posts: posts ?? this.posts,
+      isInitialLoading: isInitialLoading ?? this.isInitialLoading,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
       isCreating: isCreating ?? this.isCreating,
       isUpdating: isUpdating ?? this.isUpdating,
-      posts: posts ?? this.posts,
+      isOffline: isOffline ?? this.isOffline,
       searchQuery: searchQuery ?? this.searchQuery,
       selectedCategory: clearSelectedCategory
           ? null

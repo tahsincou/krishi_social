@@ -802,6 +802,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Post updated'**
   String get postUpdated;
+
+  /// No description provided for @offline.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline'**
+  String get offline;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

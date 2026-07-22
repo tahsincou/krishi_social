@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:krishi_social/features/feed/data/datasources/feed_local_datasource.dart';
 import 'package:krishi_social/features/feed/data/datasources/feed_remote_data_source.dart';
 import 'package:krishi_social/features/feed/data/models/agricultural_post_model.dart';
@@ -12,39 +11,23 @@ class FeedRepositoryImpl implements FeedRepository {
   final FeedLocalDataSource local;
 
   @override
-  Future<List<AgriculturePost>> getPosts() async {
-    try {
-      final remotePosts = await remote.getPosts();
-
-      try {
-        await local.replacePosts(remotePosts);
-      } catch (error, stackTrace) {
-        debugPrint('Feed cache write failed: $error');
-        debugPrintStack(stackTrace: stackTrace);
-      }
-
-      return remotePosts;
-    } catch (remoteError, stackTrace) {
-      debugPrint('Remote feed loading failed: $remoteError');
-      debugPrintStack(stackTrace: stackTrace);
-
-      final cachedPosts = await local.getPosts();
-
-      if (cachedPosts.isNotEmpty) {
-        return cachedPosts;
-      }
-
-      rethrow;
-    }
+  Future<List<AgriculturePost>> getCachedPosts() {
+    return local.getPosts();
   }
 
   @override
-  Future<AgriculturePost> createPost(AgriculturePost post) async {
-    final createdPost = await remote.createPost(
-      AgriculturalPostModel.fromEntity(post),
-    );
+  Future<List<AgriculturePost>> refreshPosts() async {
+    final posts = await remote.getPosts();
 
-    return createdPost;
+    // Cache only confirmed server data.
+    await local.replacePosts(posts);
+
+    return posts;
+  }
+
+  @override
+  Future<AgriculturePost> createPost(AgriculturePost post) {
+    return remote.createPost(AgriculturalPostModel.fromEntity(post));
   }
 
   @override

@@ -363,4 +363,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get postUpdated => 'Post updated';
+
+  @override
+  String get offline => 'Offline';
 }

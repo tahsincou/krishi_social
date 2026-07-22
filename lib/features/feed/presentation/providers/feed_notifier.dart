@@ -16,7 +16,7 @@ final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>((
 ) {
   final notifier = FeedNotifier(ref);
 
-  Future.microtask(notifier.loadPosts);
+  Future.microtask(notifier.refreshPosts);
 
   return notifier;
 });
@@ -26,22 +26,54 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
   final Ref ref;
 
-  Future<void> loadPosts() async {
-    if (state.isLoading) {
+  Future<void> initialize() async {
+    if (state.isInitialLoading ||
+        state.isRefreshing ||
+        state.posts.isNotEmpty) {
       return;
     }
 
-    state = state.copyWith(isLoading: true, clearError: true);
+    state = state.copyWith(isInitialLoading: true, clearError: true);
 
     try {
-      final posts = await ref.read(getPostsUseCaseProvider)();
+      final cachedPosts = await ref.read(getCachedPostsUseCaseProvider)();
 
-      state = state.copyWith(isLoading: false, posts: posts);
+      state = state.copyWith(posts: cachedPosts, isInitialLoading: false);
     } catch (error, stackTrace) {
-      debugPrint('Load posts failed: $error');
+      debugPrint('Cached feed loading failed: $error');
       debugPrintStack(stackTrace: stackTrace);
 
-      state = state.copyWith(isLoading: false, error: error.toString());
+      state = state.copyWith(isInitialLoading: false);
+    }
+
+    await refreshPosts();
+  }
+
+  Future<void> refreshPosts() async {
+    if (state.isRefreshing) {
+      return;
+    }
+
+    state = state.copyWith(isRefreshing: true, clearError: true);
+
+    try {
+      final posts = await ref.read(refreshPostsUseCaseProvider)();
+
+      state = state.copyWith(
+        posts: posts,
+        isRefreshing: false,
+        isOffline: false,
+        clearError: true,
+      );
+    } catch (error, stackTrace) {
+      debugPrint('Remote feed refresh failed: $error');
+      debugPrintStack(stackTrace: stackTrace);
+
+      state = state.copyWith(
+        isRefreshing: false,
+        isOffline: true,
+        error: error.toString(),
+      );
     }
   }
 
@@ -88,7 +120,7 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
       state = state.copyWith(isCreating: false);
 
-      await loadPosts();
+      await refreshPosts();
 
       return true;
     } catch (error, stackTrace) {
@@ -127,7 +159,7 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
       state = state.copyWith(isUpdating: false);
 
-      await loadPosts();
+      await refreshPosts();
 
       return true;
     } catch (error) {
@@ -147,7 +179,7 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
       state = state.copyWith(isUpdating: false);
 
-      await loadPosts();
+      await refreshPosts();
 
       return true;
     } catch (error) {
@@ -165,7 +197,7 @@ class FeedNotifier extends StateNotifier<FeedState> {
 
       state = state.copyWith(isUpdating: false);
 
-      await loadPosts();
+      await refreshPosts();
 
       return true;
     } catch (error) {
