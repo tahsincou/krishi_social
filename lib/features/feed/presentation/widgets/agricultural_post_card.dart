@@ -13,13 +13,13 @@ class AgriculturePostCard extends StatelessWidget {
   const AgriculturePostCard({
     super.key,
     required this.post,
-    this.onCall,
     this.onTap,
+    this.onCall,
   });
 
   final AgriculturePost post;
-  final VoidCallback? onCall;
   final VoidCallback? onTap;
+  final VoidCallback? onCall;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +40,12 @@ class AgriculturePostCard extends StatelessWidget {
             Row(
               children: [
                 _PostTypeBadge(
-                  isBuyPost: isBuyPost,
                   label: post.type.displayName,
+                  isBuyPost: isBuyPost,
                 ),
                 const Spacer(),
                 Text(
-                  _formatCreatedAt(post.createdAt),
+                  _formatCreatedAt(context, post.createdAt),
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,
                   ),
@@ -79,21 +79,31 @@ class AgriculturePostCard extends StatelessWidget {
                   text: post.district,
                 ),
                 _InformationPill(
-                  icon: Icons.calendar_today_outlined,
-                  text: _formatDateRange(post),
+                  icon: Icons.calendar_month_outlined,
+                  text: _formatAvailability(post),
                 ),
               ],
             ),
 
             if (post.pricePerUnit != null) ...[
               const SizedBox(height: AppSpacing.md),
-              Text(
-                '৳${_formatNumber(post.pricePerUnit!)}'
-                ' / ${post.unit.displayName}',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.w700,
-                ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.payments_outlined,
+                    size: 19,
+                    color: theme.colorScheme.primary,
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Text(
+                    '৳${_formatNumber(post.pricePerUnit!)}'
+                    ' / ${post.unit.displayName}',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.primary,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
             ],
 
@@ -104,10 +114,10 @@ class AgriculturePostCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  radius: 20,
+                  radius: 21,
                   backgroundColor: theme.colorScheme.primaryContainer,
                   child: Text(
-                    _initial(post.userName),
+                    _firstCharacter(post.userName),
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: theme.colorScheme.onPrimaryContainer,
                       fontWeight: FontWeight.w700,
@@ -142,8 +152,11 @@ class AgriculturePostCard extends StatelessWidget {
                           ],
                         ],
                       ),
+                      const SizedBox(height: 2),
                       Text(
-                        post.district,
+                        post.category.displayName(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.onSurfaceVariant,
                         ),
@@ -152,20 +165,21 @@ class AgriculturePostCard extends StatelessWidget {
                   ),
                 ),
 
-                FilledButton.tonalIcon(
-                  onPressed: onCall,
-                  icon: const Icon(Icons.call_outlined, size: 19),
-                  label: Text(context.l10n.contact),
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size(0, 44),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.md,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppRadius.pill),
+                if (onCall != null)
+                  FilledButton.tonalIcon(
+                    onPressed: onCall,
+                    icon: const Icon(Icons.call_outlined, size: 18),
+                    label: Text(context.l10n.contact),
+                    style: FilledButton.styleFrom(
+                      minimumSize: const Size(0, 44),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.md,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppRadius.pill),
+                      ),
                     ),
                   ),
-                ),
               ],
             ),
           ],
@@ -174,34 +188,33 @@ class AgriculturePostCard extends StatelessWidget {
     );
   }
 
-  String _formatDateRange(AgriculturePost post) {
+  String _formatAvailability(AgriculturePost post) {
     final formatter = DateFormat('d MMM');
 
     return '${formatter.format(post.availableFrom)}'
         ' – ${formatter.format(post.availableTo)}';
   }
 
-  String _formatCreatedAt(DateTime date) {
-    final now = DateTime.now();
-    final difference = now.difference(date);
+  String _formatCreatedAt(BuildContext context, DateTime createdAt) {
+    final difference = DateTime.now().difference(createdAt);
 
     if (difference.inMinutes < 1) {
-      return 'Now';
+      return context.l10n.justNow;
     }
 
     if (difference.inHours < 1) {
-      return '${difference.inMinutes}m';
+      return context.l10n.minutesAgo(difference.inMinutes);
     }
 
     if (difference.inDays < 1) {
-      return '${difference.inHours}h';
+      return context.l10n.hoursAgo(difference.inHours);
     }
 
     if (difference.inDays < 7) {
-      return '${difference.inDays}d';
+      return context.l10n.daysAgo(difference.inDays);
     }
 
-    return DateFormat('d MMM').format(date);
+    return DateFormat('d MMM').format(createdAt);
   }
 
   String _formatNumber(double value) {
@@ -212,32 +225,32 @@ class AgriculturePostCard extends StatelessWidget {
     return value.toStringAsFixed(1);
   }
 
-  String _initial(String name) {
-    final value = name.trim();
+  String _firstCharacter(String value) {
+    final trimmedValue = value.trim();
 
-    if (value.isEmpty) {
+    if (trimmedValue.isEmpty) {
       return '?';
     }
 
-    return value.characters.first.toUpperCase();
+    return trimmedValue.characters.first.toUpperCase();
   }
 }
 
 class _PostTypeBadge extends StatelessWidget {
-  const _PostTypeBadge({required this.isBuyPost, required this.label});
+  const _PostTypeBadge({required this.label, required this.isBuyPost});
 
-  final bool isBuyPost;
   final String label;
+  final bool isBuyPost;
 
   @override
   Widget build(BuildContext context) {
     final backgroundColor = isBuyPost
         ? Theme.of(context).colorScheme.primaryContainer
-        : const Color(0xFFFFEBC5);
+        : const Color(0xFFFFEDC9);
 
     final foregroundColor = isBuyPost
         ? Theme.of(context).colorScheme.onPrimaryContainer
-        : const Color(0xFF795100);
+        : const Color(0xFF725000);
 
     return Container(
       padding: const EdgeInsets.symmetric(

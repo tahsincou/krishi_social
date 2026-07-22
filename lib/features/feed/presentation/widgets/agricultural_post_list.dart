@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/providers/contact_providers.dart';
 import 'package:krishi_social/core/services/contact_service.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
@@ -57,7 +58,12 @@ class AgriculturePostList extends ConsumerWidget {
 
         return AgriculturePostCard(
           post: post,
-          onCall: () => _callUser(context, ref, post),
+          onTap: () {
+            context.push('/post-details', extra: post);
+          },
+          onCall: () {
+            _callUser(context, ref, post);
+          },
         );
       },
     );

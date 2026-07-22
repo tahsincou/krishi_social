@@ -375,4 +375,22 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get buyDirectlyFromPeople => 'কৃষক ও ক্রেতার সাথে সরাসরি যোগাযোগ করুন';
+
+  @override
+  String get justNow => 'এইমাত্র';
+
+  @override
+  String minutesAgo(int count) {
+    return '$count মিনিট আগে';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return '$count ঘণ্টা আগে';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return '$count দিন আগে';
+  }
 }

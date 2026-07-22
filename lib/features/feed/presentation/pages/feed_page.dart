@@ -89,10 +89,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPageIntroduction(context),
-
-            const SizedBox(height: AppSpacing.md),
-
             _buildPostTypeTabs(context),
 
             const SizedBox(height: AppSpacing.md),
@@ -161,19 +157,19 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   Widget _buildPostTypeTabs(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
       child: Container(
         padding: const EdgeInsets.all(4),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(999),
+          borderRadius: BorderRadius.circular(50),
         ),
         child: TabBar(
           indicatorSize: TabBarIndicatorSize.tab,
           dividerColor: Colors.transparent,
           indicator: BoxDecoration(
             color: Theme.of(context).colorScheme.primary,
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(50),
           ),
           labelColor: Theme.of(context).colorScheme.onPrimary,
           unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,

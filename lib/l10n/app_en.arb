@@ -146,7 +146,32 @@
 
 "offlineChangesUnavailable": "Connect to the internet to make changes.",
 "findAgriculturalProducts": "Find agricultural products",
-"buyDirectlyFromPeople": "Connect directly with farmers and buyers near you"
+"buyDirectlyFromPeople": "Connect directly with farmers and buyers near you",
+"justNow": "Just now",
+"minutesAgo": "{count}m ago",
+"@minutesAgo": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+"hoursAgo": "{count}h ago",
+"@hoursAgo": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+"daysAgo": "{count}d ago",
+"@daysAgo": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+}
 
 
 }

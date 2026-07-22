@@ -375,4 +375,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get buyDirectlyFromPeople => 'Connect directly with farmers and buyers near you';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int count) {
+    return '${count}m ago';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return '${count}h ago';
+  }
+
+  @override
+  String daysAgo(int count) {
+    return '${count}d ago';
+  }
 }
