@@ -11,15 +11,9 @@ import 'package:krishi_social/features/feed/presentation/providers/feed_provider
 import 'package:krishi_social/features/feed/presentation/providers/feed_state.dart';
 import 'package:flutter/foundation.dart';
 
-final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>((
-  ref,
-) {
-  final notifier = FeedNotifier(ref);
-
-  Future.microtask(notifier.refreshPosts);
-
-  return notifier;
-});
+final feedNotifierProvider = StateNotifierProvider<FeedNotifier, FeedState>(
+  (ref) => FeedNotifier(ref),
+);
 
 class FeedNotifier extends StateNotifier<FeedState> {
   FeedNotifier(this.ref) : super(const FeedState());
@@ -27,23 +21,26 @@ class FeedNotifier extends StateNotifier<FeedState> {
   final Ref ref;
 
   Future<void> initialize() async {
-    if (state.isInitialLoading ||
-        state.isRefreshing ||
-        state.posts.isNotEmpty) {
+    if (state.isInitialLoading || state.isRefreshing) {
       return;
     }
 
-    state = state.copyWith(isInitialLoading: true, clearError: true);
+    state = state.copyWith(
+      isInitialLoading: state.posts.isEmpty,
+      clearError: true,
+    );
 
-    try {
-      final cachedPosts = await ref.read(getCachedPostsUseCaseProvider)();
+    if (state.posts.isEmpty) {
+      try {
+        final cachedPosts = await ref.read(getCachedPostsUseCaseProvider)();
 
-      state = state.copyWith(posts: cachedPosts, isInitialLoading: false);
-    } catch (error, stackTrace) {
-      debugPrint('Cached feed loading failed: $error');
-      debugPrintStack(stackTrace: stackTrace);
+        state = state.copyWith(posts: cachedPosts, isInitialLoading: false);
+      } catch (error, stackTrace) {
+        debugPrint('Cached feed loading failed: $error');
+        debugPrintStack(stackTrace: stackTrace);
 
-      state = state.copyWith(isInitialLoading: false);
+        state = state.copyWith(isInitialLoading: false);
+      }
     }
 
     await refreshPosts();

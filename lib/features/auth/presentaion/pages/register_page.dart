@@ -6,6 +6,7 @@ import 'package:krishi_social/features/auth/data/dto/register_request.dart';
 import 'package:krishi_social/features/auth/domain/entities/account_activity.dart';
 import 'package:krishi_social/features/auth/domain/extensions/account_activity_extension.dart';
 import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
+import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_button.dart';
 import 'package:krishi_social/shared/widgets/app_dropdown.dart';
@@ -239,6 +240,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     if (!mounted || !success) {
       return;
     }
+
+    await ref.read(feedNotifierProvider.notifier).initialize();
+
+    if (!mounted) return;
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(context.l10n.registrationSuccessful)),

@@ -58,11 +58,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
         clearError: true,
       );
 
-      debugPrint(
-        'Authenticated user: '
-        '${user.id}, ${user.name}, ${user.phone}',
-      );
-
       return true;
     } catch (error) {
       state = state.copyWith(
@@ -77,8 +72,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<bool> checkLogin() async {
-    debugPrint('Starting auth restoration');
-
     state = state.copyWith(
       status: AuthStatus.restoring,
       isLoading: false,
@@ -88,30 +81,27 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final user = await ref.read(checkLoginUseCaseProvider)();
 
-      if (user != null) {
+      if (user == null) {
         state = state.copyWith(
-          status: AuthStatus.authenticated,
+          status: AuthStatus.unauthenticated,
           isLoading: false,
-          user: user,
+          clearUser: true,
           clearError: true,
         );
 
-        debugPrint(
-          'Restored user: '
-          '${user.id}, ${user.name}, ${user.phone}',
-        );
-
-        return true;
+        return false;
       }
 
       state = state.copyWith(
-        status: AuthStatus.unauthenticated,
+        status: AuthStatus.authenticated,
         isLoading: false,
-        clearUser: true,
+        user: user,
         clearError: true,
       );
 
-      return false;
+      debugPrint('Restored user: ${user.id}, ${user.name}, ${user.phone}');
+
+      return true;
     } catch (error, stackTrace) {
       debugPrint('Session restoration failed: $error');
       debugPrintStack(stackTrace: stackTrace);
@@ -122,8 +112,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
         clearUser: true,
         error: error.toString(),
       );
-
-      debugPrint('No saved authenticated user');
 
       return false;
     }

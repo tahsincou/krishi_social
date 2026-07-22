@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/shared/widgets/app_loading.dart';
 import 'package:krishi_social/shared/widgets/environment_badge.dart';
 import 'package:krishi_social/shared/widgets/environment_bottom_sheet.dart';
@@ -39,6 +40,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         );
 
     if (!mounted || !success) return;
+
+    await ref.read(feedNotifierProvider.notifier).initialize();
+
+    if (!mounted) return;
 
     context.go('/feed');
   }

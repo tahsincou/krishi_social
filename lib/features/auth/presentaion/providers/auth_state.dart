@@ -14,11 +14,13 @@ class AuthState {
     this.error,
   });
 
-  bool get isAuthenticated =>
-      status == AuthStatus.authenticated && user != null;
+  bool get isAuthenticated {
+    return status == AuthStatus.authenticated && user != null;
+  }
 
-  bool get isRestoring =>
-      status == AuthStatus.initial || status == AuthStatus.restoring;
+  bool get isRestoring {
+    return status == AuthStatus.initial || status == AuthStatus.restoring;
+  }
 
   AuthState copyWith({
     AuthStatus? status,
