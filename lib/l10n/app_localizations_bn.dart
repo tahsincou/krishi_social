@@ -369,4 +369,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get offlineChangesUnavailable => 'পোস্টে পরিবর্তন করতে ইন্টারনেট চালু করুন।';
+
+  @override
+  String get findAgriculturalProducts => 'কৃষিপণ্য খুঁজুন';
+
+  @override
+  String get buyDirectlyFromPeople => 'কৃষক ও ক্রেতার সাথে সরাসরি যোগাযোগ করুন';
 }

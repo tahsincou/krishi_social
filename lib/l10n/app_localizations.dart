@@ -814,6 +814,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect to the internet to make changes.'**
   String get offlineChangesUnavailable;
+
+  /// No description provided for @findAgriculturalProducts.
+  ///
+  /// In en, this message translates to:
+  /// **'Find agricultural products'**
+  String get findAgriculturalProducts;
+
+  /// No description provided for @buyDirectlyFromPeople.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect directly with farmers and buyers near you'**
+  String get buyDirectlyFromPeople;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,54 +1,168 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dart';
+import 'package:krishi_social/shared/theme/app_colors.dart';
+import 'package:krishi_social/shared/theme/app_radius.dart';
+import 'package:krishi_social/shared/theme/app_spacing.dart';
+import 'package:krishi_social/shared/widgets/app_card.dart';
 
 class AgriculturePostCard extends StatelessWidget {
+  const AgriculturePostCard({
+    super.key,
+    required this.post,
+    this.onCall,
+    this.onTap,
+  });
+
   final AgriculturePost post;
   final VoidCallback? onCall;
-
-  const AgriculturePostCard({super.key, required this.post, this.onCall});
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isBuyPost = post.type == PostType.buy;
 
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.xs,
+      ),
+      child: AppCard(
+        onTap: onTap,
+        padding: const EdgeInsets.all(AppSpacing.md),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _PostHeader(post: post),
-            const SizedBox(height: 16),
-            Text(post.productName, style: theme.textTheme.titleLarge),
-            const SizedBox(height: 8),
-            _PostInformation(post: post),
-            if (post.description?.isNotEmpty == true) ...[
-              const SizedBox(height: 12),
-              Text(post.description!),
+            Row(
+              children: [
+                _PostTypeBadge(
+                  isBuyPost: isBuyPost,
+                  label: post.type.displayName,
+                ),
+                const Spacer(),
+                Text(
+                  _formatCreatedAt(post.createdAt),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.md),
+
+            Text(
+              post.productName,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: [
+                _InformationPill(
+                  icon: Icons.scale_outlined,
+                  text:
+                      '${_formatNumber(post.quantity)} '
+                      '${post.unit.displayName}',
+                ),
+                _InformationPill(
+                  icon: Icons.location_on_outlined,
+                  text: post.district,
+                ),
+                _InformationPill(
+                  icon: Icons.calendar_today_outlined,
+                  text: _formatDateRange(post),
+                ),
+              ],
+            ),
+
+            if (post.pricePerUnit != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                '৳${_formatNumber(post.pricePerUnit!)}'
+                ' / ${post.unit.displayName}',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ],
-            const SizedBox(height: 12),
+
+            const SizedBox(height: AppSpacing.md),
+            const Divider(height: 1),
+            const SizedBox(height: AppSpacing.md),
 
             Row(
               children: [
-                Expanded(
-                  child: SizedBox(
-                    child: FilledButton.icon(
-                      onPressed: onCall,
-                      icon: const Icon(Icons.call_outlined),
-                      label: const Text('Contact'),
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: theme.colorScheme.primaryContainer,
+                  child: Text(
+                    _initial(post.userName),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
+                const SizedBox(width: AppSpacing.sm),
+
                 Expanded(
-                  child: SizedBox(
-                    child: FilledButton.icon(
-                      onPressed: onCall,
-                      icon: const Icon(Icons.comment),
-                      label: const Text('Comment'),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              post.userName,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          if (post.isUserReviewed) ...[
+                            const SizedBox(width: 4),
+                            Icon(
+                              Icons.verified_rounded,
+                              size: 17,
+                              color: theme.colorScheme.primary,
+                            ),
+                          ],
+                        ],
+                      ),
+                      Text(
+                        post.district,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                FilledButton.tonalIcon(
+                  onPressed: onCall,
+                  icon: const Icon(Icons.call_outlined, size: 19),
+                  label: Text(context.l10n.contact),
+                  style: FilledButton.styleFrom(
+                    minimumSize: const Size(0, 44),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.md,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.pill),
                     ),
                   ),
                 ),
@@ -59,139 +173,123 @@ class AgriculturePostCard extends StatelessWidget {
       ),
     );
   }
-}
 
-class _PostHeader extends StatelessWidget {
-  final AgriculturePost post;
+  String _formatDateRange(AgriculturePost post) {
+    final formatter = DateFormat('d MMM');
 
-  const _PostHeader({required this.post});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // CircleAvatar(
-        //   backgroundImage: post.userImageUrl != null
-        //       ? NetworkImage(post.userImageUrl!)
-        //       : null,
-        //   child: post.userImageUrl == null
-        //       ? Text(
-        //           post.userName.isNotEmpty
-        //               ? post.userName.characters.first.toUpperCase()
-        //               : '?',
-        //         )
-        //       : null,
-        // ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Flexible(
-                    child: Text(
-                      post.userName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  if (post.isUserReviewed) ...[
-                    const SizedBox(width: 4),
-                    const Icon(Icons.verified, size: 18),
-                  ],
-                ],
-              ),
-              Text(post.district, style: Theme.of(context).textTheme.bodySmall),
-            ],
-          ),
-        ),
-        Chip(
-          label: Text(post.type.displayName),
-          visualDensity: VisualDensity.compact,
-        ),
-      ],
-    );
-  }
-}
-
-class _PostInformation extends StatelessWidget {
-  final AgriculturePost post;
-
-  const _PostInformation({required this.post});
-
-  @override
-  Widget build(BuildContext context) {
-    final dateFormat = DateFormat('dd MMM yyyy');
-
-    return Column(
-      children: [
-        _InformationRow(
-          icon: Icons.scale_outlined,
-          label: 'Quantity',
-          value: '${_formatQuantity(post.quantity)} ${post.unit.displayName}',
-        ),
-        _InformationRow(
-          icon: Icons.date_range_outlined,
-          label: post.type == PostType.buy ? 'Required' : 'Available',
-          value:
-              '${dateFormat.format(post.availableFrom)} - ${dateFormat.format(post.availableTo)}',
-        ),
-        if (post.pricePerUnit != null)
-          _InformationRow(
-            icon: Icons.payments_outlined,
-            label: 'Price',
-            value:
-                '৳${_formatQuantity(post.pricePerUnit!)} / ${post.unit.displayName}',
-          ),
-        if (post.qualityRequirement?.isNotEmpty == true)
-          _InformationRow(
-            icon: Icons.fact_check_outlined,
-            label: 'Quality',
-            value: post.qualityRequirement!,
-          ),
-      ],
-    );
+    return '${formatter.format(post.availableFrom)}'
+        ' – ${formatter.format(post.availableTo)}';
   }
 
-  String _formatQuantity(double value) {
+  String _formatCreatedAt(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inMinutes < 1) {
+      return 'Now';
+    }
+
+    if (difference.inHours < 1) {
+      return '${difference.inMinutes}m';
+    }
+
+    if (difference.inDays < 1) {
+      return '${difference.inHours}h';
+    }
+
+    if (difference.inDays < 7) {
+      return '${difference.inDays}d';
+    }
+
+    return DateFormat('d MMM').format(date);
+  }
+
+  String _formatNumber(double value) {
     if (value == value.roundToDouble()) {
       return value.toInt().toString();
     }
 
     return value.toStringAsFixed(1);
   }
+
+  String _initial(String name) {
+    final value = name.trim();
+
+    if (value.isEmpty) {
+      return '?';
+    }
+
+    return value.characters.first.toUpperCase();
+  }
 }
 
-class _InformationRow extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
+class _PostTypeBadge extends StatelessWidget {
+  const _PostTypeBadge({required this.isBuyPost, required this.label});
 
-  const _InformationRow({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
+  final bool isBuyPost;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+    final backgroundColor = isBuyPost
+        ? Theme.of(context).colorScheme.primaryContainer
+        : const Color(0xFFFFEBC5);
+
+    final foregroundColor = isBuyPost
+        ? Theme.of(context).colorScheme.onPrimaryContainer
+        : const Color(0xFF795100);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 6,
+      ),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+      ),
+      child: Text(
+        label.toUpperCase(),
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: foregroundColor,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+}
+
+class _InformationPill extends StatelessWidget {
+  const _InformationPill({required this.icon, required this.text});
+
+  final IconData icon;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 8,
+      ),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+      ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 20),
-          const SizedBox(width: 10),
-          SizedBox(
-            width: 72,
-            child: Text(label, style: Theme.of(context).textTheme.bodySmall),
+          Icon(
+            icon,
+            size: 16,
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontWeight: FontWeight.w500),
-            ),
+          const SizedBox(width: 6),
+          Text(
+            text,
+            style: Theme.of(
+              context,
+            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
           ),
         ],
       ),

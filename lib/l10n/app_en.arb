@@ -144,7 +144,9 @@
 
 "offline": "Offline",
 
-"offlineChangesUnavailable": "Connect to the internet to make changes."
+"offlineChangesUnavailable": "Connect to the internet to make changes.",
+"findAgriculturalProducts": "Find agricultural products",
+"buyDirectlyFromPeople": "Connect directly with farmers and buyers near you"
 
 
 }

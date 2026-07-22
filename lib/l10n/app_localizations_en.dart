@@ -369,4 +369,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offlineChangesUnavailable => 'Connect to the internet to make changes.';
+
+  @override
+  String get findAgriculturalProducts => 'Find agricultural products';
+
+  @override
+  String get buyDirectlyFromPeople => 'Connect directly with farmers and buyers near you';
 }
