@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:krishi_social/shared/widgets/app_loading.dart';
 
 class AppButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-  final String? Function()? validator;
-
   const AppButton({
     super.key,
     required this.text,
     required this.onPressed,
     this.isLoading = false,
-    this.validator,
+    this.icon,
   });
+
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 50,
+      height: 54,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
-        child: isLoading ? const AppLoading(message: 'Loading...') : Text(text),
+        child: isLoading
+            ? const SizedBox.square(
+                dimension: 22,
+                child: CircularProgressIndicator(strokeWidth: 2.4),
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (icon != null) ...[
+                    Icon(icon, size: 20),
+                    const SizedBox(width: 8),
+                  ],
+                  Text(text),
+                ],
+              ),
       ),
     );
   }
