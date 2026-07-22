@@ -172,6 +172,14 @@
       "type": "int"
     }
   }
-}
+},
+"productInformation": "পণ্যের তথ্য",
+"deliveryInformation": "সময় ও জায়গা",
+"optionalInformationHint": "দাম, মান ও বিস্তারিত চাইলে যোগ করুন",
+
+"loginToAccount": "আপনার অ্যাকাউন্টে লগইন করুন",
+"loginAccountMessage": "কৃষিপণ্য কেনা-বেচা চালিয়ে যেতে আপনার তথ্য দিন",
+"loginWelcomeMessage": "কৃষক ও ক্রেতার সরাসরি যোগাযোগ",
+"noAccountYet": "নতুন ব্যবহারকারী?"
 
 }

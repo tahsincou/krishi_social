@@ -850,6 +850,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count}d ago'**
   String daysAgo(int count);
+
+  /// No description provided for @productInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Product Information'**
+  String get productInformation;
+
+  /// No description provided for @deliveryInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Availability & Location'**
+  String get deliveryInformation;
+
+  /// No description provided for @optionalInformationHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Price, quality and description'**
+  String get optionalInformationHint;
+
+  /// No description provided for @loginToAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Login to your account'**
+  String get loginToAccount;
+
+  /// No description provided for @loginAccountMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your details to continue buying and selling agricultural products.'**
+  String get loginAccountMessage;
+
+  /// No description provided for @loginWelcomeMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Farmers and buyers, connected directly.'**
+  String get loginWelcomeMessage;
+
+  /// No description provided for @noAccountYet.
+  ///
+  /// In en, this message translates to:
+  /// **'New here?'**
+  String get noAccountYet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

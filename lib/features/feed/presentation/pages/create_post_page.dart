@@ -12,6 +12,7 @@ import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dar
 import 'package:krishi_social/features/feed/domain/params/create_agricultural_post_params.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/product_search_field.dart';
+import 'package:krishi_social/shared/theme/app_radius.dart';
 import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_button.dart';
 import 'package:krishi_social/shared/widgets/app_card.dart';
@@ -20,14 +21,14 @@ import 'package:krishi_social/shared/widgets/app_dropdown.dart';
 import 'package:krishi_social/shared/widgets/app_text_field.dart';
 
 class CreatePostPage extends ConsumerStatefulWidget {
-  final PostType initialType;
-  final AgriculturePost? existingPost;
-
   const CreatePostPage({
     super.key,
     required this.initialType,
     this.existingPost,
   });
+
+  final PostType initialType;
+  final AgriculturePost? existingPost;
 
   bool get isEditing => existingPost != null;
 
@@ -63,37 +64,34 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
 
     _postType = post?.type ?? widget.initialType;
 
-    if (post != null) {
-      _category = post.category;
-      _unit = post.unit;
-
-      _productController.text = post.productName;
-      _quantityController.text = _formatNumber(post.quantity);
-      _locationController.text = post.district;
-      _priceController.text = post.pricePerUnit == null
-          ? ''
-          : _formatNumber(post.pricePerUnit!);
-      _qualityController.text = post.qualityRequirement ?? '';
-      _descriptionController.text = post.description ?? '';
-
-      _dateRange = DateTimeRange(
-        start: post.availableFrom,
-        end: post.availableTo,
-      );
-
-      _showOptionalFields =
-          post.pricePerUnit != null ||
-          (post.qualityRequirement?.isNotEmpty ?? false) ||
-          (post.description?.isNotEmpty ?? false);
-    }
-  }
-
-  String _formatNumber(double value) {
-    if (value == value.roundToDouble()) {
-      return value.toInt().toString();
+    if (post == null) {
+      return;
     }
 
-    return value.toString();
+    _category = post.category;
+    _unit = post.unit;
+
+    _productController.text = post.productName;
+    _quantityController.text = _formatNumber(post.quantity);
+    _locationController.text = post.district;
+
+    _priceController.text = post.pricePerUnit == null
+        ? ''
+        : _formatNumber(post.pricePerUnit!);
+
+    _qualityController.text = post.qualityRequirement ?? '';
+
+    _descriptionController.text = post.description ?? '';
+
+    _dateRange = DateTimeRange(
+      start: post.availableFrom,
+      end: post.availableTo,
+    );
+
+    _showOptionalFields =
+        post.pricePerUnit != null ||
+        (post.qualityRequirement?.isNotEmpty ?? false) ||
+        (post.description?.isNotEmpty ?? false);
   }
 
   @override
@@ -105,15 +103,21 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     _qualityController.dispose();
     _descriptionController.dispose();
     _productFocusNode.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final isBuyPost = _postType == PostType.buy;
-    final isEditing = widget.isEditing;
     final authState = ref.watch(authNotifierProvider);
-    final feedState = ref.read(feedNotifierProvider);
+    final feedState = ref.watch(feedNotifierProvider);
+
+    final isEditing = widget.isEditing;
+    final isBuyPost = _postType == PostType.buy;
+
+    final isSubmitting = isEditing
+        ? feedState.isUpdating
+        : feedState.isCreating;
 
     if (authState.status == AuthStatus.initial ||
         authState.status == AuthStatus.restoring) {
@@ -145,24 +149,35 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
         child: Form(
           key: _formKey,
           child: ListView(
-            padding: const EdgeInsets.all(AppSpacing.md),
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.md,
+              AppSpacing.sm,
+              AppSpacing.md,
+              AppSpacing.xl,
+            ),
             children: [
               _buildPostTypeSelector(),
-              const SizedBox(height: AppSpacing.md),
 
-              AppCard(
+              const SizedBox(height: AppSpacing.lg),
+
+              _buildSectionCard(
+                context: context,
+                icon: Icons.eco_outlined,
+                title: context.l10n.productInformation,
                 child: Column(
                   children: [
                     AppDropdown<ProductCategory>(
                       value: _category,
                       label: context.l10n.category,
                       prefixIcon: const Icon(Icons.category_outlined),
-                      items: ProductCategory.values.map((category) {
-                        return DropdownMenuItem(
-                          value: category,
-                          child: Text(category.displayName(context)),
-                        );
-                      }).toList(),
+                      items: ProductCategory.values
+                          .map(
+                            (category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category.displayName(context)),
+                            ),
+                          )
+                          .toList(),
                       onChanged: _onCategoryChanged,
                       validator: (value) {
                         if (value == null) {
@@ -172,6 +187,7 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
                         return null;
                       },
                     ),
+
                     const SizedBox(height: AppSpacing.md),
 
                     ProductSearchField(
@@ -186,15 +202,9 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
                           : context.l10n.productSearchHint,
                       validationMessage: context.l10n.enterProductName,
                     ),
-                  ],
-                ),
-              ),
 
-              const SizedBox(height: AppSpacing.md),
+                    const SizedBox(height: AppSpacing.md),
 
-              AppCard(
-                child: Column(
-                  children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -215,14 +225,18 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
                           child: AppDropdown<QuantityUnit>(
                             value: _unit,
                             label: context.l10n.unit,
-                            items: QuantityUnit.values.map((unit) {
-                              return DropdownMenuItem(
-                                value: unit,
-                                child: Text(unit.displayName),
-                              );
-                            }).toList(),
+                            items: QuantityUnit.values
+                                .map(
+                                  (unit) => DropdownMenuItem(
+                                    value: unit,
+                                    child: Text(unit.displayName),
+                                  ),
+                                )
+                                .toList(),
                             onChanged: (value) {
-                              if (value == null) return;
+                              if (value == null) {
+                                return;
+                              }
 
                               setState(() {
                                 _unit = value;
@@ -232,8 +246,18 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: AppSpacing.md),
+                  ],
+                ),
+              ),
 
+              const SizedBox(height: AppSpacing.md),
+
+              _buildSectionCard(
+                context: context,
+                icon: Icons.location_on_outlined,
+                title: context.l10n.deliveryInformation,
+                child: Column(
+                  children: [
                     AppDateRangeField(
                       label: isBuyPost
                           ? context.l10n.requiredBetween
@@ -243,13 +267,14 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
                       value: _dateRange,
                       onSelect: _selectDateRange,
                     ),
+
                     const SizedBox(height: AppSpacing.md),
 
                     AppTextField(
                       controller: _locationController,
                       label: context.l10n.location,
                       hint: context.l10n.locationExample,
-                      prefixIcon: const Icon(Icons.location_on_outlined),
+                      prefixIcon: const Icon(Icons.place_outlined),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
                           return context.l10n.locationRequired;
@@ -264,82 +289,21 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
 
               const SizedBox(height: AppSpacing.md),
 
-              AppCard(
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          _showOptionalFields = !_showOptionalFields;
-                        });
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            _showOptionalFields
-                                ? Icons.remove_circle_outline
-                                : Icons.add_circle_outline,
-                          ),
-                          const SizedBox(width: AppSpacing.sm),
-                          Expanded(
-                            child: Text(
-                              context.l10n.moreInformationOptional,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
-                          ),
-                          Icon(
-                            _showOptionalFields
-                                ? Icons.keyboard_arrow_up
-                                : Icons.keyboard_arrow_down,
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (_showOptionalFields) ...[
-                      const SizedBox(height: AppSpacing.md),
-
-                      AppTextField(
-                        controller: _priceController,
-                        label: isBuyPost
-                            ? context.l10n.targetPriceOptional
-                            : context.l10n.expectedPriceOptional,
-                        keyboardType: const TextInputType.numberWithOptions(
-                          decimal: true,
-                        ),
-                        prefixIcon: const Icon(Icons.payments_outlined),
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-
-                      AppTextField(
-                        controller: _qualityController,
-                        label: context.l10n.qualityOptional,
-                        prefixIcon: const Icon(Icons.fact_check_outlined),
-                      ),
-                      const SizedBox(height: AppSpacing.md),
-
-                      AppTextField(
-                        controller: _descriptionController,
-                        label: context.l10n.descriptionOptional,
-                        prefixIcon: const Icon(Icons.notes_outlined),
-                        maxLines: 3,
-                      ),
-                    ],
-                  ],
-                ),
-              ),
+              _buildOptionalInformation(isBuyPost: isBuyPost),
 
               const SizedBox(height: AppSpacing.lg),
+
+              if (feedState.isOffline) ...[
+                _buildOfflineNotice(context),
+                const SizedBox(height: AppSpacing.md),
+              ],
 
               AppButton(
                 text: isEditing
                     ? context.l10n.saveChanges
                     : context.l10n.publishPost,
-                isLoading: isEditing
-                    ? feedState.isUpdating
-                    : feedState.isCreating,
-                onPressed: feedState.isCreating || feedState.isUpdating
-                    ? null
-                    : _submit,
+                isLoading: isSubmitting,
+                onPressed: isSubmitting || feedState.isOffline ? null : _submit,
               ),
             ],
           ),
@@ -349,26 +313,216 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   }
 
   Widget _buildPostTypeSelector() {
-    return SegmentedButton<PostType>(
-      segments: [
-        ButtonSegment(
-          value: PostType.buy,
-          label: Text(context.l10n.buy),
-          icon: const Icon(Icons.shopping_cart_outlined),
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+      ),
+      child: SegmentedButton<PostType>(
+        showSelectedIcon: false,
+        segments: [
+          ButtonSegment(
+            value: PostType.buy,
+            label: Text(context.l10n.buy),
+            icon: const Icon(Icons.shopping_bag_outlined),
+          ),
+          ButtonSegment(
+            value: PostType.sell,
+            label: Text(context.l10n.sell),
+            icon: const Icon(Icons.agriculture_outlined),
+          ),
+        ],
+        selected: {_postType},
+        style: ButtonStyle(
+          side: const WidgetStatePropertyAll(BorderSide.none),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppRadius.lg),
+            ),
+          ),
         ),
-        ButtonSegment(
-          value: PostType.sell,
-          label: Text(context.l10n.sell),
-          icon: const Icon(Icons.agriculture_outlined),
-        ),
-      ],
-      selected: {_postType},
-      showSelectedIcon: false,
-      onSelectionChanged: (values) {
-        setState(() {
-          _postType = values.first;
-        });
-      },
+        onSelectionChanged: (values) {
+          setState(() {
+            _postType = values.first;
+          });
+        },
+      ),
+    );
+  }
+
+  Widget _buildSectionCard({
+    required BuildContext context,
+    required IconData icon,
+    required String title,
+    required Widget child,
+  }) {
+    return AppCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  icon,
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          child,
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOptionalInformation({required bool isBuyPost}) {
+    return AppCard(
+      padding: EdgeInsets.zero,
+      child: Column(
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(AppRadius.lg),
+            onTap: () {
+              setState(() {
+                _showOptionalFields = !_showOptionalFields;
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              child: Row(
+                children: [
+                  Container(
+                    width: 42,
+                    height: 42,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      _showOptionalFields
+                          ? Icons.remove_rounded
+                          : Icons.add_rounded,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          context.l10n.moreInformationOptional,
+                          style: Theme.of(context).textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          context.l10n.optionalInformationHint,
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    _showOptionalFields
+                        ? Icons.keyboard_arrow_up_rounded
+                        : Icons.keyboard_arrow_down_rounded,
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          if (_showOptionalFields) ...[
+            const Divider(height: 1),
+
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              child: Column(
+                children: [
+                  AppTextField(
+                    controller: _priceController,
+                    label: isBuyPost
+                        ? context.l10n.targetPriceOptional
+                        : context.l10n.expectedPriceOptional,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    prefixIcon: const Icon(Icons.payments_outlined),
+                  ),
+
+                  const SizedBox(height: AppSpacing.md),
+
+                  AppTextField(
+                    controller: _qualityController,
+                    label: context.l10n.qualityOptional,
+                    prefixIcon: const Icon(Icons.fact_check_outlined),
+                  ),
+
+                  const SizedBox(height: AppSpacing.md),
+
+                  AppTextField(
+                    controller: _descriptionController,
+                    label: context.l10n.descriptionOptional,
+                    prefixIcon: const Icon(Icons.notes_outlined),
+                    maxLines: 4,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOfflineNotice(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.md),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.errorContainer,
+        borderRadius: BorderRadius.circular(AppRadius.md),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.cloud_off_outlined,
+            color: Theme.of(context).colorScheme.onErrorContainer,
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              context.l10n.offlineChangesUnavailable,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onErrorContainer,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -441,14 +595,20 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
               .updatePost(widget.existingPost!, params)
         : await ref.read(feedNotifierProvider.notifier).createPost(params);
 
-    if (!mounted) return;
+    if (!mounted) {
+      return;
+    }
 
     if (!success) {
       final error = ref.read(feedNotifierProvider).error;
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error ?? context.l10n.actionFailed)),
-      );
+      final message = error == 'offline_write_unavailable'
+          ? context.l10n.offlineChangesUnavailable
+          : context.l10n.actionFailed;
+
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(message)));
 
       return;
     }
@@ -480,5 +640,13 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
     final text = value.trim();
 
     return text.isEmpty ? null : text;
+  }
+
+  String _formatNumber(double value) {
+    if (value == value.roundToDouble()) {
+      return value.toInt().toString();
+    }
+
+    return value.toString();
   }
 }

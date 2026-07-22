@@ -393,4 +393,25 @@ class AppLocalizationsBn extends AppLocalizations {
   String daysAgo(int count) {
     return '$count দিন আগে';
   }
+
+  @override
+  String get productInformation => 'পণ্যের তথ্য';
+
+  @override
+  String get deliveryInformation => 'সময় ও জায়গা';
+
+  @override
+  String get optionalInformationHint => 'দাম, মান ও বিস্তারিত চাইলে যোগ করুন';
+
+  @override
+  String get loginToAccount => 'আপনার অ্যাকাউন্টে লগইন করুন';
+
+  @override
+  String get loginAccountMessage => 'কৃষিপণ্য কেনা-বেচা চালিয়ে যেতে আপনার তথ্য দিন';
+
+  @override
+  String get loginWelcomeMessage => 'কৃষক ও ক্রেতার সরাসরি যোগাযোগ';
+
+  @override
+  String get noAccountYet => 'নতুন ব্যবহারকারী?';
 }

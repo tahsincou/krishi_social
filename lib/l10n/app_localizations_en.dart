@@ -393,4 +393,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String daysAgo(int count) {
     return '${count}d ago';
   }
+
+  @override
+  String get productInformation => 'Product Information';
+
+  @override
+  String get deliveryInformation => 'Availability & Location';
+
+  @override
+  String get optionalInformationHint => 'Price, quality and description';
+
+  @override
+  String get loginToAccount => 'Login to your account';
+
+  @override
+  String get loginAccountMessage => 'Enter your details to continue buying and selling agricultural products.';
+
+  @override
+  String get loginWelcomeMessage => 'Farmers and buyers, connected directly.';
+
+  @override
+  String get noAccountYet => 'New here?';
 }

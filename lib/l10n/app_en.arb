@@ -171,7 +171,15 @@
       "type": "int"
     }
   }
-}
+},
+"productInformation": "Product Information",
+"deliveryInformation": "Availability & Location",
+"optionalInformationHint": "Price, quality and description",
+
+"loginToAccount": "Login to your account",
+"loginAccountMessage": "Enter your details to continue buying and selling agricultural products.",
+"loginWelcomeMessage": "Farmers and buyers, connected directly.",
+"noAccountYet": "New here?"
 
 
 }

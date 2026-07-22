@@ -149,6 +149,29 @@
       "phone": "01700000002",
       "status": "active",
       "createdAt": "2026-07-23T02:02:42.773"
+    },
+    {
+      "userId": "user-1",
+      "userName": "Rahman Traders",
+      "userImageUrl": null,
+      "isUserReviewed": true,
+      "type": "buy",
+      "category": "fruits",
+      "productName": "Banana",
+      "quantity": 10,
+      "unit": "kg",
+      "availableFrom": "2026-07-24T00:00:00.000",
+      "availableTo": "2026-08-01T00:00:00.000",
+      "district": "Narayanganj",
+      "upazila": "",
+      "pricePerUnit": null,
+      "qualityRequirement": null,
+      "description": null,
+      "imageUrl": null,
+      "phone": "01700000002",
+      "status": "active",
+      "createdAt": "2026-07-23T03:07:16.195",
+      "id": "FjaJioq"
     }
   ]
 }
