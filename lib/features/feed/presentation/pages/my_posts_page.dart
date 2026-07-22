@@ -46,6 +46,7 @@ class MyPostsPage extends ConsumerWidget {
                 return _MyPostItem(
                   post: post,
                   isUpdating: feedState.isUpdating,
+                  isOffline: feedState.isOffline,
                   onClose: () => _closePost(context, ref, post),
                   onDelete: () => _confirmDelete(context, ref, post),
                   onEdit: () {
@@ -131,14 +132,35 @@ class _MyPostItem extends StatelessWidget {
     required this.onEdit,
     required this.onClose,
     required this.onDelete,
+    required this.isOffline,
   });
 
   final VoidCallback onEdit;
 
   final AgriculturePost post;
   final bool isUpdating;
+  final bool isOffline;
   final VoidCallback onClose;
   final VoidCallback onDelete;
+
+  void _showOfflineMessage(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(context.l10n.offlineChangesUnavailable)),
+    );
+  }
+
+  void _handleAction({
+    required BuildContext context,
+    required bool isOffline,
+    required VoidCallback action,
+  }) {
+    if (isOffline) {
+      _showOfflineMessage(context);
+      return;
+    }
+
+    action();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -158,18 +180,42 @@ class _MyPostItem extends StatelessWidget {
               ),
               const Spacer(),
               IconButton(
-                onPressed: isUpdating ? null : onEdit,
+                onPressed: isUpdating
+                    ? null
+                    : () {
+                        _handleAction(
+                          context: context,
+                          isOffline: isOffline,
+                          action: onEdit,
+                        );
+                      },
                 tooltip: context.l10n.editPost,
                 icon: const Icon(Icons.edit_outlined),
               ),
               if (!isClosed)
                 TextButton.icon(
-                  onPressed: isUpdating ? null : onClose,
+                  onPressed: isUpdating
+                      ? null
+                      : () {
+                          _handleAction(
+                            context: context,
+                            isOffline: isOffline,
+                            action: onClose,
+                          );
+                        },
                   icon: const Icon(Icons.check_circle_outline),
                   label: Text(context.l10n.closePost),
                 ),
               IconButton(
-                onPressed: isUpdating ? null : onDelete,
+                onPressed: isUpdating
+                    ? null
+                    : () {
+                        _handleAction(
+                          context: context,
+                          isOffline: isOffline,
+                          action: onDelete,
+                        );
+                      },
                 tooltip: context.l10n.delete,
                 icon: const Icon(Icons.delete_outline),
               ),

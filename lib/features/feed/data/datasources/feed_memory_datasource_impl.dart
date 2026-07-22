@@ -13,4 +13,24 @@ class FeedMemoryDataSourceImpl implements FeedLocalDataSource {
   Future<void> replacePosts(List<AgriculturalPostModel> posts) async {
     _posts = List<AgriculturalPostModel>.from(posts);
   }
+
+  @override
+  Future<void> savePost(AgriculturalPostModel post) async {
+    final index = _posts.indexWhere((item) => item.id == post.id);
+
+    if (index == -1) {
+      _posts = [post, ..._posts];
+      return;
+    }
+
+    final updatedPosts = List<AgriculturalPostModel>.from(_posts);
+
+    updatedPosts[index] = post;
+    _posts = updatedPosts;
+  }
+
+  @override
+  Future<void> deletePost(String postId) async {
+    _posts = _posts.where((post) => post.id != postId).toList();
+  }
 }

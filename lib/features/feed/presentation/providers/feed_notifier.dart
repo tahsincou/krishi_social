@@ -75,6 +75,9 @@ class FeedNotifier extends StateNotifier<FeedState> {
   }
 
   Future<bool> createPost(CreateAgriculturalPostParams params) async {
+    if (!_canWrite()) {
+      return false;
+    }
     state = state.copyWith(isCreating: true, clearError: true);
 
     try {
@@ -113,11 +116,14 @@ class FeedNotifier extends StateNotifier<FeedState> {
         createdAt: DateTime.now(),
       );
 
-      await ref.read(createPostUseCaseProvider)(post);
+      final createdPost = await ref.read(createPostUseCaseProvider)(post);
 
-      state = state.copyWith(isCreating: false);
-
-      await refreshPosts();
+      state = state.copyWith(
+        isCreating: false,
+        posts: [createdPost, ...state.posts],
+        isOffline: false,
+        clearError: true,
+      );
 
       return true;
     } catch (error, stackTrace) {
@@ -134,6 +140,9 @@ class FeedNotifier extends StateNotifier<FeedState> {
     AgriculturePost existingPost,
     CreateAgriculturalPostParams params,
   ) async {
+    if (!_canWrite()) {
+      return false;
+    }
     state = state.copyWith(isUpdating: true, clearError: true);
 
     try {
@@ -152,11 +161,18 @@ class FeedNotifier extends StateNotifier<FeedState> {
         description: params.description,
       );
 
-      await ref.read(updatePostUseCaseProvider)(updatedPost);
+      final savedPost = await ref.read(updatePostUseCaseProvider)(updatedPost);
 
-      state = state.copyWith(isUpdating: false);
+      final posts = state.posts.map((post) {
+        return post.id == savedPost.id ? savedPost : post;
+      }).toList();
 
-      await refreshPosts();
+      state = state.copyWith(
+        isUpdating: false,
+        posts: posts,
+        isOffline: false,
+        clearError: true,
+      );
 
       return true;
     } catch (error) {
@@ -167,16 +183,26 @@ class FeedNotifier extends StateNotifier<FeedState> {
   }
 
   Future<bool> closePost(AgriculturePost post) async {
+    if (!_canWrite()) {
+      return false;
+    }
     state = state.copyWith(isUpdating: true, clearError: true);
 
     try {
-      await ref.read(updatePostUseCaseProvider)(
+      final savedPost = await ref.read(updatePostUseCaseProvider)(
         post.copyWith(status: PostStatus.closed),
       );
 
-      state = state.copyWith(isUpdating: false);
+      final posts = state.posts.map((item) {
+        return item.id == savedPost.id ? savedPost : item;
+      }).toList();
 
-      await refreshPosts();
+      state = state.copyWith(
+        isUpdating: false,
+        posts: posts,
+        isOffline: false,
+        clearError: true,
+      );
 
       return true;
     } catch (error) {
@@ -187,14 +213,20 @@ class FeedNotifier extends StateNotifier<FeedState> {
   }
 
   Future<bool> deletePost(String postId) async {
+    if (!_canWrite()) {
+      return false;
+    }
     state = state.copyWith(isUpdating: true, clearError: true);
 
     try {
       await ref.read(deletePostUseCaseProvider)(postId);
 
-      state = state.copyWith(isUpdating: false);
-
-      await refreshPosts();
+      state = state.copyWith(
+        isUpdating: false,
+        posts: state.posts.where((post) => post.id != postId).toList(),
+        isOffline: false,
+        clearError: true,
+      );
 
       return true;
     } catch (error) {
@@ -219,5 +251,15 @@ class FeedNotifier extends StateNotifier<FeedState> {
     }
 
     state = state.copyWith(selectedCategory: category);
+  }
+
+  bool _canWrite() {
+    if (!state.isOffline) {
+      return true;
+    }
+
+    state = state.copyWith(error: 'offline_write_unavailable');
+
+    return false;
   }
 }

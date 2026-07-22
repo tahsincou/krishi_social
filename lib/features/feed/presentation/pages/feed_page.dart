@@ -27,6 +27,12 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     super.dispose();
   }
 
+  void _showOfflineMessage(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(context.l10n.offlineChangesUnavailable)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final feedState = ref.watch(feedNotifierProvider);
@@ -168,15 +174,21 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         ),
         floatingActionButton: Builder(
           builder: (context) {
-            return FloatingActionButton(
+            return FloatingActionButton.extended(
               onPressed: () {
+                if (feedState.isOffline) {
+                  _showOfflineMessage(context);
+                  return;
+                }
+
                 final tabIndex = DefaultTabController.of(context).index;
 
                 final type = tabIndex == 0 ? PostType.buy : PostType.sell;
 
                 context.push('/create-post', extra: type);
               },
-              child: Icon(Icons.add),
+              icon: const Icon(Icons.add),
+              label: Text(context.l10n.createPost),
             );
           },
         ),

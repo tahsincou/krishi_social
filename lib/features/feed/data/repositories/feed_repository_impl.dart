@@ -19,24 +19,37 @@ class FeedRepositoryImpl implements FeedRepository {
   Future<List<AgriculturePost>> refreshPosts() async {
     final posts = await remote.getPosts();
 
-    // Cache only confirmed server data.
     await local.replacePosts(posts);
 
     return posts;
   }
 
   @override
-  Future<AgriculturePost> createPost(AgriculturePost post) {
-    return remote.createPost(AgriculturalPostModel.fromEntity(post));
+  Future<AgriculturePost> createPost(AgriculturePost post) async {
+    final createdPost = await remote.createPost(
+      AgriculturalPostModel.fromEntity(post),
+    );
+
+    await local.savePost(createdPost);
+
+    return createdPost;
   }
 
   @override
-  Future<AgriculturePost> updatePost(AgriculturePost post) {
-    return remote.updatePost(AgriculturalPostModel.fromEntity(post));
+  Future<AgriculturePost> updatePost(AgriculturePost post) async {
+    final updatedPost = await remote.updatePost(
+      AgriculturalPostModel.fromEntity(post),
+    );
+
+    await local.savePost(updatedPost);
+
+    return updatedPost;
   }
 
   @override
-  Future<void> deletePost(String postId) {
-    return remote.deletePost(postId);
+  Future<void> deletePost(String postId) async {
+    await remote.deletePost(postId);
+
+    await local.deletePost(postId);
   }
 }

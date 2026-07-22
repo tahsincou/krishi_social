@@ -366,4 +366,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get offline => 'Offline';
+
+  @override
+  String get offlineChangesUnavailable => 'Connect to the internet to make changes.';
 }

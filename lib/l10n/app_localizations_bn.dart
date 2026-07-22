@@ -366,4 +366,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get offline => 'অফলাইন';
+
+  @override
+  String get offlineChangesUnavailable => 'পোস্টে পরিবর্তন করতে ইন্টারনেট চালু করুন।';
 }

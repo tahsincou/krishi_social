@@ -143,6 +143,8 @@
 "saveChanges": "পরিবর্তন সংরক্ষণ",
 "postUpdated": "পোস্ট আপডেট হয়েছে",
 
-"offline": "অফলাইন"
+"offline": "অফলাইন",
+
+"offlineChangesUnavailable": "পোস্টে পরিবর্তন করতে ইন্টারনেট চালু করুন।"
 
 }

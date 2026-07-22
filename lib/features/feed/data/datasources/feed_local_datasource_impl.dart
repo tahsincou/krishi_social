@@ -40,4 +40,26 @@ class FeedLocalDataSourceImpl implements FeedLocalDataSource {
       await batch.commit(noResult: true);
     });
   }
+
+  @override
+  Future<void> savePost(AgriculturalPostModel post) async {
+    final database = await databaseHelper.database;
+
+    await database.insert(
+      'agricultural_posts',
+      post.toDatabase(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  @override
+  Future<void> deletePost(String postId) async {
+    final database = await databaseHelper.database;
+
+    await database.delete(
+      'agricultural_posts',
+      where: 'id = ?',
+      whereArgs: [postId],
+    );
+  }
 }

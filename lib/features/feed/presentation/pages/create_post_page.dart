@@ -111,14 +111,9 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   @override
   Widget build(BuildContext context) {
     final isBuyPost = _postType == PostType.buy;
-    final feedState = ref.watch(feedNotifierProvider);
     final isEditing = widget.isEditing;
     final authState = ref.watch(authNotifierProvider);
-
-    debugPrint(
-      'Create post auth status: ${authState.status}, '
-      'user=${authState.user?.id}',
-    );
+    final feedState = ref.read(feedNotifierProvider);
 
     if (authState.status == AuthStatus.initial ||
         authState.status == AuthStatus.restoring) {

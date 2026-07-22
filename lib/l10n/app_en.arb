@@ -142,7 +142,9 @@
 "saveChanges": "Save Changes",
 "postUpdated": "Post updated",
 
-"offline": "Offline"
+"offline": "Offline",
+
+"offlineChangesUnavailable": "Connect to the internet to make changes."
 
 
 }

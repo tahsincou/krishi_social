@@ -808,6 +808,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Offline'**
   String get offline;
+
+  /// No description provided for @offlineChangesUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect to the internet to make changes.'**
+  String get offlineChangesUnavailable;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
