@@ -205,7 +205,59 @@
 "closedPostsWillAppearHere": "Posts you close will appear here",
 
 "buyPosts": "Buy Posts",
-"sellPosts": "Sell Posts"
+"sellPosts": "Sell Posts",
+
+"whatDoYouWantToBuy": "What do you want to buy?",
+"whatDoYouWantToSell": "What do you want to sell?",
+"buyAndSellPosts": "Buy and sell posts",
+
+"findBuyPostsMessage": "Search products, locations or browse categories.",
+"findSellPostsMessage": "Find the right category and publish your product.",
+"findBuyAndSellPostsMessage": "Browse or create agricultural marketplace posts.",
+
+"buyPostResults": "{count} buy posts found",
+"@buyPostResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"sellPostResults": "{count} sell posts found",
+"@sellPostResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"postResults": "{count} posts found",
+"@postResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"buyAndSellResultSummary": "{buyCount} buy posts • {sellCount} sell posts",
+"@buyAndSellResultSummary": {
+  "placeholders": {
+    "buyCount": {
+      "type": "int"
+    },
+    "sellCount": {
+      "type": "int"
+    }
+  }
+},
+
+"latestFirst": "Latest first",
+
+"findSellOffersMessage": "Find products offered by farmers and sellers.",
+"findBuyRequestsMessage": "Find buyers looking for agricultural products."
 
 
 }

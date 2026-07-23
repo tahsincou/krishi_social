@@ -206,6 +206,58 @@
 "closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে দেখা যাবে",
 
 "buyPosts": "কেনার পোস্ট",
-"sellPosts": "বেচার পোস্ট"
+"sellPosts": "বেচার পোস্ট",
+
+"whatDoYouWantToBuy": "কী কিনতে চান?",
+"whatDoYouWantToSell": "কী বিক্রি করতে চান?",
+"buyAndSellPosts": "কেনা-বেচার পোস্ট",
+
+"findBuyPostsMessage": "পণ্য বা এলাকার নাম লিখুন, অথবা ক্যাটাগরি বাছুন।",
+"findSellPostsMessage": "ক্যাটাগরি বেছে আপনার পণ্যের পোস্ট করুন।",
+"findBuyAndSellPostsMessage": "কেনা-বেচার পোস্ট খুঁজুন অথবা নতুন পোস্ট করুন।",
+
+"buyPostResults": "{count}টি কেনার পোস্ট পাওয়া গেছে",
+"@buyPostResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"sellPostResults": "{count}টি বিক্রির পোস্ট পাওয়া গেছে",
+"@sellPostResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"postResults": "{count}টি পোস্ট পাওয়া গেছে",
+"@postResults": {
+  "placeholders": {
+    "count": {
+      "type": "int"
+    }
+  }
+},
+
+"buyAndSellResultSummary": "কেনার পোস্ট {buyCount}টি • বিক্রির পোস্ট {sellCount}টি",
+"@buyAndSellResultSummary": {
+  "placeholders": {
+    "buyCount": {
+      "type": "int"
+    },
+    "sellCount": {
+      "type": "int"
+    }
+  }
+},
+
+"latestFirst": "নতুন পোস্ট আগে",
+
+"findSellOffersMessage": "কৃষক ও বিক্রেতাদের পণ্য খুঁজুন।",
+"findBuyRequestsMessage": "যেসব ক্রেতা কৃষিপণ্য খুঁজছেন তাদের পোস্ট দেখুন।"
 
 }

@@ -952,6 +952,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sell Posts'**
   String get sellPosts;
+
+  /// No description provided for @whatDoYouWantToBuy.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you want to buy?'**
+  String get whatDoYouWantToBuy;
+
+  /// No description provided for @whatDoYouWantToSell.
+  ///
+  /// In en, this message translates to:
+  /// **'What do you want to sell?'**
+  String get whatDoYouWantToSell;
+
+  /// No description provided for @buyAndSellPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy and sell posts'**
+  String get buyAndSellPosts;
+
+  /// No description provided for @findBuyPostsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products, locations or browse categories.'**
+  String get findBuyPostsMessage;
+
+  /// No description provided for @findSellPostsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Find the right category and publish your product.'**
+  String get findSellPostsMessage;
+
+  /// No description provided for @findBuyAndSellPostsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse or create agricultural marketplace posts.'**
+  String get findBuyAndSellPostsMessage;
+
+  /// No description provided for @buyPostResults.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} buy posts found'**
+  String buyPostResults(int count);
+
+  /// No description provided for @sellPostResults.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sell posts found'**
+  String sellPostResults(int count);
+
+  /// No description provided for @postResults.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} posts found'**
+  String postResults(int count);
+
+  /// No description provided for @buyAndSellResultSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{buyCount} buy posts • {sellCount} sell posts'**
+  String buyAndSellResultSummary(int buyCount, int sellCount);
+
+  /// No description provided for @latestFirst.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest first'**
+  String get latestFirst;
+
+  /// No description provided for @findSellOffersMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Find products offered by farmers and sellers.'**
+  String get findSellOffersMessage;
+
+  /// No description provided for @findBuyRequestsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Find buyers looking for agricultural products.'**
+  String get findBuyRequestsMessage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

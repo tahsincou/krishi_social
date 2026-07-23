@@ -12,6 +12,9 @@ import 'package:krishi_social/features/feed/domain/extensions/feed_extension.dar
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_state.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_list.dart';
+import 'package:krishi_social/shared/theme/app_colors.dart';
+import 'package:krishi_social/shared/theme/app_radius.dart';
+import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_drawer.dart';
 import 'package:krishi_social/shared/widgets/app_empty.dart';
 import 'package:krishi_social/shared/widgets/app_loading.dart';
@@ -36,7 +39,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
     final feedState = ref.watch(feedNotifierProvider);
-
     final user = authState.user;
 
     if (user == null) {
@@ -47,7 +49,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     final showBothTabs = activity == AccountActivity.both;
 
     final buyPosts = feedState.postsByType(PostType.buy);
-
     final sellPosts = feedState.postsByType(PostType.sell);
 
     if (showBothTabs) {
@@ -79,50 +80,50 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     required List<AgriculturePost> sellPosts,
     required bool showTabs,
   }) {
-    final visiblePosts = activity == AccountActivity.sell
-        ? sellPosts
-        : buyPosts;
+    final visiblePosts = activity == AccountActivity.buy ? sellPosts : buyPosts;
 
     return Scaffold(
       drawer: const AppDrawer(),
-
       appBar: AppBar(
-        title: Text(_feedTitle(activity)),
-        bottom: showTabs
-            ? TabBar(
-                tabs: [
-                  Tab(
-                    icon: const Icon(Icons.shopping_cart_outlined),
-                    text: context.l10n.buy,
-                  ),
-                  Tab(
-                    icon: const Icon(Icons.agriculture_outlined),
-                    text: context.l10n.sell,
-                  ),
-                ],
-              )
-            : null,
+        title: Text(context.l10n.appName),
         actions: [
           if (feedState.isOffline)
             Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: Chip(
-                avatar: const Icon(Icons.cloud_off_outlined, size: 18),
-                label: Text(context.l10n.offline),
-              ),
+              padding: const EdgeInsets.only(right: AppSpacing.md),
+              child: Center(child: _OfflineBadge(label: context.l10n.offline)),
             ),
         ],
       ),
-
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildCategoryFilters(feedState),
+          _buildIntroduction(activity),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.md),
+
+          if (showTabs) ...[
+            _buildPostTypeTabs(),
+            const SizedBox(height: AppSpacing.md),
+          ],
 
           _buildSearchField(feedState),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: AppSpacing.md),
+
+          _buildCategoryFilters(feedState),
+
+          const SizedBox(height: AppSpacing.md),
+
+          if (!showTabs)
+            _buildResultSummary(count: visiblePosts.length, activity: activity),
+
+          if (showTabs)
+            _BothRoleResultSummary(
+              buyCount: buyPosts.length,
+              sellCount: sellPosts.length,
+            ),
+
+          const SizedBox(height: AppSpacing.sm),
 
           Expanded(
             child: _buildFeedContent(
@@ -135,7 +136,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
           ),
         ],
       ),
-
       floatingActionButton: Builder(
         builder: (tabContext) {
           return FloatingActionButton.extended(
@@ -154,24 +154,114 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     );
   }
 
+  Widget _buildIntroduction(AccountActivity activity) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.md,
+        AppSpacing.sm,
+        AppSpacing.md,
+        0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _pageHeading(activity),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            _pageSupportingText(activity),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPostTypeTabs() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      child: Container(
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+        ),
+        child: TabBar(
+          indicatorSize: TabBarIndicatorSize.tab,
+          dividerColor: Colors.transparent,
+          indicator: BoxDecoration(
+            color: Theme.of(context).colorScheme.primary,
+            borderRadius: BorderRadius.circular(AppRadius.pill),
+          ),
+          labelColor: Theme.of(context).colorScheme.onPrimary,
+          unselectedLabelColor: Theme.of(context).colorScheme.onSurfaceVariant,
+          tabs: [
+            Tab(
+              icon: const Icon(Icons.shopping_cart_outlined, size: 19),
+              text: context.l10n.buy,
+            ),
+            Tab(
+              icon: const Icon(Icons.agriculture_outlined, size: 19),
+              text: context.l10n.sell,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchField(FeedState feedState) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      child: TextField(
+        controller: _searchController,
+        textInputAction: TextInputAction.search,
+        onChanged: (value) {
+          ref.read(feedNotifierProvider.notifier).updateSearch(value);
+        },
+        decoration: InputDecoration(
+          hintText: context.l10n.searchProductOrLocation,
+          prefixIcon: const Icon(Icons.search_rounded),
+          suffixIcon: feedState.searchQuery.isEmpty
+              ? null
+              : IconButton(
+                  onPressed: () {
+                    _searchController.clear();
+
+                    ref.read(feedNotifierProvider.notifier).clearSearch();
+                  },
+                  icon: const Icon(Icons.close_rounded),
+                ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildCategoryFilters(FeedState feedState) {
     return SizedBox(
-      height: 48,
+      height: 46,
       child: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
         scrollDirection: Axis.horizontal,
         children: [
           ChoiceChip(
+            avatar: const Icon(Icons.grid_view_rounded, size: 17),
             label: Text(context.l10n.all),
             selected: feedState.selectedCategory == null,
             onSelected: (_) {
               ref.read(feedNotifierProvider.notifier).selectCategory(null);
             },
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: AppSpacing.sm),
           ...ProductCategory.values.map((category) {
             return Padding(
-              padding: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.only(right: AppSpacing.sm),
               child: ChoiceChip(
                 label: Text(category.displayName(context)),
                 selected: feedState.selectedCategory == category,
@@ -188,28 +278,30 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     );
   }
 
-  Widget _buildSearchField(FeedState feedState) {
+  Widget _buildResultSummary({
+    required int count,
+    required AccountActivity activity,
+  }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: TextField(
-        controller: _searchController,
-        onChanged: (value) {
-          ref.read(feedNotifierProvider.notifier).updateSearch(value);
-        },
-        decoration: InputDecoration(
-          hintText: context.l10n.searchProductOrLocation,
-          prefixIcon: const Icon(Icons.search),
-          suffixIcon: feedState.searchQuery.isNotEmpty
-              ? IconButton(
-                  onPressed: () {
-                    _searchController.clear();
-
-                    ref.read(feedNotifierProvider.notifier).clearSearch();
-                  },
-                  icon: const Icon(Icons.clear),
-                )
-              : null,
-        ),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              _resultText(count: count, activity: activity),
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+            ),
+          ),
+          if (count > 0)
+            Text(
+              context.l10n.latestFirst,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+        ],
       ),
     );
   }
@@ -277,16 +369,42 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     context.push('/create-post', extra: postType);
   }
 
-  String _feedTitle(AccountActivity activity) {
+  String _pageHeading(AccountActivity activity) {
     switch (activity) {
       case AccountActivity.buy:
-        return context.l10n.buyPosts;
+        return context.l10n.whatDoYouWantToBuy;
 
       case AccountActivity.sell:
-        return context.l10n.sellPosts;
+        return context.l10n.whatDoYouWantToSell;
 
       case AccountActivity.both:
-        return context.l10n.appName;
+        return context.l10n.buyAndSellPosts;
+    }
+  }
+
+  String _pageSupportingText(AccountActivity activity) {
+    switch (activity) {
+      case AccountActivity.buy:
+        return context.l10n.findSellOffersMessage;
+
+      case AccountActivity.sell:
+        return context.l10n.findBuyRequestsMessage;
+
+      case AccountActivity.both:
+        return context.l10n.findBuyAndSellPostsMessage;
+    }
+  }
+
+  String _resultText({required int count, required AccountActivity activity}) {
+    switch (activity) {
+      case AccountActivity.buy:
+        return context.l10n.sellPostResults(count);
+
+      case AccountActivity.sell:
+        return context.l10n.buyPostResults(count);
+
+      case AccountActivity.both:
+        return context.l10n.postResults(count);
     }
   }
 
@@ -301,5 +419,67 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       case AccountActivity.both:
         return context.l10n.createPost;
     }
+  }
+}
+
+class _BothRoleResultSummary extends StatelessWidget {
+  const _BothRoleResultSummary({
+    required this.buyCount,
+    required this.sellCount,
+  });
+
+  final int buyCount;
+  final int sellCount;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      child: Text(
+        context.l10n.buyAndSellResultSummary(buyCount, sellCount),
+        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+          color: Theme.of(context).colorScheme.onSurfaceVariant,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
+}
+
+class _OfflineBadge extends StatelessWidget {
+  const _OfflineBadge({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: 6,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.accentSoft,
+        borderRadius: BorderRadius.circular(AppRadius.pill),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.cloud_off_outlined,
+            size: 16,
+            color: AppColors.accentDark,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: AppColors.accentDark,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -448,4 +448,51 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get sellPosts => 'বেচার পোস্ট';
+
+  @override
+  String get whatDoYouWantToBuy => 'কী কিনতে চান?';
+
+  @override
+  String get whatDoYouWantToSell => 'কী বিক্রি করতে চান?';
+
+  @override
+  String get buyAndSellPosts => 'কেনা-বেচার পোস্ট';
+
+  @override
+  String get findBuyPostsMessage => 'পণ্য বা এলাকার নাম লিখুন, অথবা ক্যাটাগরি বাছুন।';
+
+  @override
+  String get findSellPostsMessage => 'ক্যাটাগরি বেছে আপনার পণ্যের পোস্ট করুন।';
+
+  @override
+  String get findBuyAndSellPostsMessage => 'কেনা-বেচার পোস্ট খুঁজুন অথবা নতুন পোস্ট করুন।';
+
+  @override
+  String buyPostResults(int count) {
+    return '$countটি কেনার পোস্ট পাওয়া গেছে';
+  }
+
+  @override
+  String sellPostResults(int count) {
+    return '$countটি বিক্রির পোস্ট পাওয়া গেছে';
+  }
+
+  @override
+  String postResults(int count) {
+    return '$countটি পোস্ট পাওয়া গেছে';
+  }
+
+  @override
+  String buyAndSellResultSummary(int buyCount, int sellCount) {
+    return 'কেনার পোস্ট $buyCountটি • বিক্রির পোস্ট $sellCountটি';
+  }
+
+  @override
+  String get latestFirst => 'নতুন পোস্ট আগে';
+
+  @override
+  String get findSellOffersMessage => 'কৃষক ও বিক্রেতাদের পণ্য খুঁজুন।';
+
+  @override
+  String get findBuyRequestsMessage => 'যেসব ক্রেতা কৃষিপণ্য খুঁজছেন তাদের পোস্ট দেখুন।';
 }

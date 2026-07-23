@@ -448,4 +448,51 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sellPosts => 'Sell Posts';
+
+  @override
+  String get whatDoYouWantToBuy => 'What do you want to buy?';
+
+  @override
+  String get whatDoYouWantToSell => 'What do you want to sell?';
+
+  @override
+  String get buyAndSellPosts => 'Buy and sell posts';
+
+  @override
+  String get findBuyPostsMessage => 'Search products, locations or browse categories.';
+
+  @override
+  String get findSellPostsMessage => 'Find the right category and publish your product.';
+
+  @override
+  String get findBuyAndSellPostsMessage => 'Browse or create agricultural marketplace posts.';
+
+  @override
+  String buyPostResults(int count) {
+    return '$count buy posts found';
+  }
+
+  @override
+  String sellPostResults(int count) {
+    return '$count sell posts found';
+  }
+
+  @override
+  String postResults(int count) {
+    return '$count posts found';
+  }
+
+  @override
+  String buyAndSellResultSummary(int buyCount, int sellCount) {
+    return '$buyCount buy posts • $sellCount sell posts';
+  }
+
+  @override
+  String get latestFirst => 'Latest first';
+
+  @override
+  String get findSellOffersMessage => 'Find products offered by farmers and sellers.';
+
+  @override
+  String get findBuyRequestsMessage => 'Find buyers looking for agricultural products.';
 }
