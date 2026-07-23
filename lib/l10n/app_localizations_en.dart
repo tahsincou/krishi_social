@@ -519,4 +519,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get callBuyer => 'Call Buyer';
+
+  @override
+  String get home => 'Home';
 }

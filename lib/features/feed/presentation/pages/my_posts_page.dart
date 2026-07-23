@@ -57,7 +57,7 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
         ? activePosts
         : closedPosts;
 
-    String _pageTitle(AccountActivity activity) {
+    String pageTitle(AccountActivity activity) {
       switch (activity) {
         case AccountActivity.buy:
           return context.l10n.myBuyRequests;
@@ -72,7 +72,7 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_pageTitle(activity)),
+        title: Text(pageTitle(activity)),
         actions: [
           if (feedState.isOffline)
             Padding(
@@ -103,53 +103,6 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildStatusSelector({
-    required int activeCount,
-    required int closedCount,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.md,
-        vertical: AppSpacing.sm,
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          borderRadius: BorderRadius.circular(AppRadius.pill),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: _StatusTab(
-                label: context.l10n.active,
-                count: activeCount,
-                isSelected: _selectedStatus == PostStatus.active,
-                onTap: () {
-                  setState(() {
-                    _selectedStatus = PostStatus.active;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: _StatusTab(
-                label: context.l10n.closed,
-                count: closedCount,
-                isSelected: _selectedStatus == PostStatus.closed,
-                onTap: () {
-                  setState(() {
-                    _selectedStatus = PostStatus.closed;
-                  });
-                },
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

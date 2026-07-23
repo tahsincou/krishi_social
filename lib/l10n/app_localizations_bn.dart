@@ -519,4 +519,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get callBuyer => 'ক্রেতাকে কল';
+
+  @override
+  String get home => 'হোম';
 }

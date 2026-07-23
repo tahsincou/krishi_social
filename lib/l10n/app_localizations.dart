@@ -1078,6 +1078,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call Buyer'**
   String get callBuyer;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

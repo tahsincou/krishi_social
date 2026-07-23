@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
@@ -210,53 +209,6 @@ class _PostTypeBadge extends StatelessWidget {
           color: foregroundColor,
           fontWeight: FontWeight.w800,
         ),
-      ),
-    );
-  }
-}
-
-class _InformationPill extends StatelessWidget {
-  const _InformationPill({
-    required this.icon,
-    required this.text,
-    this.backgroundColor,
-    this.foregroundColor,
-  });
-
-  final IconData icon;
-  final String text;
-  final Color? backgroundColor;
-  final Color? foregroundColor;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    final resolvedForegroundColor =
-        foregroundColor ?? colorScheme.onSurfaceVariant;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: 8,
-      ),
-      decoration: BoxDecoration(
-        color: backgroundColor ?? colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: resolvedForegroundColor),
-          const SizedBox(width: 6),
-          Text(
-            text,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: resolvedForegroundColor,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }
