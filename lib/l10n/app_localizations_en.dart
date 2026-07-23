@@ -9,7 +9,22 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'Krishi Media';
+  String get appName => 'Krishi Social';
+
+  @override
+  String get contact => 'Call';
+
+  @override
+  String get buy => 'Buy Request';
+
+  @override
+  String get sell => 'Sell Offer';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get closed => 'Closed';
 
   @override
   String get login => 'Login';
@@ -43,12 +58,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
-
-  @override
-  String get buy => 'Buy';
-
-  @override
-  String get sell => 'Sell';
 
   @override
   String get all => 'All';
@@ -109,9 +118,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get quality => 'Quality';
-
-  @override
-  String get contact => 'Contact';
 
   @override
   String get reviewedBuyer => 'Reviewed Buyer';
@@ -270,12 +276,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionFailed => 'Could not complete the action';
-
-  @override
-  String get active => 'Active';
-
-  @override
-  String get closed => 'Closed';
 
   @override
   String get createAccount => 'Create Account';

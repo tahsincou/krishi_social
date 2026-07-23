@@ -1,7 +1,12 @@
 {
 "@@locale": "en",
 
-"appName": "Krishi Media",
+"appName": "Krishi Social",
+"contact": "Call",
+"buy": "Buy Request",
+"sell": "Sell Offer",
+"active": "Active",
+"closed": "Closed",
 
 "login": "Login",
 "dashboard": "Dashboard",
@@ -17,8 +22,7 @@
 "dark": "Dark",
 "language": "Language",
 
-"buy": "Buy",
-"sell": "Sell",
+
 "all": "All",
 
 "searchProductOrLocation": "Search product or location",
@@ -43,7 +47,6 @@
 "available": "Available",
 "price": "Price",
 "quality": "Quality",
-"contact": "Contact",
 
 "reviewedBuyer": "Reviewed Buyer",
 "newBuyer": "New Buyer",
@@ -107,8 +110,6 @@
 "deletePostConfirmation": "Are you sure you want to delete this post?",
 "postDeleted": "Post deleted",
 "actionFailed": "Could not complete the action",
-"active": "Active",
-"closed": "Closed",
 
 
 "createAccount": "Create Account",
@@ -269,6 +270,8 @@
 "callSeller": "Call Seller",
 "callBuyer": "Call Buyer",
 "home": "Home"
+
+
 
 
 }

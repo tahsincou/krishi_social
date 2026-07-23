@@ -9,7 +9,22 @@ class AppLocalizationsBn extends AppLocalizations {
   AppLocalizationsBn([String locale = 'bn']) : super(locale);
 
   @override
-  String get appName => 'কৃষি মিডিয়া';
+  String get appName => 'কৃষি সোশ্যাল';
+
+  @override
+  String get contact => 'কল করুন';
+
+  @override
+  String get buy => 'কেনার পোস্ট';
+
+  @override
+  String get sell => 'বিক্রির পোস্ট';
+
+  @override
+  String get active => 'চালু';
+
+  @override
+  String get closed => 'বন্ধ';
 
   @override
   String get login => 'লগইন';
@@ -45,16 +60,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get language => 'ভাষা';
 
   @override
-  String get buy => 'কিনতে চাই';
-
-  @override
-  String get sell => 'বিক্রি করব';
-
-  @override
   String get all => 'সব';
 
   @override
-  String get searchProductOrLocation => 'পণ্য বা এলাকার নাম লিখে সার্চ করুন';
+  String get searchProductOrLocation => 'পণ্য বা এলাকার নাম লিখুন';
 
   @override
   String get vegetables => 'শাকসবজি';
@@ -93,7 +102,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noMatchingPosts => 'কোনো পোস্ট পাওয়া যায়নি';
 
   @override
-  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন';
+  String get tryAnotherProductOrCategory => 'অন্য পণ্য বা ক্যাটাগরি দিয়ে খুঁজুন';
 
   @override
   String get quantity => 'পরিমাণ';
@@ -109,9 +118,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get quality => 'পণ্যের মান';
-
-  @override
-  String get contact => 'ফোন করুন';
 
   @override
   String get reviewedBuyer => 'যাচাই করা ক্রেতা';
@@ -183,7 +189,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get postCreated => 'পোস্ট তৈরি হয়েছে';
 
   @override
-  String get moreInformationOptional => 'আরও তথ্য দিতে চাইলে';
+  String get moreInformationOptional => 'আরও তথ্য';
 
   @override
   String get qualityOptional => 'পণ্যের মান বা সাইজ (না দিলেও হবে)';
@@ -233,7 +239,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get couldNotLoadPosts => 'পোস্ট লোড করা যায়নি';
 
   @override
-  String get checkConnectionAndTryAgain => 'সার্ভার কানেকশন দেখে আবার চেষ্টা করুন';
+  String get checkConnectionAndTryAgain => 'ইন্টারনেট বা সার্ভার দেখে আবার চেষ্টা করুন';
 
   @override
   String get tryAgain => 'আবার চেষ্টা করুন';
@@ -272,19 +278,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get actionFailed => 'কাজটি করা যায়নি';
 
   @override
-  String get active => 'চলমান';
-
-  @override
-  String get closed => 'বন্ধ';
-
-  @override
   String get createAccount => 'অ্যাকাউন্ট খুলুন';
 
   @override
   String get registerAccountTitle => 'নতুন অ্যাকাউন্ট খুলুন';
 
   @override
-  String get registerAccountMessage => 'কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন';
+  String get registerAccountMessage => 'কৃষিপণ্য কেনা-বেচা শুরু করতে নিচের তথ্য দিন';
 
   @override
   String get fullName => 'আপনার নাম';
@@ -347,7 +347,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get enterYourLocation => 'আপনার এলাকা লিখুন';
 
   @override
-  String get accountReviewMessage => 'অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।';
+  String get accountReviewMessage => 'ভেরিফিকেশন সুবিধা পরে যোগ করা হবে।';
 
   @override
   String get registrationSuccessful => 'অ্যাকাউন্ট তৈরি হয়েছে';
@@ -359,7 +359,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get editPost => 'পোস্ট এডিট';
 
   @override
-  String get saveChanges => 'পরিবর্তন সংরক্ষণ';
+  String get saveChanges => 'পরিবর্তন সেভ করুন';
 
   @override
   String get postUpdated => 'পোস্ট আপডেট হয়েছে';
@@ -398,16 +398,16 @@ class AppLocalizationsBn extends AppLocalizations {
   String get productInformation => 'পণ্যের তথ্য';
 
   @override
-  String get deliveryInformation => 'সময় ও জায়গা';
+  String get deliveryInformation => 'সময় ও লোকেশন';
 
   @override
-  String get optionalInformationHint => 'দাম, মান ও বিস্তারিত চাইলে যোগ করুন';
+  String get optionalInformationHint => 'দাম, মান বা বিস্তারিত দিতে পারেন';
 
   @override
   String get loginToAccount => 'আপনার অ্যাকাউন্টে লগইন করুন';
 
   @override
-  String get loginAccountMessage => 'কৃষিপণ্য কেনা-বেচা চালিয়ে যেতে আপনার তথ্য দিন';
+  String get loginAccountMessage => 'লগইন করে কৃষিপণ্য কেনা-বেচা শুরু করুন';
 
   @override
   String get loginWelcomeMessage => 'কৃষক ও ক্রেতার সরাসরি যোগাযোগ';
@@ -441,7 +441,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get noClosedPosts => 'কোনো বন্ধ পোস্ট নেই';
 
   @override
-  String get closedPostsWillAppearHere => 'বন্ধ করা পোস্ট এখানে দেখা যাবে';
+  String get closedPostsWillAppearHere => 'বন্ধ করা পোস্ট এখানে থাকবে';
 
   @override
   String get buyPosts => 'কেনার পোস্ট';

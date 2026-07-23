@@ -98,8 +98,38 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'Krishi Media'**
+  /// **'Krishi Social'**
   String get appName;
+
+  /// No description provided for @contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get contact;
+
+  /// No description provided for @buy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Request'**
+  String get buy;
+
+  /// No description provided for @sell.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell Offer'**
+  String get sell;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @closed.
+  ///
+  /// In en, this message translates to:
+  /// **'Closed'**
+  String get closed;
 
   /// No description provided for @login.
   ///
@@ -166,18 +196,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Language'**
   String get language;
-
-  /// No description provided for @buy.
-  ///
-  /// In en, this message translates to:
-  /// **'Buy'**
-  String get buy;
-
-  /// No description provided for @sell.
-  ///
-  /// In en, this message translates to:
-  /// **'Sell'**
-  String get sell;
 
   /// No description provided for @all.
   ///
@@ -298,12 +316,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quality'**
   String get quality;
-
-  /// No description provided for @contact.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact'**
-  String get contact;
 
   /// No description provided for @reviewedBuyer.
   ///
@@ -616,18 +628,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not complete the action'**
   String get actionFailed;
-
-  /// No description provided for @active.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get active;
-
-  /// No description provided for @closed.
-  ///
-  /// In en, this message translates to:
-  /// **'Closed'**
-  String get closed;
 
   /// No description provided for @createAccount.
   ///

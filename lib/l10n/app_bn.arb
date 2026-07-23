@@ -1,8 +1,6 @@
 {
 "@@locale": "bn",
 
-"appName": "কৃষি মিডিয়া",
-
 "login": "লগইন",
 "dashboard": "হোম",
 "settings": "সেটিংস",
@@ -17,11 +15,7 @@
 "dark": "ডার্ক",
 "language": "ভাষা",
 
-"buy": "কিনতে চাই",
-"sell": "বিক্রি করব",
 "all": "সব",
-
-"searchProductOrLocation": "পণ্য বা এলাকার নাম লিখে সার্চ করুন",
 
 "vegetables": "শাকসবজি",
 "fruits": "ফলমূল",
@@ -36,14 +30,12 @@
 "other": "অন্যান্য",
 
 "noMatchingPosts": "কোনো পোস্ট পাওয়া যায়নি",
-"tryAnotherProductOrCategory": "অন্য পণ্য বা ক্যাটাগরি দিয়ে সার্চ করুন",
 
 "quantity": "পরিমাণ",
 "required": "কবে দরকার",
 "available": "কবে পাওয়া যাবে",
 "price": "দাম",
 "quality": "পণ্যের মান",
-"contact": "ফোন করুন",
 
 "reviewedBuyer": "যাচাই করা ক্রেতা",
 "newBuyer": "নতুন ক্রেতা",
@@ -69,7 +61,6 @@
 "enterValidQuantity": "সঠিক পরিমাণ লিখুন",
 "fieldRequired": "এই তথ্যটি দিতে হবে",
 "postCreated": "পোস্ট তৈরি হয়েছে",
-"moreInformationOptional": "আরও তথ্য দিতে চাইলে",
 "qualityOptional": "পণ্যের মান বা সাইজ (না দিলেও হবে)",
 "selectCategoryFirst": "আগে ক্যাটাগরি বাছাই করুন",
 "productSearchHint": "পণ্য সার্চ করুন বা নাম লিখুন",
@@ -94,7 +85,6 @@
 "locationRequired": "পণ্য কোথায় আছে বা লাগবে তা লিখুন",
 
 "couldNotLoadPosts": "পোস্ট লোড করা যায়নি",
-"checkConnectionAndTryAgain": "সার্ভার কানেকশন দেখে আবার চেষ্টা করুন",
 "tryAgain": "আবার চেষ্টা করুন",
 "postCreationFailed": "পোস্ট তৈরি করা যায়নি",
 
@@ -108,13 +98,10 @@
 "deletePostConfirmation": "পোস্টটি ডিলিট করতে চান?",
 "postDeleted": "পোস্ট ডিলিট হয়েছে",
 "actionFailed": "কাজটি করা যায়নি",
-"active": "চলমান",
-"closed": "বন্ধ",
 
 
 "createAccount": "অ্যাকাউন্ট খুলুন",
 "registerAccountTitle": "নতুন অ্যাকাউন্ট খুলুন",
-"registerAccountMessage": "কৃষিপণ্য কেনা বা বিক্রি শুরু করতে আপনার সাধারণ তথ্য দিন",
 "fullName": "আপনার নাম",
 "enterYourName": "নাম লিখুন",
 "phoneNumber": "মোবাইল নম্বর",
@@ -135,12 +122,10 @@
 "wantToSell": "পণ্য বিক্রি করব",
 "wantToBuyAndSell": "কেনা ও বিক্রি দুটোই",
 "enterYourLocation": "আপনার এলাকা লিখুন",
-"accountReviewMessage": "অ্যাকাউন্টটি শুরুতে রিভিউর অপেক্ষায় থাকবে। বিস্তারিত ভেরিফিকেশন পরে যোগ করা হবে।",
 "registrationSuccessful": "অ্যাকাউন্ট তৈরি হয়েছে",
 "alreadyHaveAccount": "আগেই অ্যাকাউন্ট আছে? লগইন করুন",
 
 "editPost": "পোস্ট এডিট",
-"saveChanges": "পরিবর্তন সংরক্ষণ",
 "postUpdated": "পোস্ট আপডেট হয়েছে",
 
 "offline": "অফলাইন",
@@ -174,11 +159,8 @@
   }
 },
 "productInformation": "পণ্যের তথ্য",
-"deliveryInformation": "সময় ও জায়গা",
-"optionalInformationHint": "দাম, মান ও বিস্তারিত চাইলে যোগ করুন",
 
 "loginToAccount": "আপনার অ্যাকাউন্টে লগইন করুন",
-"loginAccountMessage": "কৃষিপণ্য কেনা-বেচা চালিয়ে যেতে আপনার তথ্য দিন",
 "loginWelcomeMessage": "কৃষক ও ক্রেতার সরাসরি যোগাযোগ",
 "noAccountYet": "নতুন ব্যবহারকারী?",
 
@@ -201,9 +183,7 @@
     }
   }
 },
-"noActivePosts": "কোনো চালু পোস্ট নেই",
-"noClosedPosts": "কোনো বন্ধ পোস্ট নেই",
-"closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে দেখা যাবে",
+
 
 "buyPosts": "কেনার পোস্ট",
 "sellPosts": "বেচার পোস্ট",
@@ -269,6 +249,31 @@
 
 "callSeller": "বিক্রেতাকে কল",
 "callBuyer": "ক্রেতাকে কল",
-"home": "হোম"
+"home": "হোম",
+
+
+"appName": "কৃষি সোশ্যাল",
+"contact": "কল করুন",
+"buy": "কেনার পোস্ট",
+"sell": "বিক্রির পোস্ট",
+"active": "চালু",
+"closed": "বন্ধ",
+"saveChanges": "পরিবর্তন সেভ করুন",
+
+"searchProductOrLocation": "পণ্য বা এলাকার নাম লিখুন",
+"tryAnotherProductOrCategory": "অন্য পণ্য বা ক্যাটাগরি দিয়ে খুঁজুন",
+"checkConnectionAndTryAgain": "ইন্টারনেট বা সার্ভার দেখে আবার চেষ্টা করুন",
+
+"registerAccountMessage": "কৃষিপণ্য কেনা-বেচা শুরু করতে নিচের তথ্য দিন",
+"loginAccountMessage": "লগইন করে কৃষিপণ্য কেনা-বেচা শুরু করুন",
+"accountReviewMessage": "ভেরিফিকেশন সুবিধা পরে যোগ করা হবে।",
+
+"moreInformationOptional": "আরও তথ্য",
+"optionalInformationHint": "দাম, মান বা বিস্তারিত দিতে পারেন",
+"deliveryInformation": "সময় ও লোকেশন",
+
+"noActivePosts": "কোনো চালু পোস্ট নেই",
+"noClosedPosts": "কোনো বন্ধ পোস্ট নেই",
+"closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে থাকবে"
 
 }
