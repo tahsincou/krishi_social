@@ -202,7 +202,10 @@
 },
 "noActivePosts": "No active posts",
 "noClosedPosts": "No closed posts",
-"closedPostsWillAppearHere": "Posts you close will appear here"
+"closedPostsWillAppearHere": "Posts you close will appear here",
+
+"buyPosts": "Buy Posts",
+"sellPosts": "Sell Posts"
 
 
 }

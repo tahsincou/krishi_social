@@ -442,4 +442,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get closedPostsWillAppearHere => 'Posts you close will appear here';
+
+  @override
+  String get buyPosts => 'Buy Posts';
+
+  @override
+  String get sellPosts => 'Sell Posts';
 }

@@ -442,4 +442,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get closedPostsWillAppearHere => 'বন্ধ করা পোস্ট এখানে দেখা যাবে';
+
+  @override
+  String get buyPosts => 'কেনার পোস্ট';
+
+  @override
+  String get sellPosts => 'বেচার পোস্ট';
 }

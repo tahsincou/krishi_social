@@ -203,6 +203,9 @@
 },
 "noActivePosts": "কোনো চালু পোস্ট নেই",
 "noClosedPosts": "কোনো বন্ধ পোস্ট নেই",
-"closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে দেখা যাবে"
+"closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে দেখা যাবে",
+
+"buyPosts": "কেনার পোস্ট",
+"sellPosts": "বেচার পোস্ট"
 
 }

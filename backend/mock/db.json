@@ -9,6 +9,26 @@
       "location": "Jatrabari, Dhaka",
       "activity": "buy",
       "verificationStatus": "reviewed"
+    },
+    {
+      "id": "user-2",
+      "name": "Hasan Agro Farm",
+      "phone": "01700000003",
+      "email": "seller@demo.com",
+      "password": "123456",
+      "location": "Cumilla",
+      "activity": "sell",
+      "verificationStatus": "reviewed"
+    },
+    {
+      "id": "user-3",
+      "name": "Karim Enterprise",
+      "phone": "01700000004",
+      "email": "both@demo.com",
+      "password": "123456",
+      "location": "Narayanganj",
+      "activity": "both",
+      "verificationStatus": "reviewed"
     }
   ],
   "posts": [
@@ -172,6 +192,29 @@
       "phone": "01700000002",
       "status": "closed",
       "createdAt": "2026-07-23T03:07:16.195"
+    },
+    {
+      "userId": "user-2",
+      "userName": "Hasan Agro Farm",
+      "userImageUrl": null,
+      "isUserReviewed": true,
+      "type": "sell",
+      "category": "fruits",
+      "productName": "Litchi",
+      "quantity": 1000,
+      "unit": "kg",
+      "availableFrom": "2026-07-24T00:00:00.000",
+      "availableTo": "2026-08-01T00:00:00.000",
+      "district": "Narayanganj",
+      "upazila": "",
+      "pricePerUnit": 10,
+      "qualityRequirement": "Good",
+      "description": "I will arrange the transport",
+      "imageUrl": null,
+      "phone": "01700000003",
+      "status": "active",
+      "createdAt": "2026-07-23T22:26:00.732",
+      "id": "Z7EYMTi"
     }
   ]
 }

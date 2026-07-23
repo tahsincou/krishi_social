@@ -940,6 +940,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Posts you close will appear here'**
   String get closedPostsWillAppearHere;
+
+  /// No description provided for @buyPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Posts'**
+  String get buyPosts;
+
+  /// No description provided for @sellPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell Posts'**
+  String get sellPosts;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
