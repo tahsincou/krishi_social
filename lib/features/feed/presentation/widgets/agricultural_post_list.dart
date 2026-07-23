@@ -27,7 +27,7 @@ class AgriculturePostList extends ConsumerWidget {
       );
     }
 
-    Future<void> _callUser(
+    Future<void> callUser(
       BuildContext context,
       WidgetRef ref,
       AgriculturePost post,
@@ -58,11 +58,11 @@ class AgriculturePostList extends ConsumerWidget {
 
         return AgriculturePostCard(
           post: post,
-          onTap: () {
-            context.push('/post-details', extra: post);
-          },
+          // onTap: () {
+          //   context.push('/post-details', extra: post);
+          // },
           onCall: () {
-            _callUser(context, ref, post);
+            callUser(context, ref, post);
           },
         );
       },
