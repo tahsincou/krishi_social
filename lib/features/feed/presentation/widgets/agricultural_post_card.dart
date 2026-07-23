@@ -81,6 +81,8 @@ class AgriculturePostCard extends StatelessWidget {
                 _InformationPill(
                   icon: Icons.calendar_month_outlined,
                   text: _formatAvailability(post),
+                  backgroundColor: AppColors.accentSoft,
+                  foregroundColor: AppColors.accentDark,
                 ),
               ],
             ),
@@ -92,14 +94,14 @@ class AgriculturePostCard extends StatelessWidget {
                   Icon(
                     Icons.payments_outlined,
                     size: 19,
-                    color: theme.colorScheme.primary,
+                    color: AppColors.accentDark,
                   ),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
                     '৳${_formatNumber(post.pricePerUnit!)}'
                     ' / ${post.unit.displayName}',
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: theme.colorScheme.primary,
+                      color: AppColors.accentDark,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -171,9 +173,9 @@ class AgriculturePostCard extends StatelessWidget {
                     icon: const Icon(Icons.call_outlined, size: 18),
                     label: Text(context.l10n.contact),
                     style: FilledButton.styleFrom(
-                      minimumSize: const Size(0, 44),
+                      minimumSize: const Size(0, 42),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.md,
+                        horizontal: AppSpacing.sm,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppRadius.pill),
@@ -244,13 +246,15 @@ class _PostTypeBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     final backgroundColor = isBuyPost
-        ? Theme.of(context).colorScheme.primaryContainer
-        : const Color(0xFFFFEDC9);
+        ? AppColors.accentSoft
+        : colorScheme.primaryContainer;
 
     final foregroundColor = isBuyPost
-        ? Theme.of(context).colorScheme.onPrimaryContainer
-        : const Color(0xFF725000);
+        ? AppColors.accentDark
+        : colorScheme.onPrimaryContainer;
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -265,7 +269,7 @@ class _PostTypeBadge extends StatelessWidget {
         label.toUpperCase(),
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
           color: foregroundColor,
-          fontWeight: FontWeight.w700,
+          fontWeight: FontWeight.w800,
         ),
       ),
     );
@@ -273,36 +277,45 @@ class _PostTypeBadge extends StatelessWidget {
 }
 
 class _InformationPill extends StatelessWidget {
-  const _InformationPill({required this.icon, required this.text});
+  const _InformationPill({
+    required this.icon,
+    required this.text,
+    this.backgroundColor,
+    this.foregroundColor,
+  });
 
   final IconData icon;
   final String text;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final resolvedForegroundColor =
+        foregroundColor ?? colorScheme.onSurfaceVariant;
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.sm,
         vertical: 8,
       ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        color: backgroundColor ?? colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 16,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+          Icon(icon, size: 16, color: resolvedForegroundColor),
           const SizedBox(width: 6),
           Text(
             text,
-            style: Theme.of(
-              context,
-            ).textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: resolvedForegroundColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ],
       ),

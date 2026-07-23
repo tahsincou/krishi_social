@@ -242,6 +242,7 @@ class AppTheme {
           borderRadius: BorderRadius.circular(AppRadius.pill),
         ),
       ),
+
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.darkSurface,
