@@ -9,7 +9,6 @@ import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/my_post_management_card.dart';
-import 'package:krishi_social/shared/theme/app_radius.dart';
 import 'package:krishi_social/shared/theme/app_spacing.dart';
 import 'package:krishi_social/shared/widgets/app_empty.dart';
 import 'package:krishi_social/shared/widgets/app_loading.dart';
@@ -182,9 +181,7 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
             post: post,
             isUpdating: isUpdating,
             isOffline: isOffline,
-            onEdit: () {
-              context.push('/edit-post', extra: post);
-            },
+
             onClose: () {
               _closePost(post);
             },
@@ -277,75 +274,6 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
       SnackBar(
         content: Text(
           success ? context.l10n.postDeleted : context.l10n.actionFailed,
-        ),
-      ),
-    );
-  }
-}
-
-class _StatusTab extends StatelessWidget {
-  const _StatusTab({
-    required this.label,
-    required this.count,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final String label;
-  final int count;
-  final bool isSelected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Material(
-      color: isSelected ? colorScheme.primary : Colors.transparent,
-      borderRadius: BorderRadius.circular(AppRadius.pill),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppRadius.pill),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.sm,
-            vertical: 12,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                label,
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  color: isSelected
-                      ? colorScheme.onPrimary
-                      : colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(width: 7),
-              Container(
-                constraints: const BoxConstraints(minWidth: 24),
-                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? colorScheme.onPrimary.withValues(alpha: 0.22)
-                      : colorScheme.surface,
-                  borderRadius: BorderRadius.circular(AppRadius.pill),
-                ),
-                child: Text(
-                  count.toString(),
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    color: isSelected
-                        ? colorScheme.onPrimary
-                        : colorScheme.onSurface,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

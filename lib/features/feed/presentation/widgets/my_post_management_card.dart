@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
@@ -15,7 +16,7 @@ class MyPostManagementCard extends StatelessWidget {
     required this.post,
     required this.isUpdating,
     required this.isOffline,
-    required this.onEdit,
+
     required this.onClose,
     required this.onDelete,
   });
@@ -23,7 +24,6 @@ class MyPostManagementCard extends StatelessWidget {
   final AgriculturePost post;
   final bool isUpdating;
   final bool isOffline;
-  final VoidCallback onEdit;
   final VoidCallback onClose;
   final VoidCallback onDelete;
 
@@ -40,6 +40,11 @@ class MyPostManagementCard extends StatelessWidget {
         AppSpacing.sm,
       ),
       child: AppCard(
+        onTap: () {
+          _runOnlineAction(context, () {
+            context.push('/edit-post', extra: post);
+          });
+        },
         backgroundColor: isClosed
             ? colorScheme.surfaceContainerHighest
             : colorScheme.primaryContainer.withValues(alpha: 0.38),
@@ -190,16 +195,6 @@ class MyPostManagementCard extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: OutlinedButton.icon(
-            onPressed: isUpdating
-                ? null
-                : () => _runOnlineAction(context, onEdit),
-            icon: const Icon(Icons.edit_outlined),
-            label: Text(context.l10n.edit),
-          ),
-        ),
-        const SizedBox(width: AppSpacing.sm),
-        Expanded(
           child: FilledButton.icon(
             onPressed: isUpdating
                 ? null
@@ -216,7 +211,7 @@ class MyPostManagementCard extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: TextButton.icon(
-        onPressed: isUpdating ? null : () => _runOnlineAction(context, onEdit),
+        onPressed: null,
         icon: const Icon(Icons.restart_alt_rounded),
         label: Text(context.l10n.postAgain),
       ),

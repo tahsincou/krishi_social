@@ -24,9 +24,8 @@ class AgriculturePostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isBuyPost = post.type == PostType.buy;
 
-    IconData _categoryIcon(ProductCategory category) {
+    IconData categoryIcon(ProductCategory category) {
       switch (category) {
         case ProductCategory.vegetables:
           return Icons.eco_outlined;
@@ -68,7 +67,7 @@ class AgriculturePostCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(AppRadius.md),
                   ),
                   child: Icon(
-                    _categoryIcon(post.category),
+                    categoryIcon(post.category),
                     color: post.type == PostType.buy
                         ? AppColors.accentDark
                         : Theme.of(context).colorScheme.primary,
