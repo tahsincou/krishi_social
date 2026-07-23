@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/auth/domain/entities/account_activity.dart';
 import 'package:krishi_social/features/auth/domain/entities/auth_status.dart';
 import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
@@ -18,6 +19,7 @@ import 'package:krishi_social/shared/widgets/app_button.dart';
 import 'package:krishi_social/shared/widgets/app_card.dart';
 import 'package:krishi_social/shared/widgets/app_date_range_field.dart';
 import 'package:krishi_social/shared/widgets/app_dropdown.dart';
+import 'package:krishi_social/shared/widgets/app_loading.dart';
 import 'package:krishi_social/shared/widgets/app_text_field.dart';
 
 class CreatePostPage extends ConsumerStatefulWidget {
@@ -70,17 +72,13 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
 
     _category = post.category;
     _unit = post.unit;
-
     _productController.text = post.productName;
     _quantityController.text = _formatNumber(post.quantity);
     _locationController.text = post.district;
-
     _priceController.text = post.pricePerUnit == null
         ? ''
         : _formatNumber(post.pricePerUnit!);
-
     _qualityController.text = post.qualityRequirement ?? '';
-
     _descriptionController.text = post.description ?? '';
 
     _dateRange = DateTimeRange(
@@ -111,6 +109,14 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
   Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
     final feedState = ref.watch(feedNotifierProvider);
+
+    final user = authState.user;
+
+    if (user == null) {
+      return const Scaffold(body: AppLoading());
+    }
+
+    final canChoosePostType = user.activity == AccountActivity.both;
 
     final isEditing = widget.isEditing;
     final isBuyPost = _postType == PostType.buy;
@@ -156,9 +162,10 @@ class _CreatePostPageState extends ConsumerState<CreatePostPage> {
               AppSpacing.xl,
             ),
             children: [
-              _buildPostTypeSelector(),
-
-              const SizedBox(height: AppSpacing.lg),
+              if (canChoosePostType) ...[
+                _buildPostTypeSelector(),
+                const SizedBox(height: AppSpacing.lg),
+              ],
 
               _buildSectionCard(
                 context: context,
