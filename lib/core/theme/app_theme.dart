@@ -9,7 +9,7 @@ class AppTheme {
   static ThemeData get light {
     const colorScheme = ColorScheme.light(
       primary: AppColors.primary,
-      onPrimary: AppColors.textOnPrimary,
+      onPrimary: Color.fromARGB(255, 17, 8, 8),
       primaryContainer: AppColors.primarySoft,
       onPrimaryContainer: AppColors.forest,
       secondary: AppColors.leaf,
@@ -137,15 +137,15 @@ class AppTheme {
       ),
 
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        elevation: 2,
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        elevation: 3,
+        backgroundColor: AppColors.accent,
+        foregroundColor: AppColors.accentDark,
         shape: StadiumBorder(),
       ),
 
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surface,
-        selectedColor: AppColors.primarySoft,
+        selectedColor: AppColors.primaryVerySoft,
         disabledColor: AppColors.neutralLight,
         labelStyle: const TextStyle(
           color: AppColors.textPrimary,
@@ -221,6 +221,27 @@ class AppTheme {
         ),
       ),
 
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        elevation: 3,
+        backgroundColor: AppColors.darkAccent,
+        foregroundColor: AppColors.darkBackground,
+        shape: StadiumBorder(),
+      ),
+
+      chipTheme: ChipThemeData(
+        backgroundColor: AppColors.darkSurface,
+        selectedColor: AppColors.darkSurfaceSoft,
+        disabledColor: AppColors.darkSurfaceSoft,
+        labelStyle: const TextStyle(
+          color: AppColors.darkTextPrimary,
+          fontWeight: FontWeight.w500,
+        ),
+        side: const BorderSide(color: AppColors.darkOutline),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+        ),
+      ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.darkSurface,

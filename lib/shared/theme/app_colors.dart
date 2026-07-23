@@ -8,12 +8,20 @@ class AppColors {
   static const primaryDark = Color(0xFF527D1F);
   static const primarySoft = Color(0xFFEAF5DA);
   static const primaryVerySoft = Color(0xFFF4F9EC);
-
   // Supporting agricultural colors
   static const forest = Color(0xFF20351B);
   static const leaf = Color(0xFF69A72A);
   static const harvest = Color(0xFFF2B84B);
   static const soil = Color(0xFF8A6848);
+
+  // Accent: important actions and attention
+  static const accent = Color(0xFFF2A93B);
+  static const accentDark = Color(0xFF7A4B00);
+  static const accentSoft = Color(0xFFFFF1D6);
+
+  // Dark-theme accent
+  static const darkAccent = Color(0xFFFFBF52);
+  static const darkAccentSoft = Color(0xFF3B2B12);
 
   // Light surfaces
   static const background = Color(0xFFF6F8F1);
