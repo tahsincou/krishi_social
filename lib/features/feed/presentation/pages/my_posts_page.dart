@@ -214,20 +214,6 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
       );
     }
 
-    String _activeEmptyMessage(AccountActivity activity) {
-      if (activity == AccountActivity.buy) {
-        return context.l10n.createFirstBuyRequest;
-      }
-
-      if (activity == AccountActivity.sell) {
-        return context.l10n.createFirstSellOffer;
-      }
-
-      return _selectedPostType == PostType.buy
-          ? context.l10n.createFirstBuyRequest
-          : context.l10n.createFirstSellOffer;
-    }
-
     return RefreshIndicator(
       onRefresh: () {
         return ref.read(feedNotifierProvider.notifier).refreshPosts();
@@ -256,6 +242,20 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
         },
       ),
     );
+  }
+
+  String _activeEmptyMessage(AccountActivity activity) {
+    if (activity == AccountActivity.buy) {
+      return context.l10n.createFirstBuyRequest;
+    }
+
+    if (activity == AccountActivity.sell) {
+      return context.l10n.createFirstSellOffer;
+    }
+
+    return _selectedPostType == PostType.buy
+        ? context.l10n.createFirstBuyRequest
+        : context.l10n.createFirstSellOffer;
   }
 
   Future<void> _closePost(AgriculturePost post) async {
