@@ -264,7 +264,10 @@
 "buyRequests": "Buy Requests",
 "sellOffers": "Sell Offers",
 "createFirstBuyRequest": "Create your first buy request to find sellers.",
-"createFirstSellOffer": "Create your first sell offer to find buyers."
+"createFirstSellOffer": "Create your first sell offer to find buyers.",
+
+"callSeller": "Call Seller",
+"callBuyer": "Call Buyer"
 
 
 }

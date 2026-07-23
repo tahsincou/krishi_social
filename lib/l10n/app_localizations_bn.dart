@@ -513,4 +513,10 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get createFirstSellOffer => 'ক্রেতা খুঁজতে আপনার প্রথম বিক্রির পোস্ট দিন।';
+
+  @override
+  String get callSeller => 'বিক্রেতাকে কল';
+
+  @override
+  String get callBuyer => 'ক্রেতাকে কল';
 }

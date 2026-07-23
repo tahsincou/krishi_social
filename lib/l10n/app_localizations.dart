@@ -1066,6 +1066,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Create your first sell offer to find buyers.'**
   String get createFirstSellOffer;
+
+  /// No description provided for @callSeller.
+  ///
+  /// In en, this message translates to:
+  /// **'Call Seller'**
+  String get callSeller;
+
+  /// No description provided for @callBuyer.
+  ///
+  /// In en, this message translates to:
+  /// **'Call Buyer'**
+  String get callBuyer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

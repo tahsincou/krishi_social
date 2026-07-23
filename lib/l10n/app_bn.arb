@@ -265,6 +265,9 @@
 "buyRequests": "কেনার পোস্ট",
 "sellOffers": "বিক্রির পোস্ট",
 "createFirstBuyRequest": "বিক্রেতা খুঁজতে আপনার প্রথম কেনার পোস্ট দিন।",
-"createFirstSellOffer": "ক্রেতা খুঁজতে আপনার প্রথম বিক্রির পোস্ট দিন।"
+"createFirstSellOffer": "ক্রেতা খুঁজতে আপনার প্রথম বিক্রির পোস্ট দিন।",
+
+"callSeller": "বিক্রেতাকে কল",
+"callBuyer": "ক্রেতাকে কল"
 
 }

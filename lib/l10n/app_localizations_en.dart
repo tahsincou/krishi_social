@@ -513,4 +513,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get createFirstSellOffer => 'Create your first sell offer to find buyers.';
+
+  @override
+  String get callSeller => 'Call Seller';
+
+  @override
+  String get callBuyer => 'Call Buyer';
 }
