@@ -1030,6 +1030,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find buyers looking for agricultural products.'**
   String get findBuyRequestsMessage;
+
+  /// No description provided for @myBuyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Buy Requests'**
+  String get myBuyRequests;
+
+  /// No description provided for @mySellOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'My Sell Offers'**
+  String get mySellOffers;
+
+  /// No description provided for @buyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy Requests'**
+  String get buyRequests;
+
+  /// No description provided for @sellOffers.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell Offers'**
+  String get sellOffers;
+
+  /// No description provided for @createFirstBuyRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first buy request to find sellers.'**
+  String get createFirstBuyRequest;
+
+  /// No description provided for @createFirstSellOffer.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your first sell offer to find buyers.'**
+  String get createFirstSellOffer;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

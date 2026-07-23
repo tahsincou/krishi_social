@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:krishi_social/core/locale/locale_extension.dart';
+import 'package:krishi_social/features/auth/domain/entities/account_activity.dart';
 import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.dart';
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
+import 'package:krishi_social/features/feed/domain/entities/post_type.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
 import 'package:krishi_social/features/feed/presentation/widgets/my_post_management_card.dart';
 import 'package:krishi_social/shared/theme/app_radius.dart';
@@ -21,17 +23,27 @@ class MyPostsPage extends ConsumerStatefulWidget {
 
 class _MyPostsPageState extends ConsumerState<MyPostsPage> {
   PostStatus _selectedStatus = PostStatus.active;
+  PostType _selectedPostType = PostType.buy;
 
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
     final feedState = ref.watch(feedNotifierProvider);
 
-    final userId = authState.user?.id;
+    final user = authState.user;
 
-    final allPosts = userId == null
-        ? const <AgriculturePost>[]
-        : feedState.postsByUser(userId);
+    if (user == null) {
+      return const Scaffold(body: AppLoading());
+    }
+
+    final activity = user.activity;
+    final canShowBothPostTypes = activity == AccountActivity.both;
+
+    final allUserPosts = feedState.postsByUser(user.id);
+
+    final allPosts = canShowBothPostTypes
+        ? allUserPosts.where((post) => post.type == _selectedPostType).toList()
+        : allUserPosts;
 
     final activePosts = allPosts
         .where((post) => post.status == PostStatus.active)
@@ -45,9 +57,22 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
         ? activePosts
         : closedPosts;
 
+    String _pageTitle(AccountActivity activity) {
+      switch (activity) {
+        case AccountActivity.buy:
+          return context.l10n.myBuyRequests;
+
+        case AccountActivity.sell:
+          return context.l10n.mySellOffers;
+
+        case AccountActivity.both:
+          return context.l10n.myPosts;
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.myPosts),
+        title: Text(_pageTitle(activity)),
         actions: [
           if (feedState.isOffline)
             Padding(
@@ -63,10 +88,10 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
       ),
       body: Column(
         children: [
-          _buildStatusSelector(
-            activeCount: activePosts.length,
-            closedCount: closedPosts.length,
-          ),
+          if (canShowBothPostTypes) ...[
+            _buildPostTypeSelector(),
+            const SizedBox(height: AppSpacing.xs),
+          ],
           const SizedBox(height: AppSpacing.sm),
           Expanded(
             child: _buildContent(
@@ -74,6 +99,7 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
               isLoading: feedState.isInitialLoading,
               isUpdating: feedState.isUpdating,
               isOffline: feedState.isOffline,
+              activity: activity,
             ),
           ),
         ],
@@ -128,11 +154,45 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
     );
   }
 
+  Widget _buildPostTypeSelector() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.md,
+        AppSpacing.sm,
+        AppSpacing.md,
+        0,
+      ),
+      child: SegmentedButton<PostType>(
+        showSelectedIcon: false,
+        segments: [
+          ButtonSegment(
+            value: PostType.buy,
+            icon: const Icon(Icons.shopping_cart_outlined),
+            label: Text(context.l10n.buyRequests),
+          ),
+          ButtonSegment(
+            value: PostType.sell,
+            icon: const Icon(Icons.agriculture_outlined),
+            label: Text(context.l10n.sellOffers),
+          ),
+        ],
+        selected: {_selectedPostType},
+        onSelectionChanged: (values) {
+          setState(() {
+            _selectedPostType = values.first;
+            _selectedStatus = PostStatus.active;
+          });
+        },
+      ),
+    );
+  }
+
   Widget _buildContent({
     required List<AgriculturePost> posts,
     required bool isLoading,
     required bool isUpdating,
     required bool isOffline,
+    required AccountActivity activity,
   }) {
     if (isLoading && posts.isEmpty) {
       return const AppLoading();
@@ -146,12 +206,26 @@ class _MyPostsPageState extends ConsumerState<MyPostsPage> {
             ? context.l10n.noActivePosts
             : context.l10n.noClosedPosts,
         message: showingActive
-            ? context.l10n.createFirstPost
+            ? _activeEmptyMessage(activity)
             : context.l10n.closedPostsWillAppearHere,
         icon: showingActive
             ? Icons.post_add_rounded
             : Icons.inventory_2_outlined,
       );
+    }
+
+    String _activeEmptyMessage(AccountActivity activity) {
+      if (activity == AccountActivity.buy) {
+        return context.l10n.createFirstBuyRequest;
+      }
+
+      if (activity == AccountActivity.sell) {
+        return context.l10n.createFirstSellOffer;
+      }
+
+      return _selectedPostType == PostType.buy
+          ? context.l10n.createFirstBuyRequest
+          : context.l10n.createFirstSellOffer;
     }
 
     return RefreshIndicator(

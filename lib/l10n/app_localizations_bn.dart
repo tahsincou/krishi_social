@@ -495,4 +495,22 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get findBuyRequestsMessage => 'যেসব ক্রেতা কৃষিপণ্য খুঁজছেন তাদের পোস্ট দেখুন।';
+
+  @override
+  String get myBuyRequests => 'আমার কেনার পোস্ট';
+
+  @override
+  String get mySellOffers => 'আমার বিক্রির পোস্ট';
+
+  @override
+  String get buyRequests => 'কেনার পোস্ট';
+
+  @override
+  String get sellOffers => 'বিক্রির পোস্ট';
+
+  @override
+  String get createFirstBuyRequest => 'বিক্রেতা খুঁজতে আপনার প্রথম কেনার পোস্ট দিন।';
+
+  @override
+  String get createFirstSellOffer => 'ক্রেতা খুঁজতে আপনার প্রথম বিক্রির পোস্ট দিন।';
 }

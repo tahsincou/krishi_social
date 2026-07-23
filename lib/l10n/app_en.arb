@@ -257,7 +257,14 @@
 "latestFirst": "Latest first",
 
 "findSellOffersMessage": "Find products offered by farmers and sellers.",
-"findBuyRequestsMessage": "Find buyers looking for agricultural products."
+"findBuyRequestsMessage": "Find buyers looking for agricultural products.",
+
+"myBuyRequests": "My Buy Requests",
+"mySellOffers": "My Sell Offers",
+"buyRequests": "Buy Requests",
+"sellOffers": "Sell Offers",
+"createFirstBuyRequest": "Create your first buy request to find sellers.",
+"createFirstSellOffer": "Create your first sell offer to find buyers."
 
 
 }

@@ -258,6 +258,13 @@
 "latestFirst": "নতুন পোস্ট আগে",
 
 "findSellOffersMessage": "কৃষক ও বিক্রেতাদের পণ্য খুঁজুন।",
-"findBuyRequestsMessage": "যেসব ক্রেতা কৃষিপণ্য খুঁজছেন তাদের পোস্ট দেখুন।"
+"findBuyRequestsMessage": "যেসব ক্রেতা কৃষিপণ্য খুঁজছেন তাদের পোস্ট দেখুন।",
+
+"myBuyRequests": "আমার কেনার পোস্ট",
+"mySellOffers": "আমার বিক্রির পোস্ট",
+"buyRequests": "কেনার পোস্ট",
+"sellOffers": "বিক্রির পোস্ট",
+"createFirstBuyRequest": "বিক্রেতা খুঁজতে আপনার প্রথম কেনার পোস্ট দিন।",
+"createFirstSellOffer": "ক্রেতা খুঁজতে আপনার প্রথম বিক্রির পোস্ট দিন।"
 
 }

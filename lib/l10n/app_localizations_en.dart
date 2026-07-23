@@ -495,4 +495,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get findBuyRequestsMessage => 'Find buyers looking for agricultural products.';
+
+  @override
+  String get myBuyRequests => 'My Buy Requests';
+
+  @override
+  String get mySellOffers => 'My Sell Offers';
+
+  @override
+  String get buyRequests => 'Buy Requests';
+
+  @override
+  String get sellOffers => 'Sell Offers';
+
+  @override
+  String get createFirstBuyRequest => 'Create your first buy request to find sellers.';
+
+  @override
+  String get createFirstSellOffer => 'Create your first sell offer to find buyers.';
 }
