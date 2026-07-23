@@ -414,4 +414,32 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noAccountYet => 'New here?';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get postAgain => 'Post Again';
+
+  @override
+  String get postIsClosed => 'This post is closed';
+
+  @override
+  String neededDuring(String period) {
+    return 'Needed: $period';
+  }
+
+  @override
+  String availableDuring(String period) {
+    return 'Available: $period';
+  }
+
+  @override
+  String get noActivePosts => 'No active posts';
+
+  @override
+  String get noClosedPosts => 'No closed posts';
+
+  @override
+  String get closedPostsWillAppearHere => 'Posts you close will appear here';
 }

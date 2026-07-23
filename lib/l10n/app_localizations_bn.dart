@@ -414,4 +414,32 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get noAccountYet => 'নতুন ব্যবহারকারী?';
+
+  @override
+  String get edit => 'এডিট';
+
+  @override
+  String get postAgain => 'আবার পোস্ট করুন';
+
+  @override
+  String get postIsClosed => 'পোস্টটি বন্ধ করা হয়েছে';
+
+  @override
+  String neededDuring(String period) {
+    return 'প্রয়োজন: $period';
+  }
+
+  @override
+  String availableDuring(String period) {
+    return 'পাওয়া যাবে: $period';
+  }
+
+  @override
+  String get noActivePosts => 'কোনো চালু পোস্ট নেই';
+
+  @override
+  String get noClosedPosts => 'কোনো বন্ধ পোস্ট নেই';
+
+  @override
+  String get closedPostsWillAppearHere => 'বন্ধ করা পোস্ট এখানে দেখা যাবে';
 }

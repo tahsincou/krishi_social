@@ -180,6 +180,29 @@
 "loginToAccount": "আপনার অ্যাকাউন্টে লগইন করুন",
 "loginAccountMessage": "কৃষিপণ্য কেনা-বেচা চালিয়ে যেতে আপনার তথ্য দিন",
 "loginWelcomeMessage": "কৃষক ও ক্রেতার সরাসরি যোগাযোগ",
-"noAccountYet": "নতুন ব্যবহারকারী?"
+"noAccountYet": "নতুন ব্যবহারকারী?",
+
+"edit": "এডিট",
+"postAgain": "আবার পোস্ট করুন",
+"postIsClosed": "পোস্টটি বন্ধ করা হয়েছে",
+"neededDuring": "প্রয়োজন: {period}",
+"@neededDuring": {
+  "placeholders": {
+    "period": {
+      "type": "String"
+    }
+  }
+},
+"availableDuring": "পাওয়া যাবে: {period}",
+"@availableDuring": {
+  "placeholders": {
+    "period": {
+      "type": "String"
+    }
+  }
+},
+"noActivePosts": "কোনো চালু পোস্ট নেই",
+"noClosedPosts": "কোনো বন্ধ পোস্ট নেই",
+"closedPostsWillAppearHere": "বন্ধ করা পোস্ট এখানে দেখা যাবে"
 
 }

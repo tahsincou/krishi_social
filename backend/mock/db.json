@@ -151,6 +151,7 @@
       "createdAt": "2026-07-23T02:02:42.773"
     },
     {
+      "id": "FjaJioq",
       "userId": "user-1",
       "userName": "Rahman Traders",
       "userImageUrl": null,
@@ -169,9 +170,8 @@
       "description": null,
       "imageUrl": null,
       "phone": "01700000002",
-      "status": "active",
-      "createdAt": "2026-07-23T03:07:16.195",
-      "id": "FjaJioq"
+      "status": "closed",
+      "createdAt": "2026-07-23T03:07:16.195"
     }
   ]
 }

@@ -179,7 +179,30 @@
 "loginToAccount": "Login to your account",
 "loginAccountMessage": "Enter your details to continue buying and selling agricultural products.",
 "loginWelcomeMessage": "Farmers and buyers, connected directly.",
-"noAccountYet": "New here?"
+"noAccountYet": "New here?",
+
+"edit": "Edit",
+"postAgain": "Post Again",
+"postIsClosed": "This post is closed",
+"neededDuring": "Needed: {period}",
+"@neededDuring": {
+  "placeholders": {
+    "period": {
+      "type": "String"
+    }
+  }
+},
+"availableDuring": "Available: {period}",
+"@availableDuring": {
+  "placeholders": {
+    "period": {
+      "type": "String"
+    }
+  }
+},
+"noActivePosts": "No active posts",
+"noClosedPosts": "No closed posts",
+"closedPostsWillAppearHere": "Posts you close will appear here"
 
 
 }

@@ -62,24 +62,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            context.l10n.loginToAccount,
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-
-                          const SizedBox(height: AppSpacing.xs),
-
-                          Text(
-                            context.l10n.loginAccountMessage,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-
-                          const SizedBox(height: AppSpacing.lg),
-
                           AppTextField(
                             controller: _emailController,
                             label: context.l10n.email,

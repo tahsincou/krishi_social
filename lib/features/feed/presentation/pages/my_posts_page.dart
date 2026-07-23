@@ -6,26 +6,44 @@ import 'package:krishi_social/features/auth/presentaion/providers/auth_notifier.
 import 'package:krishi_social/features/feed/domain/entities/agricultural_post.dart';
 import 'package:krishi_social/features/feed/domain/entities/post_status.dart';
 import 'package:krishi_social/features/feed/presentation/providers/feed_notifier.dart';
-import 'package:krishi_social/features/feed/presentation/widgets/agricultural_post_card.dart';
+import 'package:krishi_social/features/feed/presentation/widgets/my_post_management_card.dart';
 import 'package:krishi_social/shared/theme/app_radius.dart';
 import 'package:krishi_social/shared/theme/app_spacing.dart';
-import 'package:krishi_social/shared/widgets/app_card.dart';
 import 'package:krishi_social/shared/widgets/app_empty.dart';
 import 'package:krishi_social/shared/widgets/app_loading.dart';
 
-class MyPostsPage extends ConsumerWidget {
+class MyPostsPage extends ConsumerStatefulWidget {
   const MyPostsPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyPostsPage> createState() => _MyPostsPageState();
+}
+
+class _MyPostsPageState extends ConsumerState<MyPostsPage> {
+  PostStatus _selectedStatus = PostStatus.active;
+
+  @override
+  Widget build(BuildContext context) {
     final authState = ref.watch(authNotifierProvider);
     final feedState = ref.watch(feedNotifierProvider);
 
-    final user = authState.user;
+    final userId = authState.user?.id;
 
-    final posts = user == null
+    final allPosts = userId == null
         ? const <AgriculturePost>[]
-        : feedState.postsByUser(user.id);
+        : feedState.postsByUser(userId);
+
+    final activePosts = allPosts
+        .where((post) => post.status == PostStatus.active)
+        .toList();
+
+    final closedPosts = allPosts
+        .where((post) => post.status == PostStatus.closed)
+        .toList();
+
+    final visiblePosts = _selectedStatus == PostStatus.active
+        ? activePosts
+        : closedPosts;
 
     return Scaffold(
       appBar: AppBar(
@@ -34,34 +52,105 @@ class MyPostsPage extends ConsumerWidget {
           if (feedState.isOffline)
             Padding(
               padding: const EdgeInsets.only(right: AppSpacing.md),
-              child: Center(child: _OfflineBadge(label: context.l10n.offline)),
+              child: Center(
+                child: Icon(
+                  Icons.cloud_off_outlined,
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
             ),
         ],
       ),
-      body: _buildBody(
-        context: context,
-        ref: ref,
-        feedState: feedState,
-        posts: posts,
+      body: Column(
+        children: [
+          _buildStatusSelector(
+            activeCount: activePosts.length,
+            closedCount: closedPosts.length,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Expanded(
+            child: _buildContent(
+              posts: visiblePosts,
+              isLoading: feedState.isInitialLoading,
+              isUpdating: feedState.isUpdating,
+              isOffline: feedState.isOffline,
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildBody({
-    required BuildContext context,
-    required WidgetRef ref,
-    required dynamic feedState,
-    required List<AgriculturePost> posts,
+  Widget _buildStatusSelector({
+    required int activeCount,
+    required int closedCount,
   }) {
-    if (feedState.isInitialLoading && posts.isEmpty) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
+      child: Container(
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(AppRadius.pill),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: _StatusTab(
+                label: context.l10n.active,
+                count: activeCount,
+                isSelected: _selectedStatus == PostStatus.active,
+                onTap: () {
+                  setState(() {
+                    _selectedStatus = PostStatus.active;
+                  });
+                },
+              ),
+            ),
+            Expanded(
+              child: _StatusTab(
+                label: context.l10n.closed,
+                count: closedCount,
+                isSelected: _selectedStatus == PostStatus.closed,
+                onTap: () {
+                  setState(() {
+                    _selectedStatus = PostStatus.closed;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContent({
+    required List<AgriculturePost> posts,
+    required bool isLoading,
+    required bool isUpdating,
+    required bool isOffline,
+  }) {
+    if (isLoading && posts.isEmpty) {
       return const AppLoading();
     }
 
     if (posts.isEmpty) {
+      final showingActive = _selectedStatus == PostStatus.active;
+
       return AppEmpty(
-        title: context.l10n.noPostsYet,
-        message: context.l10n.createFirstPost,
-        icon: Icons.post_add_rounded,
+        title: showingActive
+            ? context.l10n.noActivePosts
+            : context.l10n.noClosedPosts,
+        message: showingActive
+            ? context.l10n.createFirstPost
+            : context.l10n.closedPostsWillAppearHere,
+        icon: showingActive
+            ? Icons.post_add_rounded
+            : Icons.inventory_2_outlined,
       );
     }
 
@@ -71,26 +160,23 @@ class MyPostsPage extends ConsumerWidget {
       },
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.only(
-          top: AppSpacing.sm,
-          bottom: AppSpacing.xl,
-        ),
+        padding: const EdgeInsets.only(bottom: AppSpacing.xl),
         itemCount: posts.length,
         itemBuilder: (context, index) {
           final post = posts[index];
 
-          return _MyPostItem(
+          return MyPostManagementCard(
             post: post,
-            isUpdating: feedState.isUpdating,
-            isOffline: feedState.isOffline,
+            isUpdating: isUpdating,
+            isOffline: isOffline,
             onEdit: () {
               context.push('/edit-post', extra: post);
             },
             onClose: () {
-              _closePost(context, ref, post);
+              _closePost(post);
             },
             onDelete: () {
-              _confirmDelete(context, ref, post);
+              _confirmDelete(post);
             },
           );
         },
@@ -98,43 +184,35 @@ class MyPostsPage extends ConsumerWidget {
     );
   }
 
-  Future<void> _closePost(
-    BuildContext context,
-    WidgetRef ref,
-    AgriculturePost post,
-  ) async {
+  Future<void> _closePost(AgriculturePost post) async {
     final success = await ref
         .read(feedNotifierProvider.notifier)
         .closePost(post);
 
-    if (!context.mounted) {
-      return;
-    }
+    if (!mounted) return;
 
     final error = ref.read(feedNotifierProvider).error;
 
-    final message = success
-        ? context.l10n.postClosed
-        : error == 'offline_write_unavailable'
-        ? context.l10n.offlineChangesUnavailable
-        : context.l10n.actionFailed;
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          success
+              ? context.l10n.postClosed
+              : error == 'offline_write_unavailable'
+              ? context.l10n.offlineChangesUnavailable
+              : context.l10n.actionFailed,
+        ),
+      ),
+    );
   }
 
-  Future<void> _confirmDelete(
-    BuildContext context,
-    WidgetRef ref,
-    AgriculturePost post,
-  ) async {
+  Future<void> _confirmDelete(AgriculturePost post) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) {
         return AlertDialog(
           icon: Icon(
-            Icons.delete_outline_rounded,
+            Icons.delete_outline,
             color: Theme.of(dialogContext).colorScheme.error,
           ),
           title: Text(context.l10n.deletePost),
@@ -152,7 +230,6 @@ class MyPostsPage extends ConsumerWidget {
               },
               style: FilledButton.styleFrom(
                 backgroundColor: Theme.of(dialogContext).colorScheme.error,
-                foregroundColor: Theme.of(dialogContext).colorScheme.onError,
               ),
               child: Text(context.l10n.delete),
             ),
@@ -161,268 +238,88 @@ class MyPostsPage extends ConsumerWidget {
       },
     );
 
-    if (confirmed != true) {
-      return;
-    }
+    if (confirmed != true) return;
 
     final success = await ref
         .read(feedNotifierProvider.notifier)
         .deletePost(post.id);
 
-    if (!context.mounted) {
-      return;
-    }
+    if (!mounted) return;
 
-    final error = ref.read(feedNotifierProvider).error;
-
-    final message = success
-        ? context.l10n.postDeleted
-        : error == 'offline_write_unavailable'
-        ? context.l10n.offlineChangesUnavailable
-        : context.l10n.actionFailed;
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
-  }
-}
-
-class _MyPostItem extends StatelessWidget {
-  const _MyPostItem({
-    required this.post,
-    required this.isUpdating,
-    required this.isOffline,
-    required this.onEdit,
-    required this.onClose,
-    required this.onDelete,
-  });
-
-  final AgriculturePost post;
-  final bool isUpdating;
-  final bool isOffline;
-  final VoidCallback onEdit;
-  final VoidCallback onClose;
-  final VoidCallback onDelete;
-
-  @override
-  Widget build(BuildContext context) {
-    final isClosed = post.status == PostStatus.closed;
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: Column(
-        children: [
-          AgriculturePostCard(post: post, onCall: null),
-
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-            child: AppCard(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpacing.md,
-                vertical: AppSpacing.sm,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      _StatusBadge(isClosed: isClosed),
-                      const Spacer(),
-                      Text(
-                        isClosed ? context.l10n.closed : context.l10n.active,
-                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: AppSpacing.sm),
-
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _ActionButton(
-                          icon: Icons.edit_outlined,
-                          label: context.l10n.editPost,
-                          onPressed: isUpdating
-                              ? null
-                              : () {
-                                  if (isOffline) {
-                                    _showOfflineMessage(context);
-                                    return;
-                                  }
-
-                                  onEdit();
-                                },
-                        ),
-                      ),
-
-                      const SizedBox(width: AppSpacing.sm),
-
-                      if (!isClosed) ...[
-                        Expanded(
-                          child: _ActionButton(
-                            icon: Icons.check_circle_outline_rounded,
-                            label: context.l10n.closePost,
-                            onPressed: isUpdating
-                                ? null
-                                : () {
-                                    if (isOffline) {
-                                      _showOfflineMessage(context);
-                                      return;
-                                    }
-
-                                    onClose();
-                                  },
-                          ),
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
-                      ],
-
-                      Expanded(
-                        child: _ActionButton(
-                          icon: Icons.delete_outline_rounded,
-                          label: context.l10n.delete,
-                          isDestructive: true,
-                          onPressed: isUpdating
-                              ? null
-                              : () {
-                                  if (isOffline) {
-                                    _showOfflineMessage(context);
-                                    return;
-                                  }
-
-                                  onDelete();
-                                },
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showOfflineMessage(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(context.l10n.offlineChangesUnavailable)),
-    );
-  }
-}
-
-class _StatusBadge extends StatelessWidget {
-  const _StatusBadge({required this.isClosed});
-
-  final bool isClosed;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    final backgroundColor = isClosed
-        ? colorScheme.surfaceContainerHighest
-        : colorScheme.primaryContainer;
-
-    final foregroundColor = isClosed
-        ? colorScheme.onSurfaceVariant
-        : colorScheme.onPrimaryContainer;
-
-    return Container(
-      width: 38,
-      height: 38,
-      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
-      child: Icon(
-        isClosed
-            ? Icons.lock_outline_rounded
-            : Icons.check_circle_outline_rounded,
-        size: 20,
-        color: foregroundColor,
+      SnackBar(
+        content: Text(
+          success ? context.l10n.postDeleted : context.l10n.actionFailed,
+        ),
       ),
     );
   }
 }
 
-class _ActionButton extends StatelessWidget {
-  const _ActionButton({
-    required this.icon,
+class _StatusTab extends StatelessWidget {
+  const _StatusTab({
     required this.label,
-    required this.onPressed,
-    this.isDestructive = false,
+    required this.count,
+    required this.isSelected,
+    required this.onTap,
   });
 
-  final IconData icon;
   final String label;
-  final VoidCallback? onPressed;
-  final bool isDestructive;
+  final int count;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
 
-    final foregroundColor = isDestructive
-        ? colorScheme.error
-        : colorScheme.onSurface;
-
-    return OutlinedButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, size: 18),
-      label: Text(label, maxLines: 1, overflow: TextOverflow.ellipsis),
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size.fromHeight(44),
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-        foregroundColor: foregroundColor,
-        side: BorderSide(
-          color: isDestructive
-              ? colorScheme.error.withValues(alpha: 0.35)
-              : colorScheme.outline,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.pill),
-        ),
-      ),
-    );
-  }
-}
-
-class _OfflineBadge extends StatelessWidget {
-  const _OfflineBadge({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: 6,
-      ),
-      decoration: BoxDecoration(
-        color: colorScheme.errorContainer,
+    return Material(
+      color: isSelected ? colorScheme.primary : Colors.transparent,
+      borderRadius: BorderRadius.circular(AppRadius.pill),
+      child: InkWell(
+        onTap: onTap,
         borderRadius: BorderRadius.circular(AppRadius.pill),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.cloud_off_outlined,
-            size: 16,
-            color: colorScheme.onErrorContainer,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.sm,
+            vertical: 12,
           ),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: colorScheme.onErrorContainer,
-              fontWeight: FontWeight.w600,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                label,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: isSelected
+                      ? colorScheme.onPrimary
+                      : colorScheme.onSurfaceVariant,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 7),
+              Container(
+                constraints: const BoxConstraints(minWidth: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? colorScheme.onPrimary.withValues(alpha: 0.22)
+                      : colorScheme.surface,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
+                ),
+                child: Text(
+                  count.toString(),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.onSurface,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

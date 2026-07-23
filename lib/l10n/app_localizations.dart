@@ -892,6 +892,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New here?'**
   String get noAccountYet;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @postAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Post Again'**
+  String get postAgain;
+
+  /// No description provided for @postIsClosed.
+  ///
+  /// In en, this message translates to:
+  /// **'This post is closed'**
+  String get postIsClosed;
+
+  /// No description provided for @neededDuring.
+  ///
+  /// In en, this message translates to:
+  /// **'Needed: {period}'**
+  String neededDuring(String period);
+
+  /// No description provided for @availableDuring.
+  ///
+  /// In en, this message translates to:
+  /// **'Available: {period}'**
+  String availableDuring(String period);
+
+  /// No description provided for @noActivePosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No active posts'**
+  String get noActivePosts;
+
+  /// No description provided for @noClosedPosts.
+  ///
+  /// In en, this message translates to:
+  /// **'No closed posts'**
+  String get noClosedPosts;
+
+  /// No description provided for @closedPostsWillAppearHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts you close will appear here'**
+  String get closedPostsWillAppearHere;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
